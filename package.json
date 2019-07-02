@@ -29,6 +29,7 @@
     "typescript": "^3.5.2"
   },
   "dependencies": {
-    "eventemitter3": "^4.0.0"
+    "eventemitter3": "^4.0.0",
+    "p-debounce": "^2.1.0"
   }
 }
