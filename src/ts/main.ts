@@ -1,8 +1,8 @@
 import {
   angle,
   angleLabel,
+  fileInput,
   flagSelect,
-  input,
   padding,
   paddingLabel,
   save,
@@ -17,10 +17,10 @@ populateFlags()
 window.addEventListener('load', () => {
   render()
 
-  input.addEventListener(
+  fileInput.addEventListener(
     'change',
     () => {
-      const file = input && input.files && input.files[0]
+      const file = fileInput && fileInput.files && fileInput.files[0]
       if (!file) return
 
       const img = new Image()
