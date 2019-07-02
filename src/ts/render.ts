@@ -4,7 +4,7 @@ import { state } from './state'
 
 const render = async () => {
   if (!state.image) return
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  await drawImage(Genderfluid)
 
   ctx.save()
   ctx.beginPath()
@@ -23,5 +23,5 @@ const render = async () => {
   ctx.restore()
 }
 
-const debouncedRender = pDebounce(() => render(), 200)
+const debouncedRender = pDebounce(() => render(), 10)
 export { debouncedRender as render }
