@@ -1,5 +1,5 @@
+import { angle, flagSelect, input, padding, save } from './dom'
 import { Flag, populateFlags } from './flags'
-import { angle, flagSelect, input, padding, save } from './input'
 import { render } from './render'
 import { saveImage } from './save'
 import { state } from './state'

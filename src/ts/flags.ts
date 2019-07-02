@@ -1,4 +1,4 @@
-import { flagSelect } from './input'
+import { flagSelect } from './dom'
 
 import Genderfluid from '../images/genderfluid.png'
 import Rainbow from '../images/rainbow.png'
