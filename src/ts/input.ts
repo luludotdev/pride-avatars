@@ -6,3 +6,6 @@ if (!padding) throw new Error('Padding slider not found!')
 
 export const angle = document.getElementById('angle') as HTMLInputElement
 if (!angle) throw new Error('Angle slider not found!')
+
+export const flagSelect = document.getElementById('flags') as HTMLInputElement
+if (!flagSelect) throw new Error('Flag select not found!')

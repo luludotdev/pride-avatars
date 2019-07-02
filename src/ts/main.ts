@@ -1,6 +1,9 @@
-import { angle, input, padding } from './input'
+import { Flag, populateFlags } from './flags'
+import { angle, flagSelect, input, padding } from './input'
 import { render } from './render'
 import { state } from './state'
+
+populateFlags()
 
 input.addEventListener(
   'change',
@@ -21,6 +24,10 @@ padding.addEventListener('input', () => {
 
 angle.addEventListener('input', () => {
   state.angle = parseInt(angle.value, 10)
+})
+
+flagSelect.addEventListener('change', () => {
+  state.flag = flagSelect.value as Flag
 })
 
 state.addListener('changed', () => render())
