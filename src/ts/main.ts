@@ -1,4 +1,4 @@
-import { input, padding } from './input'
+import { angle, input, padding } from './input'
 import { render } from './render'
 import { state } from './state'
 
@@ -17,6 +17,10 @@ input.addEventListener(
 
 padding.addEventListener('input', () => {
   state.padding = parseInt(padding.value, 10)
+})
+
+angle.addEventListener('input', () => {
+  state.angle = parseInt(angle.value, 10)
 })
 
 state.addListener('changed', () => render())
