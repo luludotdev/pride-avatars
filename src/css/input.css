@@ -20,7 +20,7 @@
   height: 5px;
 
   border-radius: 4px;
-  background: #d4ced4;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .input input[type="range"]::-webkit-slider-thumb {
