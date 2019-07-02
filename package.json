@@ -21,6 +21,7 @@
     "@types/parcel-env": "^0.0.0",
     "autoprefixer": "^9.6.0",
     "parcel-bundler": "^1.12.3",
+    "parcel-plugin-compress": "^1.0.10",
     "parcel-plugin-typed-css-modules": "^1.1.0",
     "postcss-modules": "^1.4.1",
     "prettier": "^1.18.2",
