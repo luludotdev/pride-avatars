@@ -1,6 +1,7 @@
 import { Flag, populateFlags } from './flags'
-import { angle, flagSelect, input, padding } from './input'
+import { angle, flagSelect, input, padding, save } from './input'
 import { render } from './render'
+import { saveImage } from './save'
 import { state } from './state'
 
 populateFlags()
@@ -29,6 +30,8 @@ angle.addEventListener('input', () => {
 flagSelect.addEventListener('change', () => {
   state.flag = flagSelect.value as Flag
 })
+
+save.addEventListener('click', () => saveImage())
 
 state.addListener('changed', () => render())
 window.addEventListener('load', () => render())

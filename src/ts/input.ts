@@ -9,3 +9,6 @@ if (!angle) throw new Error('Angle slider not found!')
 
 export const flagSelect = document.getElementById('flags') as HTMLSelectElement
 if (!flagSelect) throw new Error('Flag select not found!')
+
+export const save = document.getElementById('save') as HTMLButtonElement
+if (!flagSelect) throw new Error('Flag select not found!')
