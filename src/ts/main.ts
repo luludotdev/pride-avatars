@@ -7,7 +7,7 @@ import {
   paddingLabel,
   save,
 } from './dom'
-import { Flag, populateFlags } from './flags'
+import { populateFlags } from './flags'
 import { render } from './render'
 import { saveImage } from './save'
 import { state } from './state'
@@ -48,7 +48,7 @@ window.addEventListener('load', () => {
   })
 
   flagSelect.addEventListener('change', () => {
-    state.flag = flagSelect.value as Flag
+    state.flag = flagSelect.value
   })
 
   save.addEventListener('click', () => saveImage())
