@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
   })
 
   angle.addEventListener('input', () => {
-    state.angle = parseInt(angle.value, 10)
+    state.angle = parseFloat(angle.value)
   })
 
   flagSelect.addEventListener('change', () => {
