@@ -1,4 +1,4 @@
-import { input } from './input'
+import { input, padding } from './input'
 import { render } from './render'
 import { state } from './state'
 
@@ -14,5 +14,9 @@ input.addEventListener(
   },
   false
 )
+
+padding.addEventListener('input', () => {
+  state.padding = parseInt(padding.value, 10)
+})
 
 state.addListener('changed', () => render())
