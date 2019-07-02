@@ -1,0 +1,39 @@
+.file label {
+  appearance: none;
+  outline: none;
+
+  display: block;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+
+  background-color: transparent;
+  border: 1px rgba(0, 0, 0, 0.4) solid;
+  border-radius: 4px;
+
+  padding: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+
+  transition:
+    box-shadow 120ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    border 120ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.file label:hover {
+  border-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.4);
+}
+
+.file label:active {
+  box-shadow: 0px 12px 8px rgba(0, 0, 0, 0.4);
+}
+
+.file input[type="file"] {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
