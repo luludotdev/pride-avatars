@@ -10,32 +10,6 @@ import Nonbinary from '../images/Nonbinary_flag.svg'
 import Pansexual from '../images/Pansexuality_Pride_Flag.svg'
 import Transgender from '../images/Transgender_Pride_flag.svg'
 
-export enum Flag {
-  Rainbow = 'Rainbow',
-  Asexual = 'Asexual',
-  Bisexual = 'Bisexual',
-  Demisexual = 'Demisexual',
-  Genderfluid = 'Genderfluid',
-  Lesbian = 'Lesbian',
-  Nonbinary = 'Nonbinary',
-  Pansexual = 'Pansexual',
-  Transgender = 'Transgender',
-}
-
-export const populateFlags = () => {
-  flagSelect.innerHTML = ''
-
-  for (const flag in Flag) {
-    if (!Flag[flag]) continue
-
-    const opt = document.createElement('option')
-    opt.innerHTML = flag
-    opt.value = flag
-
-    flagSelect.appendChild(opt)
-  }
-}
-
 const createFlag = (src: string) => {
   const img = new Image()
   img.src = src
@@ -43,46 +17,37 @@ const createFlag = (src: string) => {
   return img
 }
 
-const asexualImg = createFlag(Asexual)
-const bisexualImg = createFlag(Bisexual)
-const demisexualImg = createFlag(Demisexual)
-const rainbowImg = createFlag(Rainbow)
-const genderfluidImg = createFlag(Genderfluid)
-const lesbianImg = createFlag(Lesbian)
-const nonbinaryImg = createFlag(Nonbinary)
-const pansexualImg = createFlag(Pansexual)
-const transgenderImg = createFlag(Transgender)
+interface IFlagInfo {
+  name: string
+  image: HTMLImageElement
+}
 
-export const getFlag = (flag: Flag) => {
-  switch (flag) {
-    case Flag.Asexual:
-      return asexualImg
+const rainbow = createFlag(Rainbow)
+const flags: IFlagInfo[] = [
+  { name: 'Rainbow', image: rainbow },
+  { name: 'Asexual', image: createFlag(Asexual) },
+  { name: 'Bisexual', image: createFlag(Bisexual) },
+  { name: 'Demisexual', image: createFlag(Demisexual) },
+  { name: 'Genderfluid', image: createFlag(Genderfluid) },
+  { name: 'Lesbian', image: createFlag(Lesbian) },
+  { name: 'Nonbinary', image: createFlag(Nonbinary) },
+  { name: 'Pansexual', image: createFlag(Pansexual) },
+  { name: 'Transgender', image: createFlag(Transgender) },
+]
 
-    case Flag.Bisexual:
-      return bisexualImg
+export const populateFlags = () => {
+  flagSelect.innerHTML = ''
 
-    case Flag.Demisexual:
-      return demisexualImg
+  for (const flag of flags) {
+    const opt = document.createElement('option')
+    opt.innerHTML = flag.name
+    opt.value = flag.name
 
-    case Flag.Rainbow:
-      return rainbowImg
-
-    case Flag.Genderfluid:
-      return genderfluidImg
-
-    case Flag.Lesbian:
-      return lesbianImg
-
-    case Flag.Nonbinary:
-      return nonbinaryImg
-
-    case Flag.Pansexual:
-      return pansexualImg
-
-    case Flag.Transgender:
-      return transgenderImg
-
-    default:
-      return rainbowImg
+    flagSelect.appendChild(opt)
   }
+}
+
+export const getFlag = (name: string) => {
+  const flag = flags.find(x => x.name === name)
+  return (flag && flag.image) || rainbow
 }

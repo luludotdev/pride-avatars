@@ -1,9 +1,9 @@
 import { EventEmitter } from 'eventemitter3'
-import { Flag, getFlag } from './flags'
+import { getFlag } from './flags'
 
 interface IState {
   image?: HTMLImageElement
-  flag: Flag
+  flag: string
   padding: number
   angle: number
 }
@@ -11,7 +11,7 @@ interface IState {
 type Events = 'changed'
 class State extends EventEmitter<Events> implements IState {
   public image: HTMLImageElement | undefined
-  public flag: Flag = Flag.Rainbow
+  public flag: string = 'rainbow'
   public padding: number = 10
   public angle: number = 0
 
