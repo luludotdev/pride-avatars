@@ -4,7 +4,7 @@ import { save } from './dom'
 import { button } from '../css/button.css'
 import { canvas as cvs } from '../css/canvas.css'
 import { container, footer } from '../css/global.css'
-import { sliders } from '../css/sliders.css'
+import { input } from '../css/input.css'
 
 canvas.classList.add(cvs)
 save.classList.add(button)
@@ -19,4 +19,4 @@ const applyClass = (oldClass: string, newClass: string) => {
 
 applyClass('container', container)
 applyClass('footer', footer)
-applyClass('sliders', sliders)
+applyClass('input', input)
