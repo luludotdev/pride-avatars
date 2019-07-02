@@ -1,4 +1,12 @@
-import { angle, flagSelect, input, padding, save } from './dom'
+import {
+  angle,
+  angleLabel,
+  flagSelect,
+  input,
+  padding,
+  paddingLabel,
+  save,
+} from './dom'
 import { Flag, populateFlags } from './flags'
 import { render } from './render'
 import { saveImage } from './save'
@@ -23,11 +31,20 @@ window.addEventListener('load', () => {
   )
 
   padding.addEventListener('input', () => {
-    state.padding = parseInt(padding.value, 10)
+    const val = parseInt(padding.value, 10)
+
+    state.padding = val
+    paddingLabel.innerHTML = `${val}px`
   })
 
   angle.addEventListener('input', () => {
-    state.angle = parseFloat(angle.value)
+    const snap = 0.7
+
+    const val = parseFloat(angle.value)
+    const zeroed = val > snap * -1 && val < snap
+
+    state.angle = zeroed ? 0 : val
+    angleLabel.innerHTML = zeroed ? 'Straight' : `${val}°`
   })
 
   flagSelect.addEventListener('change', () => {
