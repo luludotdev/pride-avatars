@@ -1,0 +1,69 @@
+html, body {
+  padding: 0 16px;
+  margin: 0;
+
+  width: calc(100vw - 32px);
+  height: 100vh;
+
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #5bcefa;
+  background-color: rgb(254, 253, 254);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  width: 100%;
+  max-width: 500px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.footer {
+  margin: 14px 0;
+}
+
+::-webkit-scrollbar {
+  width: 18px;
+  height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 1em;
+  border: 6px solid transparent;
+  background-clip: padding-box;
+  border-radius: 50px;
+  box-shadow: inset 0 0 0 1px transparent;
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+

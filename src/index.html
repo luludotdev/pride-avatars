@@ -16,14 +16,28 @@
   </head>
 
   <body>
-    <h1>Pride Icons! 🏳️‍🌈</h1>
-    <input type="file" name="avatar" id="input" accept="image/*">
-    <input type="range" name="padding" id="padding" value="10" min="10" max="50">
-    <input type="range" name="angle" id="angle" value="0" min="-10" max="10" step="0.01">
-    <select name="flags" id="flags"></select>
+    <div class="container">
+      <h1>Pride Icons! 🏳️‍🌈</h1>
 
-    <canvas id="canvas"></canvas>
+      <input type="file" name="avatar" id="input" accept="image/*">
 
-    <button id="save">SAVE</button>
+      <div class="sliders">
+        <label for="padding">Padding: <span id="paddingLbl">10px</span></label>
+        <input type="range" name="padding" id="padding" value="10" min="10" max="50">
+
+        <label for="angle">Tilt: <span id="angleLbl">Straight</span></label>
+        <input type="range" name="angle" id="angle" value="0" min="-10" max="10" step="0.01">
+      </div>
+
+      <div class="select">
+        <label for="flags">Flag Select:</label>
+        <select name="flags" id="flags"></select>
+      </div>
+
+      <canvas id="canvas"></canvas>
+      <button id="save">Download</button>
+    </div>
+
+    <div class="footer">Made with 💝 by lolPants#0001</div>
   </body>
 </html>
