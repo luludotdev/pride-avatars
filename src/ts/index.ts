@@ -1,4 +1,6 @@
 import './main'
 import './styles'
 
-if (module.hot) module.hot.accept()
+if (process.env.NODE_ENV === 'development') {
+  if (module.hot) module.hot.accept()
+}
