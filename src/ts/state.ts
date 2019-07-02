@@ -1,7 +1,9 @@
 import { EventEmitter } from 'eventemitter3'
+import { Flag, getFlag } from './flags'
 
 interface IState {
   image?: HTMLImageElement
+  flag: Flag
   padding: number
   angle: number
 }
@@ -9,6 +11,7 @@ interface IState {
 type Events = 'changed'
 class State extends EventEmitter<Events> implements IState {
   public image: HTMLImageElement | undefined
+  public flag: Flag = Flag.Genderfluid
   public padding: number = 10
   public angle: number = 0
 
@@ -24,6 +27,10 @@ class State extends EventEmitter<Events> implements IState {
         return true
       },
     })
+  }
+
+  public get flagImage() {
+    return getFlag(this.flag)
   }
 }
 
