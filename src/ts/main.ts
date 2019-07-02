@@ -1,3 +1,4 @@
+import { canvas } from './canvas'
 import {
   angle,
   angleLabel,
@@ -53,4 +54,21 @@ window.addEventListener('load', () => {
 
   save.addEventListener('click', () => saveImage())
   state.addListener('changed', () => render())
+
+  canvas.addEventListener('dragover', ev => ev.preventDefault())
+  canvas.addEventListener('drop', ev => {
+    ev.preventDefault()
+    if (!ev.dataTransfer) return
+
+    const file = ev.dataTransfer.items
+      ? ev.dataTransfer.items[0].getAsFile()
+      : ev.dataTransfer.files[0]
+
+    if (!file) return
+    if (!file.type.startsWith('image/')) return
+
+    const img = new Image()
+    img.src = URL.createObjectURL(file)
+    state.image = img
+  })
 })
