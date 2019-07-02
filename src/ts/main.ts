@@ -31,3 +31,4 @@ flagSelect.addEventListener('change', () => {
 })
 
 state.addListener('changed', () => render())
+window.addEventListener('load', () => render())
