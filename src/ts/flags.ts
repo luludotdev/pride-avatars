@@ -2,10 +2,12 @@ import { flagSelect } from './dom'
 
 import Genderfluid from '../images/genderfluid.png'
 import Rainbow from '../images/rainbow.png'
+import Transgender from '../images/transgender.png'
 
 export enum Flag {
   Rainbow = 'Rainbow',
   Genderfluid = 'Genderfluid',
+  Transgender = 'Transgender',
 }
 
 export const populateFlags = () => {
@@ -31,6 +33,7 @@ const createFlag = (src: string) => {
 
 const rainbowImg = createFlag(Rainbow)
 const genderFluidImg = createFlag(Genderfluid)
+const transgenderImg = createFlag(Transgender)
 
 export const getFlag = (flag: Flag) => {
   switch (flag) {
@@ -38,6 +41,8 @@ export const getFlag = (flag: Flag) => {
       return rainbowImg
     case Flag.Genderfluid:
       return genderFluidImg
+    case Flag.Transgender:
+      return transgenderImg
     default:
       return rainbowImg
   }
