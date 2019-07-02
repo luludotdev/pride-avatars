@@ -30,6 +30,10 @@ h1 {
   text-align: center;
 }
 
+a {
+  color: inherit;
+}
+
 .footer {
   margin: 14px 0;
 }
