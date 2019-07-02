@@ -40,7 +40,14 @@ const render = async () => {
     ctx.closePath()
     ctx.clip()
 
-    await drawImage(state.image)
+    ctx.translate(canvas.width / 2, canvas.height / 2)
+    await drawImage(
+      state.image,
+      (canvas.width / 2) * -1 + state.padding,
+      (canvas.height / 2) * -1 + state.padding,
+      canvas.width - state.padding * 2,
+      canvas.height - state.padding * 2
+    )
     ctx.restore()
   }
 }
