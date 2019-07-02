@@ -27,5 +27,8 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "eventemitter3": "^4.0.0"
   }
 }
