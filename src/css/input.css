@@ -36,7 +36,6 @@
 
 .input select {
   display: block;
-  appearance: none;
   outline: none;
   position: relative;
 
@@ -51,16 +50,4 @@
 
 .input select:hover {
   border-color: rgba(0, 0, 0, 0.6);
-}
-
-.input select::after {
-  content: 'hello';
-  position: absolute;
-
-  width: 100px;
-  height: 100px;
-
-  /* background-color: red;
-  top: 0;
-  left: 0; */
 }
