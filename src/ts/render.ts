@@ -8,7 +8,7 @@ const render = async () => {
   ctx.translate(canvas.width / 2, canvas.height / 2)
   ctx.rotate((Math.PI / 180) * state.angle)
 
-  const scale = Math.abs(state.angle) / 50 + 1
+  const scale = Math.abs(state.angle) / 50 + 1.01
   ctx.scale(scale, scale)
 
   if (!state.flagImage.complete) {
