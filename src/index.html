@@ -26,7 +26,14 @@
     <meta property='og:image' content='./images/favicon.png'>
 
     <!-- CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,500|Montserrat:600,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira+Mono:400,500|Montserrat:600,700&display=swap"
+      rel="preload"
+      as="style"
+      onload="this.rel = 'stylesheet'"
+      crossorigin
+    >
 
     <!-- TS -->
     <script defer src='./ts/index.ts'></script>
