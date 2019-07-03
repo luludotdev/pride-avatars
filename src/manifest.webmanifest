@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json.schemastore.org/web-manifest",
+  "short_name": "Pride Icons!",
+  "name": "Pride Icons! 🏳️‍🌈",
+  "theme_color": "#5bcefa",
+  "background_color": "#fefdfe",
+  "display": "fullscreen",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "./images/favicon.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "./images/favicon-160.png",
+      "type": "image/png",
+      "sizes": "160x160"
+    },
+    {
+      "src": "./images/favicon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./images/favicon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
