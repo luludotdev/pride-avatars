@@ -1,8 +1,7 @@
-import pDebounce from 'p-debounce'
 import { canvas, ctx, drawImage } from './canvas'
 import { state } from './state'
 
-const render = async () => {
+const drawFrame = async () => {
   ctx.save()
 
   ctx.translate(canvas.width / 2, canvas.height / 2)
@@ -52,5 +51,10 @@ const render = async () => {
   }
 }
 
-const debouncedRender = pDebounce(() => render(), 10)
-export { debouncedRender as render }
+export const render = () => {
+  requestAnimationFrame(render)
+  if (!state.dirty) return
+
+  state.dirty = false
+  drawFrame()
+}

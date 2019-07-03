@@ -15,6 +15,8 @@ class State extends EventEmitter<Events> implements IState {
   public padding: number = 10
   public angle: number = 0
 
+  public dirty: boolean = true
+
   constructor() {
     super()
 
@@ -23,7 +25,7 @@ class State extends EventEmitter<Events> implements IState {
         // @ts-ignore
         target[prop] = value
 
-        this.emit('changed')
+        if (prop !== 'dirty') this.emit('changed')
         return true
       },
     })

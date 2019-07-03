@@ -53,7 +53,7 @@ window.addEventListener('load', () => {
   })
 
   save.addEventListener('click', () => saveImage())
-  state.addListener('changed', () => render())
+  state.addListener('changed', () => (state.dirty = true))
 
   canvas.addEventListener('dragover', ev => ev.preventDefault())
   canvas.addEventListener('drop', ev => {

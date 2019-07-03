@@ -1,10 +1,10 @@
 import './main'
 import './styles'
 
-import { render } from './render'
+import { state } from './state'
 
 if (process.env.NODE_ENV === 'development') {
   if (module.hot) {
-    module.hot.accept(() => render())
+    module.hot.accept(() => (state.dirty = true))
   }
 }
