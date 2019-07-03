@@ -36,6 +36,15 @@ a {
 
 .footer {
   margin: 14px 0;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer p:not(:last-child) {
+  margin-bottom: 2px;
 }
 
 ::-webkit-scrollbar {
