@@ -35,7 +35,7 @@ window.addEventListener('load', () => {
     const val = parseInt(padding.value, 10)
 
     state.padding = val
-    paddingLabel.innerHTML = `${val}px`
+    paddingLabel.innerHTML = `${val.toString().padStart(2, '0')}px`
   })
 
   angle.addEventListener('input', () => {
