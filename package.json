@@ -15,11 +15,11 @@
     "node": ">=10.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/plugin-transform-runtime": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.5.0",
+    "@babel/preset-env": "^7.5.2",
     "@types/parcel-env": "^0.0.0",
-    "autoprefixer": "^9.6.0",
+    "autoprefixer": "^9.6.1",
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-compress": "^1.0.10",
     "parcel-plugin-typed-css-modules": "^1.1.0",
@@ -29,7 +29,7 @@
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "dependencies": {
     "eventemitter3": "^4.0.0"
