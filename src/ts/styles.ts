@@ -1,11 +1,11 @@
 import { canvas } from './canvas'
 import { save } from './dom'
 
-import { button } from '../css/button.css'
-import { canvas as cvs } from '../css/canvas.css'
-import { file } from '../css/file.css'
-import { container, footer } from '../css/global.css'
-import { input } from '../css/input.css'
+import { button } from '../css/button.styl'
+import { canvas as cvs } from '../css/canvas.styl'
+import { file } from '../css/file.styl'
+import { container, footer } from '../css/global.styl'
+import { input } from '../css/input.styl'
 
 canvas.classList.add(cvs)
 save.classList.add(button)

@@ -30,6 +30,7 @@
     "postcss-modules": "^1.4.1",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.0",
+    "stylus": "^0.54.7",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
