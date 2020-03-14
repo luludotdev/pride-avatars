@@ -18,23 +18,23 @@
     "node": ">=10.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.5",
-    "@babel/plugin-transform-runtime": "^7.7.6",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/runtime": "^7.7.6",
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/runtime": "^7.8.7",
     "@types/parcel-env": "^0.0.0",
-    "autoprefixer": "^9.7.3",
+    "autoprefixer": "^9.7.4",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-compress": "^1.1.0",
     "parcel-plugin-typed-css-modules": "^1.1.0",
-    "postcss-modules": "^1.4.1",
+    "postcss-modules": "^1.5.0",
     "prettier": "^1.19.1",
-    "rimraf": "^3.0.0",
+    "rimraf": "^3.0.2",
     "stylus": "^0.54.7",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.7.3"
+    "tslint-plugin-prettier": "^2.1.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "eventemitter3": "^4.0.0"
