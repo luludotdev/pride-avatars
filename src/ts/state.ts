@@ -11,7 +11,7 @@ interface IState {
 type Events = 'changed'
 class State extends EventEmitter<Events> implements IState {
   public image: HTMLImageElement | undefined
-  public flag: string = 'rainbow'
+  public flag: string = 'pastel'
   public padding: number = 10
   public angle: number = 0
 
