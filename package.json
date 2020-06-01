@@ -12,31 +12,32 @@
     "dev": "parcel ./src/index.html",
     "clean": "rimraf .cache dist",
     "build": "parcel build ./src/index.html",
-    "build:prod": "yarn run clean && parcel build --public-url . --no-source-maps --experimental-scope-hoisting ./src/index.html"
+    "build:prod": "yarn run clean && parcel build --no-source-maps --experimental-scope-hoisting ./src/index.html"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/plugin-transform-runtime": "^7.8.3",
-    "@babel/preset-env": "^7.8.7",
-    "@babel/runtime": "^7.8.7",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/runtime": "^7.10.2",
     "@types/parcel-env": "^0.0.0",
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^9.8.0",
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-compress": "^1.1.0",
+    "parcel-plugin-compress": "^2.0.2",
+    "parcel-plugin-subresource-integrity": "^0.3.4",
     "parcel-plugin-typed-css-modules": "^1.1.0",
-    "postcss-modules": "^1.5.0",
-    "prettier": "^1.19.1",
+    "postcss-modules": "^2.0.0",
+    "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "stylus": "^0.54.7",
-    "tslint": "^5.20.1",
+    "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.1.0",
-    "typescript": "^3.8.3"
+    "tslint-plugin-prettier": "^2.3.0",
+    "typescript": "^3.9.3"
   },
   "dependencies": {
-    "eventemitter3": "^4.0.0"
+    "eventemitter3": "^4.0.4"
   }
 }
