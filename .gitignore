@@ -40,4 +40,4 @@ dist
 .cache
 
 # Typed CSS Modules
-src/css/**/*.d.ts
+src/styles/**/*.d.ts
