@@ -41,3 +41,6 @@ dist
 
 # Typed CSS Modules
 src/styles/**/*.d.ts
+
+# Now Configuration
+.vercel
