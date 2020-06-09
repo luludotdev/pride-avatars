@@ -6,11 +6,11 @@ import Demisexual from '../images/Demisexual_Pride_Flag.svg'
 import Rainbow from '../images/Gay_Pride_Flag.svg'
 import Genderfluid from '../images/Genderfluidity_Pride-Flag.svg'
 import Lesbian from '../images/Lesbian_Pride_Flag.svg'
-import Nonbinary from '../images/Nonbinary_flag.svg'
+import Nonbinary from '../images/Nonbinary_Flag.svg'
 import Pansexual from '../images/Pansexuality_Pride_Flag.svg'
 import PastelPlus from '../images/Pastel_Plus_Flag.svg'
 import Pastel from '../images/Pastel_Pride_Flag.svg'
-import Transgender from '../images/Transgender_Pride_flag.svg'
+import Transgender from '../images/Transgender_Pride_Flag.svg'
 
 const createFlag = (src: string) => {
   const img = new Image()
