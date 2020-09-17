@@ -26,7 +26,6 @@
     "eslint-config-xo-typescript": "^0.32.0",
     "eslint-plugin-prettier": "^3.1.4",
     "parcel-bundler": "^1.12.4",
-    "parcel-plugin-compress": "^2.0.2",
     "parcel-plugin-css-modules-type-generator": "^1.2.0",
     "parcel-plugin-subresource-integrity": "^0.3.4",
     "postcss-modules": "^3.2.2",
