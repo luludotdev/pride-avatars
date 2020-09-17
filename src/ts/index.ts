@@ -1,5 +1,6 @@
 import './main'
 import './styles'
+import './firefox'
 
 import { state } from './state'
 

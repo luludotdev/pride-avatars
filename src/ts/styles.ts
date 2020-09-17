@@ -1,6 +1,7 @@
 import button from '../styles/button.styl'
 import canvas from '../styles/canvas.styl'
 import file from '../styles/file.styl'
+import firefox from '../styles/firefox.styl'
 import global from '../styles/global.styl'
 import input from '../styles/input.styl'
 
@@ -18,5 +19,5 @@ const applyAll = (styles: Record<string, string>) => {
   }
 }
 
-const styles = [button, canvas, file, global, input]
+const styles = [button, canvas, file, firefox, global, input]
 styles.forEach(x => applyAll(x))
