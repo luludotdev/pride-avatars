@@ -11,15 +11,32 @@ const canvasExport = canvas
 const ctxExport = ctx
 export { canvasExport as canvas, ctxExport as ctx }
 
+interface IDrawOptions {
+  x: number
+  y: number
+
+  w: number
+  h: number
+
+  offsetX: number
+  offsetY: number
+}
+
+const defaultOptions: IDrawOptions = {
+  x: 0,
+  y: 0,
+  w: ctx.canvas.width,
+  h: ctx.canvas.height,
+  offsetX: 0.5,
+  offsetY: 0.5,
+}
+
 export const drawImage = async (
   input: HTMLImageElement | string,
-  x = 0,
-  y = 0,
-  w: number = ctx.canvas.width,
-  h: number = ctx.canvas.height,
-  offsetX = 0.5,
-  offsetY = 0.5
+  options: Partial<IDrawOptions>
 ) => {
+  const { x, y, w, h, offsetX, offsetY } = { ...defaultOptions, ...options }
+
   let img: HTMLImageElement
   if (typeof input === 'string') {
     img = new Image()
@@ -33,11 +50,6 @@ export const drawImage = async (
       img.addEventListener('load', () => resolve())
     })
   }
-
-  if (offsetX < 0) offsetX = 0
-  if (offsetY < 0) offsetY = 0
-  if (offsetX > 1) offsetX = 1
-  if (offsetY > 1) offsetY = 1
 
   const iw = img.width
   const ih = img.height
@@ -58,8 +70,8 @@ export const drawImage = async (
   cw = iw / (nw / w)
   ch = ih / (nh / h)
 
-  cx = (iw - cw) * offsetX
-  cy = (ih - ch) * offsetY
+  cx = (iw - cw) * Math.max(0, Math.min(1, offsetX))
+  cy = (ih - ch) * Math.max(0, Math.min(1, offsetY))
 
   if (cx < 0) cx = 0
   if (cy < 0) cy = 0

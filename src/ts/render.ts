@@ -42,13 +42,12 @@ const drawFrame = async () => {
     ctx.clip()
 
     ctx.translate(canvas.width / 2, canvas.height / 2)
-    await drawImage(
-      state.image,
-      (canvas.width / 2) * -1 + state.padding,
-      (canvas.height / 2) * -1 + state.padding,
-      canvas.width - state.padding * 2,
-      canvas.height - state.padding * 2
-    )
+    await drawImage(state.image, {
+      x: (canvas.width / 2) * -1 + state.padding,
+      y: (canvas.height / 2) * -1 + state.padding,
+      w: canvas.width - state.padding * 2,
+      h: canvas.height - state.padding * 2,
+    })
     ctx.restore()
   }
 }
