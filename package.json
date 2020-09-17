@@ -23,7 +23,6 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/runtime": "^7.11.2",
     "@types/parcel-env": "^0.0.0",
-    "autoprefixer": "^10.0.0",
     "eslint-config-xo-typescript": "^0.32.0",
     "eslint-plugin-prettier": "^3.1.4",
     "parcel-bundler": "^1.12.4",
@@ -38,6 +37,7 @@
     "xo": "^0.33.1"
   },
   "dependencies": {
+    "autoprefixer": "^9.8.0",
     "eventemitter3": "^4.0.7"
   }
 }
