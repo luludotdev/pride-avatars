@@ -1,20 +1,24 @@
-export const canvas = document.getElementById('canvas') as HTMLCanvasElement
-if (!canvas) throw new Error('Canvas not found!')
+const canvas = document.querySelector<HTMLCanvasElement>('#canvas')
+if (canvas === null) throw new Error('Canvas not found!')
 
 canvas.width = 512
 canvas.height = 512
 
-export const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-if (!ctx) throw new Error('Canvas context not found!')
+const ctx = canvas.getContext('2d')
+if (ctx === null) throw new Error('Canvas context not found!')
+
+const canvasExport = canvas
+const ctxExport = ctx
+export { canvasExport as canvas, ctxExport as ctx }
 
 export const drawImage = async (
   input: HTMLImageElement | string,
-  x: number = 0,
-  y: number = 0,
+  x = 0,
+  y = 0,
   w: number = ctx.canvas.width,
   h: number = ctx.canvas.height,
-  offsetX: number = 0.5,
-  offsetY: number = 0.5
+  offsetX = 0.5,
+  offsetY = 0.5
 ) => {
   let img: HTMLImageElement
   if (typeof input === 'string') {
@@ -25,7 +29,9 @@ export const drawImage = async (
   }
 
   if (!img.complete) {
-    await new Promise(resolve => (img.onload = () => resolve()))
+    await new Promise(resolve => {
+      img.addEventListener('load', () => resolve())
+    })
   }
 
   if (offsetX < 0) offsetX = 0

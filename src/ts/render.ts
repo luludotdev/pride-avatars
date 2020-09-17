@@ -10,8 +10,10 @@ const drawFrame = async () => {
   const scale = Math.abs(state.angle) / 50 + 1.01
   ctx.scale(scale, scale)
 
-  if (!state.flagImage.complete) {
-    await new Promise(resolve => (state.flagImage.onload = () => resolve()))
+  if (state.flagImage.complete === false) {
+    await new Promise(resolve => {
+      state.flagImage.addEventListener('load', () => resolve())
+    })
   }
 
   ctx.drawImage(
@@ -51,10 +53,11 @@ const drawFrame = async () => {
   }
 }
 
-export const render = () => {
-  requestAnimationFrame(render)
-  if (!state.dirty) return
+export const render = async () => {
+  if (state.dirty) {
+    state.dirty = false
+    await drawFrame()
+  }
 
-  state.dirty = false
-  drawFrame()
+  requestAnimationFrame(render)
 }

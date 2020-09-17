@@ -1,22 +1,14 @@
-export const fileInput = document.getElementById('input') as HTMLInputElement
-if (!fileInput) throw new Error('Input box not found!')
+function nodeByID<E extends Element = Element>(id: string): E {
+  const node = document.querySelector<E>(`#${id}`)
+  if (node === null) throw new Error(`Node #${id} not found!`)
 
-export const padding = document.getElementById('padding') as HTMLInputElement
-if (!padding) throw new Error('Padding slider not found!')
+  return node
+}
 
-export const paddingLabel = document.getElementById(
-  'paddingLbl'
-) as HTMLSpanElement
-if (!paddingLabel) throw new Error('Padding label not found!')
-
-export const angle = document.getElementById('angle') as HTMLInputElement
-if (!angle) throw new Error('Angle slider not found!')
-
-export const angleLabel = document.getElementById('angleLbl') as HTMLSpanElement
-if (!angleLabel) throw new Error('Angle label not found!')
-
-export const flagSelect = document.getElementById('flags') as HTMLSelectElement
-if (!flagSelect) throw new Error('Flag select not found!')
-
-export const save = document.getElementById('save') as HTMLButtonElement
-if (!flagSelect) throw new Error('Flag select not found!')
+export const fileInput = nodeByID<HTMLInputElement>('input')
+export const padding = nodeByID<HTMLInputElement>('padding')
+export const paddingLabel = nodeByID<HTMLSpanElement>('paddingLbl')
+export const angle = nodeByID<HTMLInputElement>('angle')
+export const angleLabel = nodeByID<HTMLSpanElement>('angleLbl')
+export const flagSelect = nodeByID<HTMLSelectElement>('flags')
+export const save = nodeByID<HTMLButtonElement>('save')

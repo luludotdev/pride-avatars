@@ -16,13 +16,13 @@ import { state } from './state'
 populateFlags()
 
 window.addEventListener('load', () => {
-  render()
+  void render()
 
   fileInput.addEventListener(
     'change',
     () => {
-      const file = fileInput && fileInput.files && fileInput.files[0]
-      if (!file) return
+      const file = fileInput?.files?.[0]
+      if (file === undefined) return
 
       const img = new Image()
       img.src = URL.createObjectURL(file)
@@ -32,20 +32,20 @@ window.addEventListener('load', () => {
   )
 
   padding.addEventListener('input', () => {
-    const val = parseInt(padding.value, 10)
+    const value = Number.parseInt(padding.value, 10)
 
-    state.padding = val
-    paddingLabel.innerHTML = `${val.toString().padStart(2, '0')}px`
+    state.padding = value
+    paddingLabel.innerHTML = `${value.toString().padStart(2, '0')}px`
   })
 
   angle.addEventListener('input', () => {
     const snap = 0.7
 
-    const val = parseFloat(angle.value)
-    const zeroed = val > snap * -1 && val < snap
+    const value = Number.parseFloat(angle.value)
+    const zeroed = value > snap * -1 && value < snap
 
-    state.angle = zeroed ? 0 : val
-    angleLabel.innerHTML = zeroed ? 'Straight' : `${val}°`
+    state.angle = zeroed ? 0 : value
+    angleLabel.innerHTML = zeroed ? 'Straight' : `${value}°`
   })
 
   flagSelect.addEventListener('change', () => {
@@ -53,7 +53,9 @@ window.addEventListener('load', () => {
   })
 
   save.addEventListener('click', () => saveImage())
-  state.addListener('changed', () => (state.dirty = true))
+  state.addListener('changed', () => {
+    state.dirty = true
+  })
 
   canvas.addEventListener('dragover', ev => ev.preventDefault())
   canvas.addEventListener('drop', ev => {

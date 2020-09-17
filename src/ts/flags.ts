@@ -1,5 +1,3 @@
-import { flagSelect } from './dom'
-
 import Asexual from '../images/Asexual_Pride_Flag.svg'
 import Bisexual from '../images/Bisexual_Pride_Flag.svg'
 import Demisexual from '../images/Demisexual_Pride_Flag.svg'
@@ -11,6 +9,7 @@ import Pansexual from '../images/Pansexuality_Pride_Flag.svg'
 import PastelPlus from '../images/Pastel_Plus_Flag.svg'
 import Pastel from '../images/Pastel_Pride_Flag.svg'
 import Transgender from '../images/Transgender_Pride_Flag.svg'
+import { flagSelect } from './dom'
 
 const createFlag = (src: string) => {
   const img = new Image()
@@ -47,11 +46,11 @@ export const populateFlags = () => {
     opt.innerHTML = flag.name
     opt.value = flag.name
 
-    flagSelect.appendChild(opt)
+    flagSelect.append(opt)
   }
 }
 
 export const getFlag = (name: string) => {
   const flag = flags.find(x => x.name === name)
-  return (flag && flag.image) || pastel
+  return flag?.image ?? pastel
 }
