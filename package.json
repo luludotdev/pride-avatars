@@ -8,7 +8,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "xo",
+    "test": "yarn run lint"
+  },
+  "engines": {
+    "node": ">=14"
   },
   "dependencies": {
     "next": "10.2.0",
@@ -17,6 +22,10 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.5",
-    "typescript": "^4.2.4"
+    "eslint-config-xo-react": "^0.25.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "typescript": "^4.2.4",
+    "xo": "^0.39.1"
   }
 }
