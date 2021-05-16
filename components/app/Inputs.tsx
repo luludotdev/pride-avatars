@@ -6,7 +6,7 @@ import { flagNames, isFlagName } from '~lib/flags'
 import { useStore } from '~lib/hooks/useStore'
 import type { FC } from 'react'
 
-export const Inputs: FC = () => {
+export const Inputs: FC<{ children?: never }> = () => {
   const { state, dispatch } = useStore()
 
   const onPaddingChanged = useCallback(

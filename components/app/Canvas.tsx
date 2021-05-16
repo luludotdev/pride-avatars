@@ -4,7 +4,7 @@ import { useStore } from '~lib/hooks/useStore'
 import { drawFrame } from '~lib/render'
 import type { FC } from 'react'
 
-export const Canvas: FC = () => {
+export const Canvas: FC<{ children?: never }> = () => {
   const ref = useRef<HTMLCanvasElement>(null)
 
   const { state, dispatch } = useStore()
