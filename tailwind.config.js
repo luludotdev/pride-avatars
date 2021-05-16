@@ -14,6 +14,9 @@ module.exports = {
       colors: {
         light: '#fefdfe',
       },
+      gridTemplateColumns: {
+        input: 'fit-content(2000px) auto',
+      },
     },
   },
   variants: {
