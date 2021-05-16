@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useCallback } from 'react'
 import { Canvas } from '~components/app/Canvas'
 import { Inputs } from '~components/app/Inputs'
+import { LoadImage } from '~components/app/LoadImage'
 import { ExtLink } from '~components/ExtLink'
 import { Button } from '~components/input/Button'
 import { Container } from '~components/layout/Container'
@@ -10,11 +11,6 @@ import { PreloadFlags } from '~components/PreloadFlags'
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
-  const onLoadClicked = useCallback(() => {
-    // TODO
-    console.log('onLoadClicked')
-  }, [])
-
   const onSaveClicked = useCallback(() => {
     // TODO
     console.log('onSaveClicked')
@@ -30,8 +26,7 @@ const Home: NextPage = () => {
 
         <h1 className='text-4xl my-6 font-title'>Pride Icons! 🏳️‍🌈</h1>
 
-        <Button onClick={onLoadClicked}>📸 Load Avatar</Button>
-
+        <LoadImage />
         <Inputs />
         <Canvas />
 
