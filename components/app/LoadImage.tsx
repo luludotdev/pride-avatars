@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useRef } from 'react'
+import { ChangeEventHandler, useCallback, useRef } from 'react'
 import { Button } from '~components/input/Button'
 import { useStore } from '~lib/hooks/useStore'
 import type { FC } from 'react'
@@ -11,8 +11,8 @@ export const LoadImage: FC<{ children?: never }> = () => {
     ref.current?.click()
   }, [])
 
-  const handleChange = useCallback(
-    (ev: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    ev => {
       const file = ev.target.files?.[0]
       if (file === undefined) return
 

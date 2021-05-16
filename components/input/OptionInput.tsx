@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from 'react'
+import { ChangeEventHandler, useCallback } from 'react'
 import type { FC } from 'react'
 
 interface Props {
@@ -19,8 +19,8 @@ export const OptionInput: FC<Props> = ({
   value,
   onChange,
 }) => {
-  const handleChange = useCallback(
-    (ev: ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
+    ev => {
       if (typeof onChange === 'function') onChange(ev.target.value)
     },
     [onChange]

@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from 'react'
+import { ChangeEventHandler, useCallback } from 'react'
 import type { FC } from 'react'
 
 interface Props {
@@ -26,8 +26,8 @@ export const RangeInput: FC<Props> = ({
   onChange,
   formatter,
 }) => {
-  const handleChange = useCallback(
-    (ev: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+    ev => {
       if (typeof onChange === 'function') {
         const value =
           step % 1 === 0
