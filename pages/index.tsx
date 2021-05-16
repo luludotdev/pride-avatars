@@ -5,8 +5,6 @@ import { Inputs } from '~components/app/Inputs'
 import { LoadImage } from '~components/app/LoadImage'
 import { SaveImage } from '~components/app/SaveImage'
 import { ExtLink } from '~components/ExtLink'
-import { Container } from '~components/layout/Container'
-import { Footer } from '~components/layout/Footer'
 import { PreloadFlags } from '~components/PreloadFlags'
 import type { NextPage } from 'next'
 
@@ -15,7 +13,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Container>
+      <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
         <Head>
           <title>Pride Icons</title>
         </Head>
@@ -27,9 +25,9 @@ const Home: NextPage = () => {
         <Inputs />
         <Canvas canvasRef={canvasRef} />
         <SaveImage canvasRef={canvasRef} />
-      </Container>
+      </div>
 
-      <Footer>
+      <footer className='text-center my-3'>
         <p>
           Made with 💝 by{' '}
           <ExtLink href='https://twitter.com/JackBaron__'>
@@ -43,7 +41,7 @@ const Home: NextPage = () => {
             GitHub
           </ExtLink>
         </p>
-      </Footer>
+      </footer>
     </>
   )
 }

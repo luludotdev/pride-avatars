@@ -1,5 +1,4 @@
 import { useCallback } from 'react'
-import { InputGrid } from '~components/input/InputGrid'
 import { OptionInput } from '~components/input/OptionInput'
 import { RangeInput } from '~components/input/RangeInput'
 import { flagNames, isFlagName } from '~lib/flags'
@@ -42,7 +41,7 @@ export const Inputs: FC<{ children?: never }> = () => {
   )
 
   return (
-    <InputGrid>
+    <div className='w-full grid grid-cols-input gap-x-3'>
       <RangeInput
         id='padding'
         label='Padding'
@@ -72,6 +71,6 @@ export const Inputs: FC<{ children?: never }> = () => {
         value={state.flag}
         onChange={onFlagChanged}
       />
-    </InputGrid>
+    </div>
   )
 }
