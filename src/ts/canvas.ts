@@ -46,8 +46,10 @@ export const drawImage = async (
   }
 
   if (!img.complete) {
-    await new Promise(resolve => {
-      img.addEventListener('load', () => resolve())
+    await new Promise<void>(resolve => {
+      img.addEventListener('load', () => {
+        resolve()
+      })
     })
   }
 

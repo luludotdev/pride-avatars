@@ -25,7 +25,7 @@ class State extends EventEmitter<Events> implements IState {
 const createState = () => {
   const base = new State()
   return new Proxy(base, {
-    set: (target, prop, value) => {
+    set: (target, prop, value: unknown) => {
       // @ts-expect-error
       target[prop] = value
 

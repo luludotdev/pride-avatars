@@ -52,12 +52,18 @@ window.addEventListener('load', () => {
     state.flag = flagSelect.value
   })
 
-  save.addEventListener('click', () => saveImage())
+  save.addEventListener('click', () => {
+    saveImage()
+  })
+
   state.addListener('changed', () => {
     state.dirty = true
   })
 
-  canvas.addEventListener('dragover', ev => ev.preventDefault())
+  canvas.addEventListener('dragover', ev => {
+    ev.preventDefault()
+  })
+
   canvas.addEventListener('drop', ev => {
     ev.preventDefault()
     if (!ev.dataTransfer) return

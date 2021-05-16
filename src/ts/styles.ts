@@ -20,4 +20,4 @@ const applyAll = (styles: Record<string, string>) => {
 }
 
 const styles = [button, canvas, file, firefox, global, input]
-styles.forEach(x => applyAll(x))
+for (const x of styles) applyAll(x as Record<string, string>)

@@ -11,8 +11,10 @@ const drawFrame = async () => {
   ctx.scale(scale, scale)
 
   if (state.flagImage.complete === false) {
-    await new Promise(resolve => {
-      state.flagImage.addEventListener('load', () => resolve())
+    await new Promise<void>(resolve => {
+      state.flagImage.addEventListener('load', () => {
+        resolve()
+      })
     })
   }
 
