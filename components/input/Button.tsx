@@ -13,7 +13,7 @@ export const Button: FC<Props> = ({ onClick, children }) => {
   return (
     <button
       type='button'
-      className='w-full py-2 font-semibold text-lg rounded border border-gray-400 transition-all focus:outline-none hover:border-gray-100 hover:shadow-md'
+      className='w-full py-2 font-semibold text-lg rounded border border-gray-400 dark:border-gray-500 transition-all focus:outline-none hover:border-gray-100 dark:hover:border-gray-300 hover:shadow-md dark:hover:shadow-none'
       onClick={handleClick}
     >
       {children}

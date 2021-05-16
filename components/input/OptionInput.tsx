@@ -33,7 +33,7 @@ export const OptionInput: FC<Props> = ({
         name={id}
         id={id}
         value={value}
-        className='p-1 text-sm bg-transparent rounded border border-gray-400'
+        className='p-1 text-sm bg-light dark:bg-dark rounded border border-gray-400 dark:border-gray-500'
         onChange={handleChange}
       >
         {options.map(option => (
