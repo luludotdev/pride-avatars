@@ -7,6 +7,7 @@ export interface State {
   padding: number
   angle: number
   flag: FlagName
+  image: HTMLImageElement | null
 }
 
 const initialState: State = {
@@ -14,6 +15,7 @@ const initialState: State = {
   padding: 10,
   angle: 0,
   flag: 'Pastel',
+  image: null,
 }
 
 interface Context {
@@ -29,6 +31,7 @@ type Action =
   | { type: 'setPadding'; value: number }
   | { type: 'setAngle'; value: number }
   | { type: 'setFlag'; value: FlagName }
+  | { type: 'setImage'; value: string }
 
 export const Provider: FC = ({ children }) => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
@@ -45,6 +48,13 @@ export const Provider: FC = ({ children }) => {
 
         case 'setFlag':
           return { ...prevState, dirty: true, flag: action.value }
+
+        case 'setImage': {
+          const image = new Image()
+          image.src = action.value
+
+          return { ...prevState, dirty: true, image }
+        }
 
         default:
           throw new Error('Invalid Action')
