@@ -11,6 +11,9 @@ module.exports = {
         mono: ['Fira Mono', ...fontFamily.mono],
         title: ['Montserrat', ...fontFamily.sans],
       },
+      colors: {
+        light: '#fefdfe',
+      },
     },
   },
   variants: {
