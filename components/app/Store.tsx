@@ -50,6 +50,8 @@ export const Provider: FC = ({ children }) => {
           return { ...prevState, dirty: true, flag: action.value }
 
         case 'setImage': {
+          prevState.image?.remove()
+
           const image = new Image()
           image.src = action.value
 
