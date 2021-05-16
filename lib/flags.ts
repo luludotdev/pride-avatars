@@ -10,7 +10,7 @@ import PastelPlus from '~assets/flags/Pastel_Plus_Flag.svg'
 import Pastel from '~assets/flags/Pastel_Pride_Flag.svg'
 import Transgender from '~assets/flags/Transgender_Pride_Flag.svg'
 
-export const flags: Array<[name: string, url: string]> = [
+export const flags = [
   ['Pastel', Pastel],
   ['Pastel+', PastelPlus],
   ['Rainbow', Rainbow],
@@ -22,4 +22,6 @@ export const flags: Array<[name: string, url: string]> = [
   ['Nonbinary', Nonbinary],
   ['Pansexual', Pansexual],
   ['Transgender', Transgender],
-]
+] as const
+
+export const flagNames = flags.map(([name]) => name)

@@ -1,20 +1,104 @@
 import Head from 'next/head'
+import { useCallback } from 'react'
+import { Button } from '~components/Button'
+import { Canvas } from '~components/Canvas'
+import { Container } from '~components/Container'
+import { ExtLink } from '~components/ExtLink'
+import { Footer } from '~components/Footer'
+import { InputGrid } from '~components/InputGrid'
+import { OptionInput } from '~components/OptionInput'
 import { PreloadFlags } from '~components/PreloadFlags'
+import { RangeInput } from '~components/RangeInput'
+import { flagNames } from '~lib/flags'
 import type { NextPage } from 'next'
 
-const Home: NextPage = () => (
-  <>
-    <PreloadFlags />
-    <Head>
-      <title>Pride Icons</title>
-    </Head>
+const Home: NextPage = () => {
+  const onLoadClicked = useCallback(() => {
+    // TODO
+    console.log('onLoadClicked')
+  }, [])
 
-    <div className='w-full h-screen flex justify-center px-4'>
-      <div className='flex flex-col items-center w-full max-w-[500px]'>
+  const onPaddingChanged = useCallback((padding: number) => {
+    // TODO
+    console.log(`onPaddingChanged: ${padding}`)
+  }, [])
+
+  const onAngleChanged = useCallback((angle: number) => {
+    // TODO
+    console.log(`onAngleChanged: ${angle}`)
+  }, [])
+
+  const onFlagChanged = useCallback((flag: string) => {
+    // TODO
+    console.log(`onFlagChanged: ${flag}`)
+  }, [])
+
+  const onSaveClicked = useCallback(() => {
+    // TODO
+    console.log('onSaveClicked')
+  }, [])
+
+  return (
+    <>
+      <Container>
+        <Head>
+          <title>Pride Icons</title>
+        </Head>
+        <PreloadFlags />
+
         <h1 className='text-4xl my-6 font-title'>Pride Icons! 🏳️‍🌈</h1>
-      </div>
-    </div>
-  </>
-)
+
+        <Button onClick={onLoadClicked}>📸 Load Avatar</Button>
+
+        <InputGrid>
+          <RangeInput
+            id='padding'
+            label='Padding:'
+            min={0}
+            max={50}
+            step={1}
+            onChange={onPaddingChanged}
+          />
+
+          <RangeInput
+            id='angle'
+            label='Angle:'
+            min={-10}
+            max={10}
+            step={0.01}
+            onChange={onAngleChanged}
+          />
+
+          <OptionInput
+            id='flags'
+            label='Flag:'
+            options={flagNames}
+            onChange={onFlagChanged}
+          />
+        </InputGrid>
+
+        <Canvas />
+
+        <Button onClick={onSaveClicked}>💾 Download</Button>
+      </Container>
+
+      <Footer>
+        <p>
+          Made with 💝 by{' '}
+          <ExtLink href='https://twitter.com/JackBaron__'>
+            lolPants#0001
+          </ExtLink>
+        </p>
+
+        <p>
+          Source available on{' '}
+          <ExtLink href='https://github.com/lolPants/pride-icons'>
+            GitHub
+          </ExtLink>
+        </p>
+      </Footer>
+    </>
+  )
+}
 
 export default Home

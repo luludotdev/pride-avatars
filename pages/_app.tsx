@@ -14,7 +14,9 @@ const NextApp = ({ Component, pageProps }: AppProps) => (
       />
     </Head>
 
-    <Component {...pageProps} />
+    <div className='w-full h-screen flex flex-col items-center px-4'>
+      <Component {...pageProps} />
+    </div>
   </>
 )
 
