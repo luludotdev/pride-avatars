@@ -21,7 +21,7 @@ const Home: NextPage = () => {
         </Head>
         <PreloadFlags />
 
-        <h1 className='text-4xl my-6 font-title'>Pride Icons! 🏳️‍🌈</h1>
+        <h1 className='text-4xl mt-6 mb-2 font-title'>Pride Icons! 🏳️‍🌈</h1>
 
         <LoadImage />
         <Inputs />
