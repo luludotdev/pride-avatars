@@ -27,11 +27,15 @@ export const RangeInput: FC<Props> = ({
   const handleChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
       if (typeof onChange === 'function') {
-        const value = Number.parseInt(ev.target.value, 10)
+        const value =
+          step % 1 === 0
+            ? Number.parseInt(ev.target.value, 10)
+            : Number.parseFloat(ev.target.value)
+
         onChange(value)
       }
     },
-    [onChange]
+    [step, onChange]
   )
 
   return (
