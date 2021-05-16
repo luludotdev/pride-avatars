@@ -28,7 +28,7 @@ export const OptionInput: FC<Props> = ({
 
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>{label}:</label>
       <select name={id} id={id} value={value} onChange={handleChange}>
         {options.map(option => (
           <option key={option} value={option}>

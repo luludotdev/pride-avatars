@@ -13,6 +13,7 @@ interface Props {
 
   value: number
   onChange: (value: number) => void
+  formatter?: (value: number) => string
 }
 
 export const RangeInput: FC<Props> = ({
@@ -23,6 +24,7 @@ export const RangeInput: FC<Props> = ({
   step,
   value,
   onChange,
+  formatter,
 }) => {
   const handleChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -38,9 +40,20 @@ export const RangeInput: FC<Props> = ({
     [step, onChange]
   )
 
+  const formatValue = useCallback<(v: number) => string>(
+    v => {
+      if (typeof formatter === 'function') return formatter(v)
+      return v.toString()
+    },
+    [formatter]
+  )
+
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>
+        {label}: <span className='font-mono'>{formatValue(value)}</span>
+      </label>
+
       <input
         type='range'
         name={id}
