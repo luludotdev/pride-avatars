@@ -5,6 +5,8 @@ import 'tailwindcss/tailwind.css'
 const NextApp = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
+      <link rel='icon' type='image/png' href='/favicon.png' />
+
       <link rel='preconnect' href='https://fonts.gstatic.com' />
       <link
         href='https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Montserrat:wght@700&family=Fira+Mono:wght@500&display=swap'
