@@ -1,9 +1,17 @@
+const { fontFamily } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false,
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', ...fontFamily.sans],
+        mono: ['Fira Mono', ...fontFamily.mono],
+        title: ['Montserrat', ...fontFamily.sans],
+      },
+    },
   },
   variants: {
     extend: {},
