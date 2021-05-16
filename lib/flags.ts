@@ -34,7 +34,7 @@ export function isFlagName(string: unknown): string is FlagName {
 }
 
 const flagStore: Map<FlagName, HTMLImageElement> = new Map()
-const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
+export const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
   name,
   url
 ) => {

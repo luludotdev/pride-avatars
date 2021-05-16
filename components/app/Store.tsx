@@ -2,7 +2,7 @@ import { createContext, useMemo, useReducer } from 'react'
 import type { FlagName } from '~lib/flags'
 import type { Dispatch, FC, Reducer } from 'react'
 
-interface State {
+export interface State {
   dirty: boolean
   padding: number
   angle: number

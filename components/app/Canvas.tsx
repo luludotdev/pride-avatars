@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useAnimationFrame } from '~lib/hooks/useAnimationFrame'
 import { useStore } from '~lib/hooks/useStore'
+import { drawFrame } from '~lib/render'
 import type { FC } from 'react'
 
 export const Canvas: FC = () => {
@@ -11,9 +12,11 @@ export const Canvas: FC = () => {
     if (!ref.current) return
     if (!state.dirty) return
 
-    const ctx = ref.current.getContext('2d')
+    const canvas = ref.current
+    const ctx = canvas.getContext('2d')
     if (ctx === null) return
 
+    void drawFrame(canvas, ctx, state)
     dispatch({ type: 'markClean' })
   }, [])
 
