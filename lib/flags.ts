@@ -24,4 +24,11 @@ export const flags = [
   ['Transgender', Transgender],
 ] as const
 
-export const flagNames = flags.map(([name]) => name)
+export type FlagName = typeof flags[number][0]
+export const flagNames: FlagName[] = flags.map(([name]) => name)
+
+export function isFlagName(string: unknown): string is FlagName {
+  if (typeof string !== 'string') return false
+  // @ts-expect-error
+  return flagNames.includes(string)
+}
