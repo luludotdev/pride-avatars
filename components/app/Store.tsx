@@ -25,7 +25,7 @@ interface Context {
 export const store = createContext<Context>({ state: initialState })
 
 type Action =
-  | { type: 'markClean'; value: never }
+  | { type: 'markClean' }
   | { type: 'setPadding'; value: number }
   | { type: 'setAngle'; value: number }
   | { type: 'setFlag'; value: FlagName }
