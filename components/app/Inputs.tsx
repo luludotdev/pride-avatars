@@ -16,11 +16,21 @@ export const Inputs: FC<{ children?: never }> = () => {
     [dispatch]
   )
 
+  const formatPadding = useCallback<(v: number) => string>(
+    v => `${v.toFixed(0).padStart(2, '0')}px`,
+    []
+  )
+
   const onAngleChanged = useCallback(
     (angle: number) => {
       dispatch({ type: 'setAngle', value: angle })
     },
     [dispatch]
+  )
+
+  const formatAngle = useCallback<(v: number) => string>(
+    v => `${v.toFixed(2)}°`,
+    []
   )
 
   const onFlagChanged = useCallback(
@@ -35,27 +45,29 @@ export const Inputs: FC<{ children?: never }> = () => {
     <InputGrid>
       <RangeInput
         id='padding'
-        label='Padding:'
+        label='Padding'
         min={0}
         max={50}
         step={1}
         value={state.padding}
+        formatter={formatPadding}
         onChange={onPaddingChanged}
       />
 
       <RangeInput
         id='angle'
-        label='Angle:'
+        label='Tilt'
         min={-10}
         max={10}
         step={0.01}
         value={state.angle}
+        formatter={formatAngle}
         onChange={onAngleChanged}
       />
 
       <OptionInput
         id='flags'
-        label='Flag:'
+        label='Flag'
         options={flagNames}
         value={state.flag}
         onChange={onFlagChanged}
