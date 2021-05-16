@@ -1,10 +1,10 @@
-import Head from 'next/head'
 import { useRef } from 'react'
 import { Canvas } from '~components/app/Canvas'
 import { Inputs } from '~components/app/Inputs'
 import { LoadImage } from '~components/app/LoadImage'
 import { SaveImage } from '~components/app/SaveImage'
 import { ExtLink } from '~components/ExtLink'
+import { Meta } from '~components/Meta'
 import { PreloadFlags } from '~components/PreloadFlags'
 import type { NextPage } from 'next'
 
@@ -14,10 +14,13 @@ const Home: NextPage = () => {
   return (
     <>
       <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
-        <Head>
-          <title>Pride Icons</title>
-        </Head>
         <PreloadFlags />
+        <Meta
+          title='Pride Icons!'
+          description='Generate pride icons for social media!'
+          colour='#5bcefa'
+          ogImage='./favicon.png'
+        />
 
         <h1 className='text-4xl mt-6 mb-2 font-title'>Pride Icons! 🏳️‍🌈</h1>
 
