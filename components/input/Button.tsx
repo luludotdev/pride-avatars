@@ -11,7 +11,11 @@ export const Button: FC<Props> = ({ onClick, children }) => {
   }, [onClick])
 
   return (
-    <button type='button' onClick={handleClick}>
+    <button
+      type='button'
+      className='w-full py-2 font-semibold text-lg rounded border border-gray-400 transition-all focus:outline-none hover:border-gray-100 hover:shadow-md'
+      onClick={handleClick}
+    >
       {children}
     </button>
   )
