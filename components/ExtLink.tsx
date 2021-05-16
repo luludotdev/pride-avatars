@@ -5,7 +5,12 @@ interface Props {
 }
 
 export const ExtLink: FC<Props> = ({ href, children }) => (
-  <a href={href} target='_blank' rel='noopener noreferrer'>
+  <a
+    className='underline transition-colors hover:text-accent-light'
+    href={href}
+    target='_blank'
+    rel='noopener noreferrer'
+  >
     {children}
   </a>
 )

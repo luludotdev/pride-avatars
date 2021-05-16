@@ -1,3 +1,4 @@
+const colors = require('tailwindcss/colors')
 const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
@@ -12,7 +13,12 @@ module.exports = {
         title: ['Montserrat', ...fontFamily.sans],
       },
       colors: {
+        gray: colors.gray,
         light: '#fefdfe',
+        accent: {
+          light: '#8879fc',
+          dark: '#afa5fd',
+        },
       },
       gridTemplateColumns: {
         input: 'fit-content(2000px) auto',
