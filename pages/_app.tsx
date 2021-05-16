@@ -1,3 +1,4 @@
+import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 import { Provider } from '~components/app/Store'
 import type { AppProps } from 'next/app'
@@ -15,11 +16,13 @@ const NextApp = ({ Component, pageProps }: AppProps) => (
       />
     </Head>
 
-    <div className='w-full h-screen flex flex-col items-center px-4'>
-      <Provider>
-        <Component {...pageProps} />
-      </Provider>
-    </div>
+    <ThemeProvider attribute='class'>
+      <div className='w-full h-screen flex flex-col items-center px-4'>
+        <Provider>
+          <Component {...pageProps} />
+        </Provider>
+      </div>
+    </ThemeProvider>
   </>
 )
 
