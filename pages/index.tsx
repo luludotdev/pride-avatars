@@ -1,20 +1,17 @@
 import Head from 'next/head'
-import { useCallback } from 'react'
+import { useRef } from 'react'
 import { Canvas } from '~components/app/Canvas'
 import { Inputs } from '~components/app/Inputs'
 import { LoadImage } from '~components/app/LoadImage'
+import { SaveImage } from '~components/app/SaveImage'
 import { ExtLink } from '~components/ExtLink'
-import { Button } from '~components/input/Button'
 import { Container } from '~components/layout/Container'
 import { Footer } from '~components/layout/Footer'
 import { PreloadFlags } from '~components/PreloadFlags'
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
-  const onSaveClicked = useCallback(() => {
-    // TODO
-    console.log('onSaveClicked')
-  }, [])
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   return (
     <>
@@ -28,9 +25,8 @@ const Home: NextPage = () => {
 
         <LoadImage />
         <Inputs />
-        <Canvas />
-
-        <Button onClick={onSaveClicked}>💾 Download</Button>
+        <Canvas canvasRef={canvasRef} />
+        <SaveImage canvasRef={canvasRef} />
       </Container>
 
       <Footer>

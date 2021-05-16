@@ -1,12 +1,14 @@
-import { useRef } from 'react'
 import { useAnimationFrame } from '~lib/hooks/useAnimationFrame'
 import { useStore } from '~lib/hooks/useStore'
 import { drawFrame } from '~lib/render'
-import type { FC } from 'react'
+import type { FC, RefObject } from 'react'
 
-export const Canvas: FC<{ children?: never }> = () => {
-  const ref = useRef<HTMLCanvasElement>(null)
+interface Props {
+  children?: never
+  canvasRef: RefObject<HTMLCanvasElement>
+}
 
+export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
   const { state, dispatch } = useStore()
   useAnimationFrame(() => {
     if (!ref.current) return
