@@ -32,3 +32,28 @@ export function isFlagName(string: unknown): string is FlagName {
   // @ts-expect-error
   return flagNames.includes(string)
 }
+
+const flagStore: Map<FlagName, HTMLImageElement> = new Map()
+const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
+  name,
+  url
+) => {
+  const cached = flagStore.get(name)
+  if (cached !== undefined) return cached
+
+  const href = url ?? flags.find(([flagName]) => flagName === name)?.[1]
+  if (href === undefined) throw new Error('Invalid Flag Name')
+
+  const img = new Image()
+  img.src = href
+
+  flagStore.set(name, img)
+  return img
+}
+
+for (const [name, url] of flags) {
+  // Only preload on client-side
+  if (typeof window === 'undefined') continue
+
+  getFlag(name, url)
+}
