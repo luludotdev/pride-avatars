@@ -43,8 +43,13 @@ export const Provider: FC = ({ children }) => {
         case 'setPadding':
           return { ...prevState, dirty: true, padding: action.value }
 
-        case 'setAngle':
-          return { ...prevState, dirty: true, angle: action.value }
+        case 'setAngle': {
+          const snap = 0.25
+          const raw = action.value
+
+          const angle = raw > snap * -1 && raw < snap ? 0 : raw
+          return { ...prevState, dirty: true, angle }
+        }
 
         case 'setFlag':
           return { ...prevState, dirty: true, flag: action.value }
