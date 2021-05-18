@@ -3,14 +3,14 @@ import { ExtLink } from './ExtLink'
 import type { FC } from 'react'
 
 export const FirefoxWarning: FC<{ children?: never }> = () => {
-  const [hidden, setHidden] = useState<boolean>(false)
+  const [hidden, setHidden] = useState<boolean>(true)
   const isFireFox = useCallback<() => boolean>(() => {
     if (typeof window === 'undefined') return false
     return navigator.userAgent.toLowerCase().includes('firefox')
   }, [])
 
   useEffect(() => {
-    if (!isFireFox()) setHidden(true)
+    if (isFireFox()) setHidden(false)
   }, [isFireFox])
 
   return hidden ? null : (
