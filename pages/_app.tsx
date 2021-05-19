@@ -16,7 +16,7 @@ const NextApp = ({ Component, pageProps }: AppProps) => (
       />
     </Head>
 
-    <ThemeProvider attribute='class'>
+    <ThemeProvider disableTransitionOnChange attribute='class'>
       <div className='w-full h-screen flex flex-col items-center px-4'>
         <Provider>
           <Component {...pageProps} />
