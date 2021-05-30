@@ -31,8 +31,24 @@ export const LoadImage: FC<{ children?: never }> = () => {
         return
       }
 
-      const { delay } = decoded[0]
-      const frames = decoded.map(x => x.patch)
+      const {
+        delay,
+        dims: { width, height },
+      } = decoded[0]
+
+      const frames = decoded.map(({ patch }) => {
+        const canvas = document.createElement('canvas')
+        canvas.width = width
+        canvas.height = height
+
+        const ctx = canvas.getContext('2d')
+        if (ctx === null) throw new Error('oh no')
+
+        const data = new ImageData(patch, width, height)
+        ctx.putImageData(data, 0, 0)
+
+        return canvas
+      })
 
       dispatch({ type: 'setGif', value: [frames, delay] })
     },
