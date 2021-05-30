@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import type { DragEventHandler, FC, RefObject } from 'react'
 import { useAnimationFrame } from '~lib/hooks/useAnimationFrame'
 import { useStore } from '~lib/hooks/useStore'
+import { loadImage } from '~lib/load'
 import { drawFrame } from '~lib/render'
 
 interface Props {
@@ -32,7 +33,7 @@ export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
   )
 
   const handleDrop = useCallback<DragEventHandler<HTMLCanvasElement>>(
-    ev => {
+    async ev => {
       ev.preventDefault()
       if (!ev.dataTransfer) return
 
@@ -43,7 +44,7 @@ export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
       if (!file) return
       if (!file.type.startsWith('image/')) return
 
-      dispatch({ type: 'setImage', value: URL.createObjectURL(file) })
+      await loadImage(dispatch, file)
     },
     [dispatch]
   )
