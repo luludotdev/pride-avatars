@@ -28,29 +28,21 @@ export const drawFrame = async (
   }
 
   const drawImage = async (
-    input: HTMLImageElement | string,
+    input: HTMLImageElement | HTMLCanvasElement,
     options: Partial<DrawOptions>
   ) => {
     const { x, y, w, h, offsetX, offsetY } = { ...defaultOptions, ...options }
 
-    let img: HTMLImageElement
-    if (typeof input === 'string') {
-      img = new Image()
-      img.src = input
-    } else {
-      img = input
-    }
-
-    if (img.complete === false) {
+    if (input instanceof HTMLImageElement && input.complete === false) {
       await new Promise<void>(resolve => {
-        img.addEventListener('load', () => {
+        input.addEventListener('load', () => {
           resolve()
         })
       })
     }
 
-    const iw = img.width
-    const ih = img.height
+    const iw = input.width
+    const ih = input.height
     const r = Math.min(w / iw, h / ih)
     let nw = iw * r
     let nh = ih * r
@@ -76,7 +68,7 @@ export const drawFrame = async (
     if (cw > iw) cw = iw
     if (ch > ih) ch = ih
 
-    ctx.drawImage(img, cx, cy, cw, ch, x, y, w, h)
+    ctx.drawImage(input, cx, cy, cw, ch, x, y, w, h)
   }
 
   ctx.save()
@@ -106,7 +98,18 @@ export const drawFrame = async (
 
   ctx.restore()
 
-  if (state.image) {
+  const pickFrame = () => {
+    if (state.image !== null) return state.image
+    if (state.frames === null || state.frames.length === 0) return null
+
+    const frameTime = (time * 1000) / state.delay
+    const idx = Math.floor(frameTime % state.frames.length)
+
+    return state.frames[idx]
+  }
+
+  const frame = pickFrame()
+  if (frame) {
     ctx.save()
 
     ctx.beginPath()
@@ -123,7 +126,7 @@ export const drawFrame = async (
     ctx.clip()
 
     ctx.translate(canvas.width / 2, canvas.height / 2)
-    await drawImage(state.image, {
+    await drawImage(frame, {
       x: (canvas.width / 2) * -1 + state.padding,
       y: (canvas.height / 2) * -1 + state.padding,
       w: canvas.width - state.padding * 2,
