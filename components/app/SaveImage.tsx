@@ -67,7 +67,7 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
 
   return (
     <Button disabled={state.saving} onClick={onSaveClicked}>
-      💾 Download
+      {state.saving ? <>⏳ Encoding...</> : <>💾 Download</>}
     </Button>
   )
 }
