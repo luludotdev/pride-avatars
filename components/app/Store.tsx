@@ -32,7 +32,7 @@ interface Context {
 // @ts-expect-error
 export const store = createContext<Context>({ state: initialState })
 
-type Action =
+export type Action =
   | { type: 'markClean' }
   | { type: 'setPadding'; value: number }
   | { type: 'setAngle'; value: number }
