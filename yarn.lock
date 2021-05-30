@@ -2350,6 +2350,11 @@ get-value@^2.0.3, get-value@^2.0.6:
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
 
+gif-encoder-2@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/gif-encoder-2/-/gif-encoder-2-1.0.5.tgz#872ae04d8028de4a3417646ceb80dda88d6247b9"
+  integrity sha512-fsRAKbZuUoZ7FYGjpFElmflTkKwsn/CzAmL/xDl4558aTAgysIDCUF6AXWO8dmai/ApfZACbPVAM+vPezJXlFg==
+
 gifuct-js@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/gifuct-js/-/gifuct-js-2.1.1.tgz#ac74ab664bc0726d0a1af3f4fb46f8c0f19d8f43"
