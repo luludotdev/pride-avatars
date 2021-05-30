@@ -5,7 +5,7 @@ import { useStore } from '~lib/hooks/useStore'
 import type { FC } from 'react'
 
 export const LoadImage: FC<{ children?: never }> = () => {
-  const { dispatch } = useStore()
+  const { state, dispatch } = useStore()
   const ref = useRef<HTMLInputElement>(null)
 
   const onLoadClicked = useCallback(() => {
@@ -57,7 +57,9 @@ export const LoadImage: FC<{ children?: never }> = () => {
 
   return (
     <>
-      <Button onClick={onLoadClicked}>📸 Load Avatar</Button>
+      <Button disabled={state.saving} onClick={onLoadClicked}>
+        📸 Load Avatar
+      </Button>
 
       <input
         ref={ref}

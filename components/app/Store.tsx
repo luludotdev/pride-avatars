@@ -10,6 +10,7 @@ export interface State {
   image: HTMLImageElement | null
   frames: HTMLCanvasElement[] | null
   delay: number
+  saving: boolean
 }
 
 const initialState: State = {
@@ -20,6 +21,7 @@ const initialState: State = {
   image: null,
   frames: null,
   delay: -1,
+  saving: false,
 }
 
 interface Context {
@@ -37,6 +39,7 @@ type Action =
   | { type: 'setFlag'; value: FlagName }
   | { type: 'setImage'; value: string }
   | { type: 'setGif'; value: [frames: HTMLCanvasElement[], delay: number] }
+  | { type: 'setSaving'; value: boolean }
 
 export const Provider: FC = ({ children }) => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
@@ -80,6 +83,9 @@ export const Provider: FC = ({ children }) => {
           const [frames, delay] = action.value
           return { ...prevState, dirty: true, image: null, frames, delay }
         }
+
+        case 'setSaving':
+          return { ...prevState, saving: action.value }
 
         default:
           throw new Error('Invalid Action')

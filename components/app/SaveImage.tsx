@@ -9,13 +9,20 @@ interface Props {
 }
 
 export const SaveImage: FC<Props> = ({ canvasRef }) => {
-  const { state } = useStore()
-  const onSaveClicked = useCallback(() => {
+  const { state, dispatch } = useStore()
+  const onSaveClicked = useCallback(async () => {
+    if (state.saving) return
     if (!canvasRef.current) return
     const canvas = canvasRef.current
 
     if (state.frames) {
-      // TODO: Implement
+      dispatch({ type: 'setSaving', value: true })
+
+      try {
+        // TODO: Implement
+      } finally {
+        dispatch({ type: 'setSaving', value: false })
+      }
     } else {
       const a = document.createElement('a')
       const b64 = canvas.toDataURL('image/png;base64')
@@ -25,7 +32,11 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
       a.click()
       a.remove()
     }
-  }, [canvasRef, state])
+  }, [canvasRef, state, dispatch])
 
-  return <Button onClick={onSaveClicked}>💾 Download</Button>
+  return (
+    <Button disabled={state.saving} onClick={onSaveClicked}>
+      💾 Download
+    </Button>
+  )
 }

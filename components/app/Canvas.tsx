@@ -12,6 +12,7 @@ interface Props {
 export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
   const { state, dispatch } = useStore()
   useAnimationFrame(({ time }) => {
+    if (state.saving) return
     if (!ref.current) return
     if (!state.dirty && state.frames === null) return
 
