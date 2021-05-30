@@ -1,8 +1,8 @@
 import { decompressFrames, parseGIF } from 'gifuct-js'
 import { ChangeEventHandler, useCallback, useRef } from 'react'
+import type { FC } from 'react'
 import { Button } from '~components/input/Button'
 import { useStore } from '~lib/hooks/useStore'
-import type { FC } from 'react'
 
 export const LoadImage: FC<{ children?: never }> = () => {
   const { state, dispatch } = useStore()

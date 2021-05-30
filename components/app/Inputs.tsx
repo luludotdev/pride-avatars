@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
+import type { FC } from 'react'
 import { OptionInput } from '~components/input/OptionInput'
 import { RangeInput } from '~components/input/RangeInput'
 import { flagNames, isFlagName } from '~lib/flags'
 import { useStore } from '~lib/hooks/useStore'
-import type { FC } from 'react'
 
 export const Inputs: FC<{ children?: never }> = () => {
   const { state, dispatch } = useStore()

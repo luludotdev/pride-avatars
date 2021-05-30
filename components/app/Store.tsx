@@ -1,6 +1,6 @@
 import { createContext, useMemo, useReducer } from 'react'
-import type { FlagName } from '~lib/flags'
 import type { Dispatch, FC, Reducer } from 'react'
+import type { FlagName } from '~lib/flags'
 
 export interface State {
   dirty: boolean

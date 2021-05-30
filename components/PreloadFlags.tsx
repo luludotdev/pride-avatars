@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import { flags } from '~lib/flags'
 import type { FC } from 'react'
+import { flags } from '~lib/flags'
 
 export const PreloadFlags: FC<{ children?: never }> = () => (
   <Head>

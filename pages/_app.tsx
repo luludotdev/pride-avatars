@@ -1,7 +1,7 @@
 import { ThemeProvider } from 'next-themes'
+import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Provider } from '~components/app/Store'
-import type { AppProps } from 'next/app'
 import 'tailwindcss/tailwind.css'
 
 const NextApp = ({ Component, pageProps }: AppProps) => (

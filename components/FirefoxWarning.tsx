@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import { ExtLink } from './ExtLink'
 import type { FC } from 'react'
+import { ExtLink } from './ExtLink'
 
 export const FirefoxWarning: FC<{ children?: never }> = () => {
   const [hidden, setHidden] = useState<boolean>(true)

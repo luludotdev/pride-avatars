@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
+import type { DragEventHandler, FC, RefObject } from 'react'
 import { useAnimationFrame } from '~lib/hooks/useAnimationFrame'
 import { useStore } from '~lib/hooks/useStore'
 import { drawFrame } from '~lib/render'
-import type { DragEventHandler, FC, RefObject } from 'react'
 
 interface Props {
   children?: never

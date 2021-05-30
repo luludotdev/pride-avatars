@@ -1,3 +1,4 @@
+import type { NextPage } from 'next'
 import { useRef } from 'react'
 import { Canvas } from '~components/app/Canvas'
 import { Inputs } from '~components/app/Inputs'
@@ -7,7 +8,6 @@ import { ExtLink } from '~components/ExtLink'
 import { FirefoxWarning } from '~components/FirefoxWarning'
 import { Meta } from '~components/Meta'
 import { PreloadFlags } from '~components/PreloadFlags'
-import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
