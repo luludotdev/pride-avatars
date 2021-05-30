@@ -2345,6 +2345,13 @@ get-value@^2.0.3, get-value@^2.0.6:
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
 
+gifuct-js@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/gifuct-js/-/gifuct-js-2.1.1.tgz#ac74ab664bc0726d0a1af3f4fb46f8c0f19d8f43"
+  integrity sha512-DZkLjGtUs+cx0EDby+on/h/GrjizxcqGHLN6c8h8t8GHT1XBhRhfow/nl6L96fwSRO+37hTF2lCnoqUWFsKs9g==
+  dependencies:
+    js-binary-schema-parser "^2.0.2"
+
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -3122,6 +3129,11 @@ jest-worker@27.0.0-next.5:
     "@types/node" "*"
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
+
+js-binary-schema-parser@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/js-binary-schema-parser/-/js-binary-schema-parser-2.0.2.tgz#8fec115616bfe91c6c407f1ef2b58297b1147299"
+  integrity sha512-LUdtrIW6+4ERDhLO19cQBwYKWMcS09QpuBQSUmwYx+OXB8KzMiGDTNoVOTuo4dNrPItlYW0xyiUd1t/3HZtbxg==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"

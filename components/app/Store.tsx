@@ -8,6 +8,8 @@ export interface State {
   angle: number
   flag: FlagName
   image: HTMLImageElement | null
+  frames: Uint8ClampedArray[] | null
+  delay: number
 }
 
 const initialState: State = {
@@ -16,6 +18,8 @@ const initialState: State = {
   angle: 0,
   flag: 'Pastel',
   image: null,
+  frames: null,
+  delay: -1,
 }
 
 interface Context {
@@ -32,6 +36,7 @@ type Action =
   | { type: 'setAngle'; value: number }
   | { type: 'setFlag'; value: FlagName }
   | { type: 'setImage'; value: string }
+  | { type: 'setGif'; value: [frames: Uint8ClampedArray[], delay: number] }
 
 export const Provider: FC = ({ children }) => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
@@ -60,7 +65,14 @@ export const Provider: FC = ({ children }) => {
           const image = new Image()
           image.src = action.value
 
-          return { ...prevState, dirty: true, image }
+          return { ...prevState, dirty: true, frames: null, delay: -1, image }
+        }
+
+        case 'setGif': {
+          prevState.image?.remove()
+
+          const [frames, delay] = action.value
+          return { ...prevState, dirty: true, image: null, frames, delay }
         }
 
         default:
