@@ -15,7 +15,8 @@ interface DrawOptions {
 export const drawFrame = async (
   canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
-  state: State
+  state: State,
+  time: number
 ) => {
   const defaultOptions: DrawOptions = {
     x: 0,

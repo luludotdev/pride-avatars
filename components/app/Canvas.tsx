@@ -11,15 +11,15 @@ interface Props {
 
 export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
   const { state, dispatch } = useStore()
-  useAnimationFrame(() => {
+  useAnimationFrame(({ time }) => {
     if (!ref.current) return
-    if (!state.dirty) return
+    if (!state.dirty && state.frames === null) return
 
     const canvas = ref.current
     const ctx = canvas.getContext('2d')
     if (ctx === null) return
 
-    void drawFrame(canvas, ctx, state)
+    void drawFrame(canvas, ctx, state, time)
     dispatch({ type: 'markClean' })
   }, [])
 
