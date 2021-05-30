@@ -36,7 +36,13 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
         const ctx = canvas.getContext('2d')
         if (ctx === null) throw new Error('oh no')
 
-        const encoder = new GIFEncoder(canvas.width, canvas.height)
+        const encoder = new GIFEncoder(
+          canvas.width,
+          canvas.height,
+          'neuquant',
+          true
+        )
+
         encoder.setDelay(state.delay)
         encoder.start()
 
