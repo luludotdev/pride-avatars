@@ -5,7 +5,6 @@ import { Inputs } from '~components/app/Inputs'
 import { LoadImage } from '~components/app/LoadImage'
 import { SaveImage } from '~components/app/SaveImage'
 import { ExtLink } from '~components/ExtLink'
-import { FirefoxWarning } from '~components/FirefoxWarning'
 import { Meta } from '~components/Meta'
 import { PreloadFlags } from '~components/PreloadFlags'
 
@@ -14,8 +13,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <FirefoxWarning />
-
       <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
         <PreloadFlags />
         <Meta
