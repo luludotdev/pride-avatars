@@ -24,12 +24,12 @@ export const Advert: FC<{ children?: never }> = () => {
           <ExtLink href='http://paypal.me/jackbarondev'>
             supporting my work
           </ExtLink>
-          .
+          . Developers gotta eat too! 😉
         </p>
 
         <p>
           I work on these projects in my free time and your support helps me
-          spend more time working on projects just like these.
+          spend more time working on fun little side-projects, just like this.
         </p>
 
         <div className='mt-2'>
