@@ -1,8 +1,9 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import type { DragEventHandler, FC, RefObject } from 'react'
 import { useAnimationFrame } from '~lib/hooks/useAnimationFrame'
 import { useStore } from '~lib/hooks/useStore'
 import { loadImage } from '~lib/load'
+import { qualityToResolution } from '~lib/quality'
 import { drawFrame } from '~lib/render'
 
 interface Props {
@@ -49,12 +50,17 @@ export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
     [dispatch]
   )
 
+  const resolution = useMemo(
+    () => qualityToResolution(state.quality),
+    [state.quality]
+  )
+
   return (
     <canvas
       ref={ref}
       className='w-full h-auto rounded'
-      width='512'
-      height='512'
+      width={resolution}
+      height={resolution}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     />

@@ -4,9 +4,25 @@ import { OptionInput } from '~components/input/OptionInput'
 import { RangeInput } from '~components/input/RangeInput'
 import { flagNames, isFlagName } from '~lib/flags'
 import { useStore } from '~lib/hooks/useStore'
+import { qualities, qualityToResolution } from '~lib/quality'
 
 export const Inputs: FC<{ children?: never }> = () => {
   const { state, dispatch } = useStore()
+
+  const onQualityChanged = useCallback(
+    (quality: number) => {
+      dispatch({ type: 'setQuality', value: quality })
+    },
+    [dispatch]
+  )
+
+  const formatQuality = useCallback<(v: number) => string>(v => {
+    const padding = 6
+    if (v === 0) return 'shit'.padEnd(padding, ' ')
+
+    const res = qualityToResolution(v).toString()
+    return `${res}px`.padEnd(padding, ' ')
+  }, [])
 
   const onPaddingChanged = useCallback(
     (padding: number) => {
@@ -42,6 +58,17 @@ export const Inputs: FC<{ children?: never }> = () => {
 
   return (
     <div className='w-full grid grid-cols-input gap-x-3'>
+      <RangeInput
+        id='quality'
+        label='Quality'
+        min={0}
+        max={qualities.length - 1}
+        step={1}
+        value={state.quality}
+        formatter={formatQuality}
+        onChange={onQualityChanged}
+      />
+
       <RangeInput
         id='padding'
         label='Padding'

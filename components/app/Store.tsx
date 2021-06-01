@@ -4,6 +4,7 @@ import type { FlagName } from '~lib/flags'
 
 export interface State {
   dirty: boolean
+  quality: number
   padding: number
   angle: number
   flag: FlagName
@@ -15,6 +16,7 @@ export interface State {
 
 const initialState: State = {
   dirty: true,
+  quality: 3,
   padding: 10,
   angle: 0,
   flag: 'Pastel',
@@ -34,6 +36,7 @@ export const store = createContext<Context>({ state: initialState })
 
 export type Action =
   | { type: 'markClean' }
+  | { type: 'setQuality'; value: number }
   | { type: 'setPadding'; value: number }
   | { type: 'setAngle'; value: number }
   | { type: 'setFlag'; value: FlagName }
@@ -47,6 +50,9 @@ export const Provider: FC = ({ children }) => {
       switch (action.type) {
         case 'markClean':
           return { ...prevState, dirty: false }
+
+        case 'setQuality':
+          return { ...prevState, dirty: true, quality: action.value }
 
         case 'setPadding':
           return { ...prevState, dirty: true, padding: action.value }
