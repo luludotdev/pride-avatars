@@ -22,7 +22,7 @@ const Home: NextPage = () => {
           title='Pride Icons!'
           description='Generate pride icons for social media!'
           colour='#5bcefa'
-          ogImage='./favicon.png'
+          ogImage='/favicon.png'
         />
 
         <h1 className='text-4xl mt-6 mb-2 font-title'>Pride Icons! 🏳️‍🌈</h1>
