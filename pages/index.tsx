@@ -5,6 +5,7 @@ import { Canvas } from '~components/app/Canvas'
 import { Inputs } from '~components/app/Inputs'
 import { LoadImage } from '~components/app/LoadImage'
 import { SaveImage } from '~components/app/SaveImage'
+import { Warning } from '~components/app/Warning'
 import { ExtLink } from '~components/ExtLink'
 import { Meta } from '~components/Meta'
 import { PreloadFlags } from '~components/PreloadFlags'
@@ -30,6 +31,8 @@ const Home: NextPage = () => {
         <LoadImage />
         <Inputs />
         <Canvas canvasRef={canvasRef} />
+
+        <Warning />
         <SaveImage canvasRef={canvasRef} />
       </div>
 
