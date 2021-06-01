@@ -36,7 +36,7 @@ const Home: NextPage = () => {
         <SaveImage canvasRef={canvasRef} />
       </div>
 
-      <footer className='text-center my-3'>
+      <footer className='text-center py-3'>
         <p>
           Made with 💝 by{' '}
           <ExtLink href='https://twitter.com/JackBaron__'>
