@@ -25,7 +25,7 @@ export const LoadImage: FC<{ children?: never }> = () => {
   return (
     <>
       <Button disabled={state.saving} onClick={onLoadClicked}>
-        📸 Load Avatar
+        📸 Load Image
       </Button>
 
       <input

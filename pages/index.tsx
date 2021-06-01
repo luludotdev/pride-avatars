@@ -19,13 +19,13 @@ const Home: NextPage = () => {
       <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
         <PreloadFlags />
         <Meta
-          title='Pride Icons!'
-          description='Generate pride icons for social media!'
+          title='Pride Avatars!'
+          description='Enhance your social media avatars with a pride flag border!'
           colour='#afa5fd'
           ogImage='/favicon.png'
         />
 
-        <h1 className='text-4xl mt-6 mb-2 font-title'>Pride Icons! 🏳️‍🌈</h1>
+        <h1 className='text-4xl mt-6 mb-2 font-title'>Pride Avatars! 🏳️‍🌈</h1>
 
         <LoadImage />
         <Inputs />
@@ -43,7 +43,7 @@ const Home: NextPage = () => {
 
         <p>
           Source available on{' '}
-          <ExtLink href='https://github.com/lolPants/pride-icons'>
+          <ExtLink href='https://github.com/lolPants/pride-avatars'>
             GitHub
           </ExtLink>
         </p>

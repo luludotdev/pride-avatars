@@ -1,2 +1,2 @@
-# 🏳️‍🌈 Pride Icons
-_Generate pride icons for social media!_
+# 🏳️‍🌈 Pride Avatars
+> Enhance your social media avatars with a pride flag border!

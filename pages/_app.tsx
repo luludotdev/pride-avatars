@@ -18,7 +18,7 @@ const NextApp = ({ Component, pageProps }: AppProps) => (
 
       <link
         // Title
-        href='https://fonts.googleapis.com/css2?&family=Montserrat:wght@700&display=swap&text=Pride Icons!'
+        href='https://fonts.googleapis.com/css2?&family=Montserrat:wght@700&display=swap&text=Pride Avatars!'
         rel='stylesheet'
       />
 
