@@ -24,6 +24,11 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
   }, [])
 
   const onSaveClicked = useCallback(async () => {
+    if (!state.shownAdvert) {
+      dispatch({ type: 'markAdShown' })
+      dispatch({ type: 'setAdShowing', value: true })
+    }
+
     if (state.saving) return
     if (!canvasRef.current) return
     const canvas = canvasRef.current

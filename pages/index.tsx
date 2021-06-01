@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useRef } from 'react'
+import { Advert } from '~components/app/Advert'
 import { Canvas } from '~components/app/Canvas'
 import { Inputs } from '~components/app/Inputs'
 import { LoadImage } from '~components/app/LoadImage'
@@ -13,6 +14,8 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Advert />
+
       <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
         <PreloadFlags />
         <Meta

@@ -12,6 +12,8 @@ export interface State {
   frames: HTMLCanvasElement[] | null
   delay: number
   saving: boolean
+  advertOpen: boolean
+  shownAdvert: boolean
 }
 
 const initialState: State = {
@@ -24,6 +26,11 @@ const initialState: State = {
   frames: null,
   delay: -1,
   saving: false,
+  advertOpen: false,
+  shownAdvert:
+    typeof window === 'undefined'
+      ? false
+      : Boolean(localStorage.getItem('shownAdvert')) ?? false,
 }
 
 interface Context {
@@ -43,6 +50,8 @@ export type Action =
   | { type: 'setImage'; value: string }
   | { type: 'setGif'; value: [frames: HTMLCanvasElement[], delay: number] }
   | { type: 'setSaving'; value: boolean }
+  | { type: 'setAdShowing'; value: boolean }
+  | { type: 'markAdShown' }
 
 export const Provider: FC = ({ children }) => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
@@ -92,6 +101,14 @@ export const Provider: FC = ({ children }) => {
 
         case 'setSaving':
           return { ...prevState, saving: action.value }
+
+        case 'setAdShowing':
+          return { ...prevState, advertOpen: action.value }
+
+        case 'markAdShown': {
+          localStorage.setItem('shownAdvert', '1')
+          return { ...prevState, shownAdvert: true }
+        }
 
         default:
           throw new Error('Invalid Action')
