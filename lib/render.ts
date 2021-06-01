@@ -1,5 +1,6 @@
 import type { State } from '~components/app/Store'
 import { getFlag } from '~lib/flags'
+import { calculatePadding } from './quality'
 
 interface DrawOptions {
   x: number
@@ -111,12 +112,13 @@ export const drawFrame = async (
   const frame = pickFrame()
   if (frame) {
     ctx.save()
+    const padding = calculatePadding(state.quality, state.padding)
 
     ctx.beginPath()
     ctx.arc(
       canvas.width / 2,
       canvas.height / 2,
-      canvas.height / 2 - state.padding,
+      canvas.height / 2 - padding,
       0,
       Math.PI * 2,
       true
@@ -127,10 +129,10 @@ export const drawFrame = async (
 
     ctx.translate(canvas.width / 2, canvas.height / 2)
     await drawImage(frame, {
-      x: (canvas.width / 2) * -1 + state.padding,
-      y: (canvas.height / 2) * -1 + state.padding,
-      w: canvas.width - state.padding * 2,
-      h: canvas.height - state.padding * 2,
+      x: (canvas.width / 2) * -1 + padding,
+      y: (canvas.height / 2) * -1 + padding,
+      w: canvas.width - padding * 2,
+      h: canvas.height - padding * 2,
     })
 
     ctx.restore()

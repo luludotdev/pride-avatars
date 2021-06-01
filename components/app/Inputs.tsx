@@ -4,7 +4,7 @@ import { OptionInput } from '~components/input/OptionInput'
 import { RangeInput } from '~components/input/RangeInput'
 import { flagNames, isFlagName } from '~lib/flags'
 import { useStore } from '~lib/hooks/useStore'
-import { qualities, qualityToResolution } from '~lib/quality'
+import { calculatePadding, qualities, qualityToResolution } from '~lib/quality'
 
 export const Inputs: FC<{ children?: never }> = () => {
   const { state, dispatch } = useStore()
@@ -32,8 +32,11 @@ export const Inputs: FC<{ children?: never }> = () => {
   )
 
   const formatPadding = useCallback<(v: number) => string>(
-    v => `${v.toFixed(0).padStart(2, '0')}px`,
-    []
+    v => {
+      const value = calculatePadding(state.quality, v)
+      return `${value.toFixed(0).padStart(2, '0')}px`
+    },
+    [state.quality]
   )
 
   const onAngleChanged = useCallback(
@@ -73,7 +76,7 @@ export const Inputs: FC<{ children?: never }> = () => {
         id='padding'
         label='Padding'
         min={0}
-        max={50}
+        max={64}
         step={1}
         value={state.padding}
         formatter={formatPadding}
