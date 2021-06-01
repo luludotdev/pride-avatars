@@ -1,4 +1,3 @@
-// Import { useCallback, useEffect, useState } from 'react'
 import { FC, useCallback } from 'react'
 import { Button } from '~components/input/Button'
 import { useStore } from '~lib/hooks/useStore'
