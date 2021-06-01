@@ -19,7 +19,7 @@ export interface State {
 const initialState: State = {
   dirty: true,
   quality: 3,
-  padding: 10,
+  padding: 12,
   angle: 0,
   flag: 'Pastel',
   image: null,
