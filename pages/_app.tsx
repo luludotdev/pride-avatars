@@ -11,7 +11,20 @@ const NextApp = ({ Component, pageProps }: AppProps) => (
 
       <link rel='preconnect' href='https://fonts.gstatic.com' />
       <link
-        href='https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Montserrat:wght@700&family=Fira+Mono:wght@500&display=swap'
+        // Body
+        href='https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap'
+        rel='stylesheet'
+      />
+
+      <link
+        // Title
+        href='https://fonts.googleapis.com/css2?&family=Montserrat:wght@700&display=swap&text=Pride Icons!'
+        rel='stylesheet'
+      />
+
+      <link
+        // Mono
+        href='https://fonts.googleapis.com/css2?&family=Fira+Mono:wght@500&display=swap&text=0.123456789px-%C2%B0shit'
         rel='stylesheet'
       />
     </Head>
