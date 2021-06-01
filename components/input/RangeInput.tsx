@@ -51,7 +51,8 @@ export const RangeInput: FC<Props> = ({
   return (
     <>
       <label htmlFor={id}>
-        {label}: <span className='font-mono'>{formatValue(value)}</span>
+        {label}:{' '}
+        <span className='font-mono whitespace-pre'>{formatValue(value)}</span>
       </label>
 
       <input
