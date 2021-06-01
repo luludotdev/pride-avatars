@@ -21,7 +21,7 @@ const Home: NextPage = () => {
         <Meta
           title='Pride Icons!'
           description='Generate pride icons for social media!'
-          colour='#5bcefa'
+          colour='#afa5fd'
           ogImage='/favicon.png'
         />
 
