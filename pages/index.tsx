@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { Advert } from '~components/app/Advert'
 import { Canvas } from '~components/app/Canvas'
 import { Inputs } from '~components/app/Inputs'
@@ -7,11 +7,23 @@ import { LoadImage } from '~components/app/LoadImage'
 import { SaveImage } from '~components/app/SaveImage'
 import { Warning } from '~components/app/Warning'
 import { ExtLink } from '~components/ExtLink'
+import { Button } from '~components/input/Button'
 import { Meta } from '~components/Meta'
 import { PreloadFlags } from '~components/PreloadFlags'
+import { useStore } from '~lib/hooks/useStore'
 
 const Home: NextPage = () => {
+  const { state, dispatch } = useStore()
   const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  const onEasterEggClicked = useCallback(() => {
+    if (!canvasRef.current) return
+    if (state.frames) return
+    const canvas = canvasRef.current
+
+    const b64 = canvas.toDataURL()
+    dispatch({ type: 'setImage', value: b64 })
+  }, [state, dispatch])
 
   return (
     <>
@@ -30,6 +42,7 @@ const Home: NextPage = () => {
 
         <LoadImage />
         <Inputs />
+        <Button onClick={onEasterEggClicked}>⭕</Button>
         <Canvas canvasRef={canvasRef} />
 
         <Warning />
