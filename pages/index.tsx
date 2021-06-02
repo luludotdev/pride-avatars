@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useCallback, useRef } from 'react'
+import { useKonami } from 'react-konami-code'
 import { Advert } from '~components/app/Advert'
 import { Canvas } from '~components/app/Canvas'
 import { Inputs } from '~components/app/Inputs'
@@ -25,6 +26,12 @@ const Home: NextPage = () => {
     dispatch({ type: 'setImage', value: b64 })
   }, [state, dispatch])
 
+  const handleKonami = useCallback(() => {
+    dispatch({ type: 'toggleEasterEgg' })
+  }, [dispatch])
+
+  useKonami(handleKonami)
+
   return (
     <>
       <Advert />
@@ -42,9 +49,12 @@ const Home: NextPage = () => {
 
         <LoadImage />
         <Inputs />
-        <Button onClick={onEasterEggClicked}>⭕</Button>
-        <Canvas canvasRef={canvasRef} />
 
+        {!(state.showEasterEgg && !state.frames) ? null : (
+          <Button onClick={onEasterEggClicked}>⭕</Button>
+        )}
+
+        <Canvas canvasRef={canvasRef} />
         <Warning />
         <SaveImage canvasRef={canvasRef} />
       </div>

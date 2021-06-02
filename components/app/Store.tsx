@@ -11,6 +11,7 @@ export interface State {
   image: HTMLImageElement | null
   frames: HTMLCanvasElement[] | null
   delay: number
+  showEasterEgg: boolean
   saving: boolean
   advertOpen: boolean
   shownAdvert: boolean
@@ -25,6 +26,7 @@ const initialState: State = {
   image: null,
   frames: null,
   delay: -1,
+  showEasterEgg: false,
   saving: false,
   advertOpen: false,
   shownAdvert:
@@ -49,6 +51,7 @@ export type Action =
   | { type: 'setFlag'; value: FlagName }
   | { type: 'setImage'; value: string }
   | { type: 'setGif'; value: [frames: HTMLCanvasElement[], delay: number] }
+  | { type: 'toggleEasterEgg' }
   | { type: 'setSaving'; value: boolean }
   | { type: 'setAdShowing'; value: boolean }
   | { type: 'markAdShown' }
@@ -98,6 +101,9 @@ export const Provider: FC = ({ children }) => {
           const [frames, delay] = action.value
           return { ...prevState, dirty: true, image: null, frames, delay }
         }
+
+        case 'toggleEasterEgg':
+          return { ...prevState, showEasterEgg: !prevState.showEasterEgg }
 
         case 'setSaving':
           return { ...prevState, saving: action.value }
