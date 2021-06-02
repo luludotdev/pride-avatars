@@ -3260,6 +3260,11 @@ kind-of@^6.0.0, kind-of@^6.0.2, kind-of@^6.0.3:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
+konami@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/konami/-/konami-1.6.2.tgz#022a52efc23ba74c5b457cf2755af71386f28b29"
+  integrity sha512-6wljx0YS4Opt7HWiaZFfL2rxn17pqvEFZLyHxeGHgb64QwrS8oRkxYkV22kyciVzs3yqQFKWHqsEvLxuhuQlag==
+
 latest-version@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/latest-version/-/latest-version-5.1.0.tgz#119dfe908fe38d15dfa43ecd13fa12ec8832face"
@@ -4471,13 +4476,6 @@ react-is@16.13.1, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-
-react-konami-code@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/react-konami-code/-/react-konami-code-2.2.2.tgz#cf42af47bdc3fe3ffefce6333ea881026936f429"
-  integrity sha512-TTrdZqA25WItE6Pk6bjoIu/YKjQ6aRmk70TIqGb/tmj2tiYYcKTeDutcnikYJcX3RPsUW7CHFULq2T4svbFc+A==
-  dependencies:
-    prop-types "^15.7.2"
 
 react-refresh@0.8.3:
   version "0.8.3"
