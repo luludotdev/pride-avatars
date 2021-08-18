@@ -11,17 +11,17 @@ import Rainbow from '~assets/flags/Rainbow.svg'
 import Transgender from '~assets/flags/Transgender.svg'
 
 export const flags = [
-  ['Pastel', Pastel],
-  ['Pastel+', PastelPlus],
-  ['Rainbow', Rainbow],
-  ['Asexual', Asexual],
-  ['Bisexual', Bisexual],
-  ['Demisexual', Demisexual],
-  ['Genderfluid', Genderfluid],
-  ['Lesbian', Lesbian],
-  ['Nonbinary', Nonbinary],
-  ['Pansexual', Pansexual],
-  ['Transgender', Transgender],
+  ['Pastel', Pastel.src],
+  ['Pastel+', PastelPlus.src],
+  ['Rainbow', Rainbow.src],
+  ['Asexual', Asexual.src],
+  ['Bisexual', Bisexual.src],
+  ['Demisexual', Demisexual.src],
+  ['Genderfluid', Genderfluid.src],
+  ['Lesbian', Lesbian.src],
+  ['Nonbinary', Nonbinary.src],
+  ['Pansexual', Pansexual.src],
+  ['Transgender', Transgender.src],
 ] as const
 
 export type FlagName = typeof flags[number][0]
