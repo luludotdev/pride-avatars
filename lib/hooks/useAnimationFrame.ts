@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react'
-import type { DependencyList } from 'react'
 
 export const useAnimationFrame = (
   cb: (arg: { time: number; delta: number }) => void,
-  deps: DependencyList
+  deps: readonly unknown[]
 ) => {
   /* eslint-disable react-hooks/rules-of-hooks */
   if (typeof window === 'undefined') return

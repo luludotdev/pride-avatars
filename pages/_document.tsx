@@ -10,7 +10,29 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang='en'>
-        <Head />
+        <Head>
+          <link rel='icon' type='image/png' href='./favicon.png' />
+
+          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            // Body
+            href='https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap'
+            rel='stylesheet'
+          />
+
+          <link
+            // Title
+            href='https://fonts.googleapis.com/css2?&family=Montserrat:wght@700&display=swap&text=Pride Avatars!'
+            rel='stylesheet'
+          />
+
+          <link
+            // Mono
+            href='https://fonts.googleapis.com/css2?&family=Fira+Mono:wght@500&display=swap&text=0.123456789px-%C2%B0shit'
+            rel='stylesheet'
+          />
+        </Head>
+
         <body className='bg-light dark:bg-dark dark:text-light'>
           <Main />
           <NextScript />

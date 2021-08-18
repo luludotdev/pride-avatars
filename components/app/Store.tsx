@@ -40,7 +40,7 @@ interface Context {
   dispatch: Dispatch<Action>
 }
 
-// @ts-expect-error
+// @ts-expect-error Does not include `dispatch()`
 export const store = createContext<Context>({ state: initialState })
 
 export type Action =
@@ -58,62 +58,71 @@ export type Action =
 
 export const Provider: FC = ({ children }) => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
-    (prevState, action) => {
+    (previousState, action) => {
       switch (action.type) {
         case 'markClean':
-          return { ...prevState, dirty: false }
+          return { ...previousState, dirty: false }
 
         case 'setQuality':
-          return { ...prevState, dirty: true, quality: action.value }
+          return { ...previousState, dirty: true, quality: action.value }
 
         case 'setPadding':
-          return { ...prevState, dirty: true, padding: action.value }
+          return { ...previousState, dirty: true, padding: action.value }
 
         case 'setAngle': {
           const snap = 0.25
           const raw = action.value
 
           const angle = raw > snap * -1 && raw < snap ? 0 : raw
-          return { ...prevState, dirty: true, angle }
+          return { ...previousState, dirty: true, angle }
         }
 
         case 'setFlag':
-          return { ...prevState, dirty: true, flag: action.value }
+          return { ...previousState, dirty: true, flag: action.value }
 
         case 'setImage': {
-          prevState.image?.remove()
-          for (const frame of prevState?.frames ?? []) {
+          previousState.image?.remove()
+          for (const frame of previousState?.frames ?? []) {
             frame.remove()
           }
 
           const image = new Image()
           image.src = action.value
 
-          return { ...prevState, dirty: true, frames: null, delay: -1, image }
+          return {
+            ...previousState,
+            dirty: true,
+            frames: null,
+            delay: -1,
+            image,
+          }
         }
 
         case 'setGif': {
-          prevState.image?.remove()
-          for (const frame of prevState?.frames ?? []) {
+          previousState.image?.remove()
+          for (const frame of previousState?.frames ?? []) {
             frame.remove()
           }
 
           const [frames, delay] = action.value
-          return { ...prevState, dirty: true, image: null, frames, delay }
+          return { ...previousState, dirty: true, image: null, frames, delay }
         }
 
         case 'toggleEasterEgg':
-          return { ...prevState, showEasterEgg: !prevState.showEasterEgg }
+          return {
+            ...previousState,
+            showEasterEgg: !previousState.showEasterEgg,
+          }
 
         case 'setSaving':
-          return { ...prevState, saving: action.value }
+          return { ...previousState, saving: action.value }
 
         case 'setAdShowing':
-          return { ...prevState, advertOpen: action.value }
+          return { ...previousState, advertOpen: action.value }
 
         case 'markAdShown': {
           localStorage.setItem('shownAdvert', '1')
-          return { ...prevState, shownAdvert: true }
+          return { ...previousState, shownAdvert: true }
         }
 
         default:

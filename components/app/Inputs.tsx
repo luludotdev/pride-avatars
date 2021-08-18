@@ -20,8 +20,8 @@ export const Inputs: FC<{ children?: never }> = () => {
     const padding = 6
     if (v === 0) return 'shit'.padEnd(padding, ' ')
 
-    const res = qualityToResolution(v).toString()
-    return `${res}px`.padEnd(padding, ' ')
+    const resolution = qualityToResolution(v).toString()
+    return `${resolution}px`.padEnd(padding, ' ')
   }, [])
 
   const onPaddingChanged = useCallback(

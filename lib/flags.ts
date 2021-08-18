@@ -29,7 +29,7 @@ export const flagNames: FlagName[] = flags.map(([name]) => name)
 
 export function isFlagName(string: unknown): string is FlagName {
   if (typeof string !== 'string') return false
-  // @ts-expect-error
+  // @ts-expect-error Compare `string` to union
   return flagNames.includes(string)
 }
 
