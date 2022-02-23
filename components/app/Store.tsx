@@ -8,8 +8,10 @@ export interface State {
   padding: number
   angle: number
   flag: FlagName
+  /* eslint-disable @typescript-eslint/ban-types */
   image: HTMLImageElement | null
   frames: HTMLCanvasElement[] | null
+  /* eslint-enable @typescript-eslint/ban-types */
   delay: number
   showEasterEgg: boolean
   saving: boolean
