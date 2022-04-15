@@ -3,7 +3,7 @@ import { Button } from '~components/input/Button'
 import { useStore } from '~lib/hooks/useStore'
 import { ExtLink } from '../ExtLink'
 
-export const Advert: FC<{ children?: never }> = () => {
+export const Advert: FC = () => {
   const { state, dispatch } = useStore()
 
   const handleClose = useCallback(() => {

@@ -2,8 +2,6 @@ import Head from 'next/head'
 import type { FC } from 'react'
 
 interface Props {
-  children?: never
-
   title: string
   description?: string
   colour?: string

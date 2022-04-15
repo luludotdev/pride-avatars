@@ -6,7 +6,7 @@ import { flagNames, isFlagName } from '~lib/flags'
 import { useStore } from '~lib/hooks/useStore'
 import { calculatePadding, qualities, qualityToResolution } from '~lib/quality'
 
-export const Inputs: FC<{ children?: never }> = () => {
+export const Inputs: FC = () => {
   const { state, dispatch } = useStore()
 
   const onQualityChanged = useCallback(

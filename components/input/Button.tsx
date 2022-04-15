@@ -1,13 +1,17 @@
 import clsx from 'clsx'
 import { useCallback } from 'react'
-import type { FC } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 
 interface Props {
   disabled?: boolean
   onClick: () => void
 }
 
-export const Button: FC<Props> = ({ disabled, onClick, children }) => {
+export const Button: FC<PropsWithChildren<Props>> = ({
+  disabled,
+  onClick,
+  children,
+}) => {
   const handleClick = useCallback(() => {
     if (typeof onClick === 'function') onClick()
   }, [onClick])

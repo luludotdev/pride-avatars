@@ -7,7 +7,6 @@ import { drawFrame } from '~lib/render'
 import { sleep } from '~lib/sleep'
 
 interface Props {
-  children?: never
   canvasRef: RefObject<HTMLCanvasElement>
 }
 

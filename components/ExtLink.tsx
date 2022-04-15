@@ -1,10 +1,10 @@
-import type { FC } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 
 interface Props {
   href: string
 }
 
-export const ExtLink: FC<Props> = ({ href, children }) => (
+export const ExtLink: FC<PropsWithChildren<Props>> = ({ href, children }) => (
   <a
     className='underline transition-colors hover:text-accent-light dark:hover:text-accent-dark'
     href={href}

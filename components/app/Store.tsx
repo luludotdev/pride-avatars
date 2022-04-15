@@ -1,5 +1,5 @@
 import { createContext, useMemo, useReducer } from 'react'
-import type { Dispatch, FC, Reducer } from 'react'
+import type { Dispatch, FC, PropsWithChildren, Reducer } from 'react'
 import type { FlagName } from '~lib/flags'
 
 export interface State {
@@ -58,7 +58,7 @@ export type Action =
   | { type: 'setAdShowing'; value: boolean }
   | { type: 'markAdShown' }
 
-export const Provider: FC = ({ children }) => {
+export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
     (previousState, action) => {
       switch (action.type) {

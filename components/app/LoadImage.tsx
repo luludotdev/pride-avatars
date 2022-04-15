@@ -4,7 +4,7 @@ import { Button } from '~components/input/Button'
 import { useStore } from '~lib/hooks/useStore'
 import { loadImage } from '~lib/load'
 
-export const LoadImage: FC<{ children?: never }> = () => {
+export const LoadImage: FC = () => {
   const { state, dispatch } = useStore()
   const ref = useRef<HTMLInputElement>(null)
 

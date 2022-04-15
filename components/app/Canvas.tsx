@@ -7,7 +7,6 @@ import { qualityToResolution } from '~lib/quality'
 import { drawFrame } from '~lib/render'
 
 interface Props {
-  children?: never
   canvasRef: RefObject<HTMLCanvasElement>
 }
 

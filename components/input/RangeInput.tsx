@@ -2,8 +2,6 @@ import { ChangeEventHandler, useCallback } from 'react'
 import type { FC } from 'react'
 
 interface Props {
-  children?: never
-
   id: string
   label: string
 

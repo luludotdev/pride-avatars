@@ -4,7 +4,7 @@ import { useStore } from '~lib/hooks/useStore'
 import { qualities } from '~lib/quality'
 
 const MAX_QUALITY = 2
-export const Warning: FC<{ children?: never }> = () => {
+export const Warning: FC = () => {
   const { state } = useStore()
   const shouldShow = useMemo<boolean>(() => {
     if (state.frames === null) return false
