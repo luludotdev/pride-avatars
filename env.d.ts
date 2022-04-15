@@ -1,5 +1,5 @@
 declare module '~assets/flags/*.svg' {
-  const content: StaticImageData
+  const content: import('next/image').StaticImageData
 
   export default content
 }
