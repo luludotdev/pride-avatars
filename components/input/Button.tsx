@@ -1,6 +1,5 @@
 import clsx from 'clsx'
-import { useCallback } from 'react'
-import type { FC, PropsWithChildren } from 'react'
+import { type FC, type PropsWithChildren, useCallback } from 'react'
 
 interface Props {
   disabled?: boolean

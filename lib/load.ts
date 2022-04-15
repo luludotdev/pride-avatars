@@ -1,6 +1,6 @@
 import { decompressFrames, parseGIF } from 'gifuct-js'
-import type { Dispatch } from 'react'
-import type { Action } from '~components/app/Store'
+import { type Dispatch } from 'react'
+import { type Action } from '~components/app/Store'
 
 export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
   if (file.type !== 'image/gif') {

@@ -1,6 +1,13 @@
-import { createContext, useMemo, useReducer } from 'react'
-import type { Dispatch, FC, PropsWithChildren, Reducer } from 'react'
-import type { FlagName } from '~lib/flags'
+import {
+  createContext,
+  type Dispatch,
+  type FC,
+  type PropsWithChildren,
+  type Reducer,
+  useMemo,
+  useReducer,
+} from 'react'
+import { type FlagName } from '~lib/flags'
 
 export interface State {
   dirty: boolean

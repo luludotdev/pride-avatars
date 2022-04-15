@@ -1,5 +1,4 @@
-import { ChangeEventHandler, useCallback } from 'react'
-import type { FC } from 'react'
+import { ChangeEventHandler, type FC, useCallback } from 'react'
 
 interface Props {
   id: string

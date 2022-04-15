@@ -1,6 +1,5 @@
 import GIFEncoder from 'gif-encoder-2'
-import { useCallback } from 'react'
-import type { FC, RefObject } from 'react'
+import { type FC, type RefObject, useCallback } from 'react'
 import { Button } from '~components/input/Button'
 import { useStore } from '~lib/hooks/useStore'
 import { drawFrame } from '~lib/render'

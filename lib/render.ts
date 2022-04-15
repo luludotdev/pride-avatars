@@ -1,4 +1,4 @@
-import type { State } from '~components/app/Store'
+import { type State } from '~components/app/Store'
 import { getFlag } from '~lib/flags'
 import { calculatePadding } from './quality'
 

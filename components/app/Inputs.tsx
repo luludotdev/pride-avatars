@@ -1,5 +1,4 @@
-import { useCallback } from 'react'
-import type { FC } from 'react'
+import { type FC, useCallback } from 'react'
 import { OptionInput } from '~components/input/OptionInput'
 import { RangeInput } from '~components/input/RangeInput'
 import { flagNames, isFlagName } from '~lib/flags'

@@ -1,5 +1,4 @@
-import { ChangeEventHandler, useCallback, useRef } from 'react'
-import type { FC } from 'react'
+import { ChangeEventHandler, type FC, useCallback, useRef } from 'react'
 import { Button } from '~components/input/Button'
 import { useStore } from '~lib/hooks/useStore'
 import { loadImage } from '~lib/load'

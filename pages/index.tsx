@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import { type NextPage } from 'next'
 import { useCallback, useRef } from 'react'
 import { Advert } from '~components/app/Advert'
 import { Canvas } from '~components/app/Canvas'

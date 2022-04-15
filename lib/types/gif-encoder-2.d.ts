@@ -1,5 +1,5 @@
 declare module 'gif-encoder-2' {
-  import type { Buffer } from 'buffer'
+  import { type Buffer } from 'buffer'
 
   type Algorithm = 'neuquant' | 'octree'
 
