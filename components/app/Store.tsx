@@ -26,6 +26,19 @@ export interface State {
   lastShownAd: Date | undefined
 }
 
+const loadLastShownAd: () => State['lastShownAd'] = () => {
+  if (typeof window === 'undefined') return undefined
+
+  const stored = localStorage.getItem('lastShownAd')
+  if (!stored) return undefined
+
+  const parsed = Number.parseInt(stored, 10)
+  if (Number.isNaN(parsed)) return undefined
+
+  const date = new Date(parsed)
+  return date
+}
+
 const initialState: State = {
   dirty: true,
   quality: 3,
@@ -38,12 +51,7 @@ const initialState: State = {
   showEasterEgg: false,
   saving: false,
   advertOpen: false,
-  lastShownAd:
-    typeof window === 'undefined'
-      ? undefined
-      : new Date(
-          Number.parseInt(localStorage.getItem('lastShownAd') ?? '', 10)
-        ),
+  lastShownAd: loadLastShownAd(),
 }
 
 interface Context {
