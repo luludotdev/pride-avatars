@@ -5,11 +5,11 @@ import {
   useCallback,
   useMemo,
 } from 'react'
-import { useAnimationFrame } from '~lib/hooks/useAnimationFrame'
-import { useStore } from '~lib/hooks/useStore'
-import { loadImage } from '~lib/load'
-import { qualityToResolution } from '~lib/quality'
-import { drawFrame } from '~lib/render'
+import { useAnimationFrame } from '~/lib/hooks/useAnimationFrame'
+import { useStore } from '~/lib/hooks/useStore'
+import { loadImage } from '~/lib/load'
+import { qualityToResolution } from '~/lib/quality'
+import { drawFrame } from '~/lib/render'
 
 interface Props {
   canvasRef: RefObject<HTMLCanvasElement>

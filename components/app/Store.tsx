@@ -7,7 +7,7 @@ import {
   useMemo,
   useReducer,
 } from 'react'
-import { type FlagName } from '~lib/flags'
+import { type FlagName } from '~/lib/flags'
 
 export interface State {
   dirty: boolean

@@ -1,9 +1,9 @@
 import { type FC, useCallback } from 'react'
-import { OptionInput } from '~components/input/OptionInput'
-import { RangeInput } from '~components/input/RangeInput'
-import { flagNames, isFlagName } from '~lib/flags'
-import { useStore } from '~lib/hooks/useStore'
-import { calculatePadding, qualities, qualityToResolution } from '~lib/quality'
+import { OptionInput } from '~/components/input/OptionInput'
+import { RangeInput } from '~/components/input/RangeInput'
+import { flagNames, isFlagName } from '~/lib/flags'
+import { useStore } from '~/lib/hooks/useStore'
+import { calculatePadding, qualities, qualityToResolution } from '~/lib/quality'
 
 export const Inputs: FC = () => {
   const { state, dispatch } = useStore()

@@ -20,10 +20,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "~assets/*": ["assets/*"],
-      "~components/*": ["components/*"],
-      "~pages/*": ["pages/*"],
-      "~lib/*": ["lib/*"],
+      "~/*": ["./*"],
     }
   },
   "include": [

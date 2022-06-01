@@ -1,7 +1,7 @@
 import { decompressFrames, parseGIF } from 'gifuct-js'
 import { parse as parsePath } from 'path'
 import { type Dispatch } from 'react'
-import { type Action } from '~components/app/Store'
+import { type Action } from '~/components/app/Store'
 
 export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
   const { name: filename } = parsePath(file.name)

@@ -1,6 +1,6 @@
 import { type FC, useMemo } from 'react'
-import { useStore } from '~lib/hooks/useStore'
-import { qualities } from '~lib/quality'
+import { useStore } from '~/lib/hooks/useStore'
+import { qualities } from '~/lib/quality'
 
 const MAX_QUALITY = 2
 export const Warning: FC = () => {

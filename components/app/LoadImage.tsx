@@ -1,7 +1,7 @@
 import { ChangeEventHandler, type FC, useCallback, useRef } from 'react'
-import { Button } from '~components/input/Button'
-import { useStore } from '~lib/hooks/useStore'
-import { loadImage } from '~lib/load'
+import { Button } from '~/components/input/Button'
+import { useStore } from '~/lib/hooks/useStore'
+import { loadImage } from '~/lib/load'
 
 export const LoadImage: FC = () => {
   const { state, dispatch } = useStore()

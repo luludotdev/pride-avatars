@@ -1,6 +1,6 @@
-import { type State } from '~components/app/Store'
-import { getFlag } from '~lib/flags'
-import { calculatePadding } from './quality'
+import { type State } from '~/components/app/Store'
+import { getFlag } from '~/lib/flags'
+import { calculatePadding } from '~/lib/quality'
 
 interface DrawOptions {
   x: number

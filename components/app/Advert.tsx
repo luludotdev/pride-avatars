@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react'
-import { Button } from '~components/input/Button'
-import { useStore } from '~lib/hooks/useStore'
-import { ExtLink } from '../ExtLink'
+import { ExtLink } from '~/components/ExtLink'
+import { Button } from '~/components/input/Button'
+import { useStore } from '~/lib/hooks/useStore'
 
 export const Advert: FC = () => {
   const { state, dispatch } = useStore()
