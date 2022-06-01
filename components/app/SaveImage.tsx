@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver'
 import GIFEncoder from 'gif-encoder-2'
 import ms from 'ms'
 import { type FC, type RefObject, useCallback } from 'react'
@@ -12,15 +13,6 @@ interface Props {
 
 export const SaveImage: FC<Props> = ({ canvasRef }) => {
   const { state, dispatch } = useStore()
-
-  const saveToFile = useCallback((url: string, ext: string) => {
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `avatar${ext}`
-
-    a.click()
-    a.remove()
-  }, [])
 
   const onSaveClicked = useCallback(async () => {
     const shouldShowAd = () => {
@@ -75,16 +67,16 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
         const blob = new Blob([buffer], { type: 'image/gif' })
 
         const url = URL.createObjectURL(blob)
-        saveToFile(url, '.gif')
+        saveAs(url, '.gif')
         URL.revokeObjectURL(url)
       } finally {
         dispatch({ type: 'setSaving', value: false })
       }
     } else {
       const url = canvas.toDataURL('image/png;base64')
-      saveToFile(url, '.png')
+      saveAs(url, 'avatar.png')
     }
-  }, [canvasRef, state, dispatch, saveToFile])
+  }, [canvasRef, state, dispatch])
 
   return (
     <Button disabled={state.saving} onClick={onSaveClicked}>
