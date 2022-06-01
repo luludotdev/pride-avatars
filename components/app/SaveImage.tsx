@@ -1,4 +1,5 @@
 import GIFEncoder from 'gif-encoder-2'
+import ms from 'ms'
 import { type FC, type RefObject, useCallback } from 'react'
 import { Button } from '~components/input/Button'
 import { useStore } from '~lib/hooks/useStore'
@@ -22,7 +23,18 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
   }, [])
 
   const onSaveClicked = useCallback(async () => {
-    if (!state.shownAdvert) {
+    const shouldShowAd = () => {
+      if (state.lastShownAd === undefined) return true
+
+      const offset = ms('3 months')
+      const now = Date.now()
+      const lastShown = state.lastShownAd.getTime()
+
+      return lastShown + offset <= now
+    }
+
+    const shouldShow = shouldShowAd()
+    if (shouldShow) {
       dispatch({ type: 'markAdShown' })
       dispatch({ type: 'setAdShowing', value: true })
     }

@@ -23,7 +23,7 @@ export interface State {
   showEasterEgg: boolean
   saving: boolean
   advertOpen: boolean
-  shownAdvert: boolean
+  lastShownAd: Date | undefined
 }
 
 const initialState: State = {
@@ -38,10 +38,12 @@ const initialState: State = {
   showEasterEgg: false,
   saving: false,
   advertOpen: false,
-  shownAdvert:
+  lastShownAd:
     typeof window === 'undefined'
-      ? false
-      : Boolean(localStorage.getItem('shownAdvert')) ?? false,
+      ? undefined
+      : new Date(
+          Number.parseInt(localStorage.getItem('lastShownAd') ?? '', 10)
+        ),
 }
 
 interface Context {
@@ -130,8 +132,9 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
           return { ...previousState, advertOpen: action.value }
 
         case 'markAdShown': {
-          localStorage.setItem('shownAdvert', '1')
-          return { ...previousState, shownAdvert: true }
+          const now = new Date()
+          localStorage.setItem('lastShownAd', now.getTime().toString())
+          return { ...previousState, lastShownAd: now }
         }
 
         default:
