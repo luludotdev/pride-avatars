@@ -16,6 +16,7 @@ export interface State {
   angle: number
   flag: FlagName
   /* eslint-disable @typescript-eslint/ban-types */
+  filename: string | null
   image: HTMLImageElement | null
   frames: HTMLCanvasElement[] | null
   /* eslint-enable @typescript-eslint/ban-types */
@@ -45,6 +46,7 @@ const initialState: State = {
   padding: 12,
   angle: 0,
   flag: 'Pastel',
+  filename: null,
   image: null,
   frames: null,
   delay: -1,
@@ -68,6 +70,7 @@ export type Action =
   | { type: 'setPadding'; value: number }
   | { type: 'setAngle'; value: number }
   | { type: 'setFlag'; value: FlagName }
+  | { type: 'setFilename'; value: string }
   | { type: 'setImage'; value: string }
   | { type: 'setGif'; value: [frames: HTMLCanvasElement[], delay: number] }
   | { type: 'toggleEasterEgg' }
@@ -98,6 +101,9 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 
         case 'setFlag':
           return { ...previousState, dirty: true, flag: action.value }
+
+        case 'setFilename':
+          return { ...previousState, dirty: true, filename: action.value }
 
         case 'setImage': {
           previousState.image?.remove()

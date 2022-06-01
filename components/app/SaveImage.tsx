@@ -14,6 +14,14 @@ interface Props {
 export const SaveImage: FC<Props> = ({ canvasRef }) => {
   const { state, dispatch } = useStore()
 
+  const filename = useCallback(
+    (ext: string) => {
+      const base = state.filename ?? 'avatar'
+      return `${base}.pride.${ext}`
+    },
+    [state.filename]
+  )
+
   const onSaveClicked = useCallback(async () => {
     const shouldShowAd = () => {
       if (state.lastShownAd === undefined) return true
@@ -67,16 +75,16 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
         const blob = new Blob([buffer], { type: 'image/gif' })
 
         const url = URL.createObjectURL(blob)
-        saveAs(url, '.gif')
+        saveAs(url, filename('gif'))
         URL.revokeObjectURL(url)
       } finally {
         dispatch({ type: 'setSaving', value: false })
       }
     } else {
       const url = canvas.toDataURL('image/png;base64')
-      saveAs(url, 'avatar.png')
+      saveAs(url, filename('png'))
     }
-  }, [canvasRef, state, dispatch])
+  }, [canvasRef, state, dispatch, filename])
 
   return (
     <Button disabled={state.saving} onClick={onSaveClicked}>

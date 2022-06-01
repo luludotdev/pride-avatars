@@ -1,10 +1,15 @@
 import { decompressFrames, parseGIF } from 'gifuct-js'
+import { parse as parsePath } from 'path'
 import { type Dispatch } from 'react'
 import { type Action } from '~components/app/Store'
 
 export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
+  const { name: filename } = parsePath(file.name)
+
   if (file.type !== 'image/gif') {
     dispatch({ type: 'setImage', value: URL.createObjectURL(file) })
+    dispatch({ type: 'setFilename', value: filename })
+
     return
   }
 
@@ -14,6 +19,8 @@ export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
   if (decoded.length === 0) return
   if (decoded.length === 1) {
     dispatch({ type: 'setImage', value: URL.createObjectURL(file) })
+    dispatch({ type: 'setFilename', value: filename })
+
     return
   }
 
@@ -35,4 +42,5 @@ export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
   )
 
   dispatch({ type: 'setGif', value: [frames, delay] })
+  dispatch({ type: 'setFilename', value: filename })
 }
