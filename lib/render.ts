@@ -114,18 +114,20 @@ export const drawFrame = async (
     ctx.save()
     const padding = calculatePadding(state.quality, state.padding)
 
-    ctx.beginPath()
-    ctx.arc(
-      canvas.width / 2,
-      canvas.height / 2,
-      canvas.height / 2 - padding,
-      0,
-      Math.PI * 2,
-      true
-    )
+    if (state.clip) {
+      ctx.beginPath()
+      ctx.arc(
+        canvas.width / 2,
+        canvas.height / 2,
+        canvas.height / 2 - padding,
+        0,
+        Math.PI * 2,
+        true
+      )
 
-    ctx.closePath()
-    ctx.clip()
+      ctx.closePath()
+      ctx.clip()
+    }
 
     ctx.translate(canvas.width / 2, canvas.height / 2)
     await drawImage(frame, {

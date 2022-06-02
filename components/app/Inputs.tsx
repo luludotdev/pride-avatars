@@ -4,6 +4,7 @@ import { RangeInput } from '~/components/input/RangeInput'
 import { flagNames, isFlagName } from '~/lib/flags'
 import { useStore } from '~/lib/hooks/useStore'
 import { calculatePadding, qualities, qualityToResolution } from '~/lib/quality'
+import { CheckboxInput } from '../input/CheckboxInput'
 
 export const Inputs: FC = () => {
   const { state, dispatch } = useStore()
@@ -58,6 +59,13 @@ export const Inputs: FC = () => {
     [dispatch]
   )
 
+  const onClipChanged = useCallback(
+    (v: boolean) => {
+      dispatch({ type: 'setClip', value: v })
+    },
+    [dispatch]
+  )
+
   return (
     <div className='w-full grid grid-cols-input gap-x-3'>
       <RangeInput
@@ -99,6 +107,13 @@ export const Inputs: FC = () => {
         options={flagNames}
         value={state.flag}
         onChange={onFlagChanged}
+      />
+
+      <CheckboxInput
+        id='clip'
+        label='Clip'
+        value={state.clip}
+        onChange={onClipChanged}
       />
     </div>
   )
