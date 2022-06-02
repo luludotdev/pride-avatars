@@ -14,6 +14,7 @@ export interface State {
   quality: number
   padding: number
   angle: number
+  preview: boolean
   clip: boolean
   flag: FlagName
   /* eslint-disable @typescript-eslint/ban-types */
@@ -46,6 +47,7 @@ const initialState: State = {
   quality: 3,
   padding: 12,
   angle: 0,
+  preview: false,
   clip: true,
   flag: 'Pastel',
   filename: null,
@@ -71,6 +73,7 @@ export type Action =
   | { type: 'setQuality'; value: number }
   | { type: 'setPadding'; value: number }
   | { type: 'setAngle'; value: number }
+  | { type: 'setPreview'; value: boolean }
   | { type: 'setClip'; value: boolean }
   | { type: 'setFlag'; value: FlagName }
   | { type: 'setFilename'; value: string }
@@ -83,6 +86,7 @@ export type Action =
 
 export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
+    // eslint-disable-next-line complexity
     (previousState, action) => {
       switch (action.type) {
         case 'markClean':
@@ -101,6 +105,9 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
           const angle = raw > snap * -1 && raw < snap ? 0 : raw
           return { ...previousState, dirty: true, angle }
         }
+
+        case 'setPreview':
+          return { ...previousState, dirty: true, preview: action.value }
 
         case 'setClip':
           return { ...previousState, dirty: true, clip: action.value }

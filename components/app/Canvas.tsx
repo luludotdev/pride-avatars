@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import {
   type DragEventHandler,
   type FC,
@@ -62,7 +63,7 @@ export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
   return (
     <canvas
       ref={ref}
-      className='w-full h-auto rounded'
+      className={clsx('w-full h-auto rounded', state.preview && 'rounded-full')}
       width={resolution}
       height={resolution}
       onDragOver={handleDragOver}

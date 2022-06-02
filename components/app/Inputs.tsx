@@ -59,6 +59,13 @@ export const Inputs: FC = () => {
     [dispatch]
   )
 
+  const onPreviewChanged = useCallback(
+    (v: boolean) => {
+      dispatch({ type: 'setPreview', value: v })
+    },
+    [dispatch]
+  )
+
   const onClipChanged = useCallback(
     (v: boolean) => {
       dispatch({ type: 'setClip', value: v })
@@ -107,6 +114,13 @@ export const Inputs: FC = () => {
         options={flagNames}
         value={state.flag}
         onChange={onFlagChanged}
+      />
+
+      <CheckboxInput
+        id='preview'
+        label='Preview'
+        value={state.preview}
+        onChange={onPreviewChanged}
       />
 
       <CheckboxInput
