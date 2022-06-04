@@ -1,17 +1,15 @@
-import { useRouter } from 'next/router'
 import { type FC, useCallback } from 'react'
 import { OptionInput } from '~/components/input/OptionInput'
 import { RangeInput } from '~/components/input/RangeInput'
 import { flagNames, isFlagName } from '~/lib/flags'
+import { useExperimental } from '~/lib/hooks/useExperimental'
 import { useStore } from '~/lib/hooks/useStore'
 import { calculatePadding, qualities, qualityToResolution } from '~/lib/quality'
 import { CheckboxInput } from '../input/CheckboxInput'
 
 export const Inputs: FC = () => {
   const { state, dispatch } = useStore()
-
-  const { query } = useRouter()
-  const experimental = query.experimental !== undefined
+  const experimental = useExperimental()
 
   const onQualityChanged = useCallback(
     (quality: number) => {
