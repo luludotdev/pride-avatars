@@ -25,12 +25,15 @@ export const OptionInput: FC<Props> = ({
 
   return (
     <>
-      <label htmlFor={id}>{label}:</label>
+      <label htmlFor={id} className='my-auto'>
+        {label}:
+      </label>
+
       <select
         name={id}
         id={id}
         value={value}
-        className='p-1 text-sm bg-light dark:bg-dark rounded border border-gray-400 dark:border-gray-500'
+        className='p-1 mt-2 text-sm bg-light dark:bg-dark rounded border border-gray-400 dark:border-gray-500'
         onChange={handleChange}
       >
         {options.map(option => (
