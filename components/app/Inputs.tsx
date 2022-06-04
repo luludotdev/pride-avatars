@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { type FC, useCallback } from 'react'
 import { OptionInput } from '~/components/input/OptionInput'
 import { RangeInput } from '~/components/input/RangeInput'
@@ -8,6 +9,9 @@ import { CheckboxInput } from '../input/CheckboxInput'
 
 export const Inputs: FC = () => {
   const { state, dispatch } = useStore()
+
+  const { query } = useRouter()
+  const experimental = query.experimental !== undefined
 
   const onQualityChanged = useCallback(
     (quality: number) => {
@@ -135,16 +139,18 @@ export const Inputs: FC = () => {
         onChange={onAngleChanged}
       />
 
-      <RangeInput
-        id='blur'
-        label='Blur'
-        min={0}
-        max={10}
-        step={0.01}
-        value={state.blur}
-        formatter={formatBlur}
-        onChange={onBlurChanged}
-      />
+      {experimental && (
+        <RangeInput
+          id='blur'
+          label='Blur'
+          min={0}
+          max={10}
+          step={0.01}
+          value={state.blur}
+          formatter={formatBlur}
+          onChange={onBlurChanged}
+        />
+      )}
 
       <OptionInput
         id='flags'
@@ -154,22 +160,26 @@ export const Inputs: FC = () => {
         onChange={onFlagChanged}
       />
 
-      {state.dualFlag ? (
-        <OptionInput
-          id='flags2'
-          label='Second Flag'
-          options={flagNames}
-          value={state.flag2}
-          onChange={onFlag2Changed}
-        />
-      ) : null}
+      {experimental && (
+        <>
+          {state.dualFlag ? (
+            <OptionInput
+              id='flags2'
+              label='Second Flag'
+              options={flagNames}
+              value={state.flag2}
+              onChange={onFlag2Changed}
+            />
+          ) : null}
 
-      <CheckboxInput
-        id='dual-flag'
-        label='Dual Flags'
-        value={state.dualFlag}
-        onChange={onDualFlagChanged}
-      />
+          <CheckboxInput
+            id='dual-flag'
+            label='Dual Flags'
+            value={state.dualFlag}
+            onChange={onDualFlagChanged}
+          />
+        </>
+      )}
 
       <CheckboxInput
         id='preview'
