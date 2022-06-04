@@ -4,8 +4,8 @@ import { Advert } from '~/components/app/Advert'
 import { Canvas } from '~/components/app/Canvas'
 import { Inputs } from '~/components/app/Inputs'
 import { LoadImage } from '~/components/app/LoadImage'
+import { QualityWarning } from '~/components/app/QualityWarning'
 import { SaveImage } from '~/components/app/SaveImage'
-import { Warning } from '~/components/app/Warning'
 import { ExtLink } from '~/components/ExtLink'
 import { Button } from '~/components/input/Button'
 import { Meta } from '~/components/Meta'
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
         )}
 
         <Canvas canvasRef={canvasRef} />
-        <Warning />
+        <QualityWarning />
         <SaveImage canvasRef={canvasRef} />
       </div>
 
