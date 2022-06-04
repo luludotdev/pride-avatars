@@ -144,18 +144,16 @@ export const Inputs: FC = () => {
         onChange={onAngleChanged}
       />
 
-      {experimental && (
-        <RangeInput
-          id='blur'
-          label='Blur'
-          min={0}
-          max={10}
-          step={0.01}
-          value={state.blur}
-          formatter={formatBlur}
-          onChange={onBlurChanged}
-        />
-      )}
+      <RangeInput
+        id='blur'
+        label='Blur'
+        min={0}
+        max={10}
+        step={0.01}
+        value={state.blur}
+        formatter={formatBlur}
+        onChange={onBlurChanged}
+      />
 
       <OptionInput
         id='flags'
