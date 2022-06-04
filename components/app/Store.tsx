@@ -17,7 +17,9 @@ export interface State {
   blur: number
   preview: boolean
   clip: boolean
+  dualFlag: boolean
   flag: FlagName
+  flag2: FlagName
   /* eslint-disable @typescript-eslint/ban-types */
   filename: string | null
   image: HTMLImageElement | null
@@ -51,7 +53,9 @@ const initialState: State = {
   blur: 0,
   preview: false,
   clip: true,
+  dualFlag: false,
   flag: 'Pastel',
+  flag2: 'Pastel',
   filename: null,
   image: null,
   frames: null,
@@ -78,7 +82,9 @@ export type Action =
   | { type: 'setBlur'; value: number }
   | { type: 'setPreview'; value: boolean }
   | { type: 'setClip'; value: boolean }
+  | { type: 'setDualFlag'; value: boolean }
   | { type: 'setFlag'; value: FlagName }
+  | { type: 'setFlag2'; value: FlagName }
   | { type: 'setFilename'; value: string }
   | { type: 'setImage'; value: string }
   | { type: 'setGif'; value: [frames: HTMLCanvasElement[], delay: number] }
@@ -118,8 +124,14 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
         case 'setClip':
           return { ...previousState, dirty: true, clip: action.value }
 
+        case 'setDualFlag':
+          return { ...previousState, dirty: true, dualFlag: action.value }
+
         case 'setFlag':
           return { ...previousState, dirty: true, flag: action.value }
+
+        case 'setFlag2':
+          return { ...previousState, dirty: true, flag2: action.value }
 
         case 'setFilename':
           return { ...previousState, dirty: true, filename: action.value }

@@ -71,6 +71,21 @@ export const Inputs: FC = () => {
     [dispatch]
   )
 
+  const onFlag2Changed = useCallback(
+    (flag: string) => {
+      if (!isFlagName(flag)) return
+      dispatch({ type: 'setFlag2', value: flag })
+    },
+    [dispatch]
+  )
+
+  const onDualFlagChanged = useCallback(
+    (v: boolean) => {
+      dispatch({ type: 'setDualFlag', value: v })
+    },
+    [dispatch]
+  )
+
   const onPreviewChanged = useCallback(
     (v: boolean) => {
       dispatch({ type: 'setPreview', value: v })
@@ -137,6 +152,23 @@ export const Inputs: FC = () => {
         options={flagNames}
         value={state.flag}
         onChange={onFlagChanged}
+      />
+
+      {state.dualFlag ? (
+        <OptionInput
+          id='flags2'
+          label='Second Flag'
+          options={flagNames}
+          value={state.flag2}
+          onChange={onFlag2Changed}
+        />
+      ) : null}
+
+      <CheckboxInput
+        id='dual-flag'
+        label='Dual Flags'
+        value={state.dualFlag}
+        onChange={onDualFlagChanged}
       />
 
       <CheckboxInput

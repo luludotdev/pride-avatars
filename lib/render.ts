@@ -98,6 +98,35 @@ export const drawFrame = async (
     canvas.height
   )
 
+  if (state.dualFlag) {
+    const flagImage2 = getFlag(state.flag2)
+    if (flagImage2.complete === false) {
+      await new Promise<void>(resolve => {
+        flagImage2.addEventListener('load', () => {
+          resolve()
+        })
+      })
+    }
+
+    const region = new Path2D()
+    region.rect(
+      0,
+      (ctx.canvas.height / 2) * -1,
+      ctx.canvas.width,
+      ctx.canvas.height
+    )
+
+    ctx.clip(region, 'evenodd')
+
+    ctx.drawImage(
+      flagImage2,
+      (canvas.width / 2) * -1,
+      (canvas.height / 2) * -1,
+      canvas.width,
+      canvas.height
+    )
+  }
+
   ctx.restore()
 
   const pickFrame = () => {
