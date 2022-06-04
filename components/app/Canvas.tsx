@@ -28,7 +28,7 @@ export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
     if (ctx === null) return
 
     void drawFrame(canvas, ctx, state, time)
-    dispatch({ type: 'markClean' })
+    if (state.blur === 0) dispatch({ type: 'markClean' })
   }, [])
 
   const handleDragOver = useCallback<DragEventHandler<HTMLCanvasElement>>(
