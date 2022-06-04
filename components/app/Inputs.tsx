@@ -4,7 +4,11 @@ import { RangeInput } from '~/components/input/RangeInput'
 import { flagNames, isFlagName } from '~/lib/flags'
 import { useExperimental } from '~/lib/hooks/useExperimental'
 import { useStore } from '~/lib/hooks/useStore'
-import { calculatePadding, qualities, qualityToResolution } from '~/lib/quality'
+import {
+  qualities,
+  qualityToResolution,
+  scaleQualityValue,
+} from '~/lib/quality'
 import { CheckboxInput } from '../input/CheckboxInput'
 
 export const Inputs: FC = () => {
@@ -35,7 +39,7 @@ export const Inputs: FC = () => {
 
   const formatPadding = useCallback<(v: number) => string>(
     v => {
-      const value = calculatePadding(state.quality, v)
+      const value = scaleQualityValue(state.quality, v, true)
       return `${value.toFixed(0).padStart(2, '0')}px`
     },
     [state.quality]
@@ -61,8 +65,11 @@ export const Inputs: FC = () => {
   )
 
   const formatBlur = useCallback<(v: number) => string>(
-    v => `${v.toFixed(2)}px`,
-    []
+    v => {
+      const value = scaleQualityValue(state.quality, v)
+      return `${value.toFixed(2)}px`
+    },
+    [state.quality]
   )
 
   const onFlagChanged = useCallback(

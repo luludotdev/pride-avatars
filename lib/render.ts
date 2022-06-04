@@ -1,6 +1,6 @@
 import { type State } from '~/components/app/Store'
 import { getFlag } from '~/lib/flags'
-import { calculatePadding } from '~/lib/quality'
+import { scaleQualityValue } from '~/lib/quality'
 
 interface DrawOptions {
   x: number
@@ -89,7 +89,8 @@ export const drawFrame = async (
     })
   }
 
-  ctx.filter = state.blur !== 0 ? `blur(${state.blur}px)` : ''
+  const blur = scaleQualityValue(state.quality, state.blur)
+  ctx.filter = blur !== 0 ? `blur(${blur}px)` : ''
   ctx.drawImage(
     flagImage,
     (canvas.width / 2) * -1,
@@ -142,7 +143,7 @@ export const drawFrame = async (
   const frame = pickFrame()
   if (frame) {
     ctx.save()
-    const padding = calculatePadding(state.quality, state.padding)
+    const padding = scaleQualityValue(state.quality, state.padding)
 
     if (state.clip) {
       ctx.beginPath()
