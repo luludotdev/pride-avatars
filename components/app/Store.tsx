@@ -14,6 +14,7 @@ export interface State {
   quality: number
   padding: number
   angle: number
+  blur: number
   preview: boolean
   clip: boolean
   flag: FlagName
@@ -47,6 +48,7 @@ const initialState: State = {
   quality: 3,
   padding: 12,
   angle: 0,
+  blur: 0,
   preview: false,
   clip: true,
   flag: 'Pastel',
@@ -73,6 +75,7 @@ export type Action =
   | { type: 'setQuality'; value: number }
   | { type: 'setPadding'; value: number }
   | { type: 'setAngle'; value: number }
+  | { type: 'setBlur'; value: number }
   | { type: 'setPreview'; value: boolean }
   | { type: 'setClip'; value: boolean }
   | { type: 'setFlag'; value: FlagName }
@@ -105,6 +108,9 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
           const angle = raw > snap * -1 && raw < snap ? 0 : raw
           return { ...previousState, dirty: true, angle }
         }
+
+        case 'setBlur':
+          return { ...previousState, dirty: true, blur: action.value }
 
         case 'setPreview':
           return { ...previousState, dirty: true, preview: action.value }

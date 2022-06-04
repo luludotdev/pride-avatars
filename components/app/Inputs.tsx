@@ -51,6 +51,18 @@ export const Inputs: FC = () => {
     []
   )
 
+  const onBlurChanged = useCallback(
+    (blur: number) => {
+      dispatch({ type: 'setBlur', value: blur })
+    },
+    [dispatch]
+  )
+
+  const formatBlur = useCallback<(v: number) => string>(
+    v => `${v.toFixed(2)}px`,
+    []
+  )
+
   const onFlagChanged = useCallback(
     (flag: string) => {
       if (!isFlagName(flag)) return
@@ -106,6 +118,17 @@ export const Inputs: FC = () => {
         value={state.angle}
         formatter={formatAngle}
         onChange={onAngleChanged}
+      />
+
+      <RangeInput
+        id='blur'
+        label='Blur'
+        min={0}
+        max={10}
+        step={0.01}
+        value={state.blur}
+        formatter={formatBlur}
+        onChange={onBlurChanged}
       />
 
       <OptionInput

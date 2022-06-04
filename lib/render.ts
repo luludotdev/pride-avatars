@@ -89,6 +89,7 @@ export const drawFrame = async (
     })
   }
 
+  ctx.filter = state.blur !== 0 ? `blur(${state.blur}px)` : ''
   ctx.drawImage(
     flagImage,
     (canvas.width / 2) * -1,
