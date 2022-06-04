@@ -2,6 +2,7 @@ import { type NextPage } from 'next'
 import { useCallback, useRef } from 'react'
 import { Advert } from '~/components/app/Advert'
 import { Canvas } from '~/components/app/Canvas'
+import { ExperimentalWarning } from '~/components/app/ExperimentalWarning'
 import { Inputs } from '~/components/app/Inputs'
 import { LoadImage } from '~/components/app/LoadImage'
 import { QualityWarning } from '~/components/app/QualityWarning'
@@ -47,6 +48,7 @@ const Home: NextPage = () => {
 
         <h1 className='text-4xl mt-6 mb-2 font-title'>Pride Avatars! 🏳️‍🌈</h1>
 
+        <ExperimentalWarning />
         <LoadImage />
         <Inputs />
 
