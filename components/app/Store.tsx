@@ -48,7 +48,7 @@ const loadLastShownAd: () => State['lastShownAd'] = () => {
 const initialState: State = {
   dirty: true,
   quality: 3,
-  padding: 12,
+  padding: 24,
   angle: 0,
   blur: 0,
   preview: false,
