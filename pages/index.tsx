@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useCallback, useRef } from 'react'
+import useKonami from 'react-use-konami'
 import { ExtLink } from '~/components/ExtLink'
 import { Meta } from '~/components/Meta'
 import { PreloadFlags } from '~/components/PreloadFlags'
@@ -11,7 +12,6 @@ import { LoadImage } from '~/components/app/LoadImage'
 import { QualityWarning } from '~/components/app/QualityWarning'
 import { SaveImage } from '~/components/app/SaveImage'
 import { Button } from '~/components/input/Button'
-import { useKonami } from '~/lib/hooks/useKonami'
 import { useStore } from '~/lib/hooks/useStore'
 
 const Home: NextPage = () => {
@@ -31,7 +31,20 @@ const Home: NextPage = () => {
     dispatch({ type: 'toggleEasterEgg' })
   }, [dispatch])
 
-  useKonami(handleKonami)
+  useKonami(handleKonami, {
+    code: [
+      'ArrowUp',
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowLeft',
+      'ArrowRight',
+      'b',
+      'a',
+    ],
+  })
 
   return (
     <>
