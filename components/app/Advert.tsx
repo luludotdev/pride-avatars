@@ -13,7 +13,7 @@ export const Advert: FC = () => {
 
   return !state.advertOpen ? null : (
     <div className='absolute top-0 left-0 bottom-0 right-0 bg-black bg-opacity-30 dark:bg-opacity-40 flex items-center justify-center'>
-      <div className='max-w-[480px] rounded border border-gray-400 dark:border-gray-500 shadow-md bg-light dark:bg-dark py-5 px-6 flex flex-col gap-y-2 text-sm'>
+      <div className='max-w-[480px] rounded-md border border-gray-400 dark:border-gray-500 shadow-md bg-light dark:bg-dark py-5 px-6 flex flex-col gap-y-2 text-sm'>
         <h1 className='text-2xl font-bold text-center'>
           Thanks for using Pride Avatars!
         </h1>

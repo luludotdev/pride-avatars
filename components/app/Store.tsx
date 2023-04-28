@@ -24,10 +24,11 @@ export interface State {
   lastShownAd: Date | undefined
 }
 
+const LAST_SHOW_ADD_KEY = '@@pride-avatars/last-shown-ad'
 const loadLastShownAd: () => State['lastShownAd'] = () => {
   if (typeof window === 'undefined') return undefined
 
-  const stored = localStorage.getItem('lastShownAd')
+  const stored = localStorage.getItem(LAST_SHOW_ADD_KEY)
   if (!stored) return undefined
 
   const parsed = Number.parseInt(stored, 10)
@@ -168,7 +169,7 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 
         case 'markAdShown': {
           const now = new Date()
-          localStorage.setItem('lastShownAd', now.getTime().toString())
+          localStorage.setItem(LAST_SHOW_ADD_KEY, now.getTime().toString())
           return { ...previousState, lastShownAd: now }
         }
 
