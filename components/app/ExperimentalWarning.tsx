@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import type { FC } from 'react'
 import { Warning } from '~/components/app/Warning'
 import { useExperimental } from '~/lib/hooks/useExperimental'
 

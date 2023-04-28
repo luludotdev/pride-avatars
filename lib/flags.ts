@@ -24,7 +24,7 @@ export const flags = [
   ['Transgender', Transgender.src],
 ] as const
 
-export type FlagName = typeof flags[number][0]
+export type FlagName = (typeof flags)[number][0]
 export const flagNames: FlagName[] = flags.map(([name]) => name)
 
 export function isFlagName(string: unknown): string is FlagName {
@@ -36,7 +36,7 @@ export function isFlagName(string: unknown): string is FlagName {
 const flagStore: Map<FlagName, HTMLImageElement> = new Map()
 export const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
   name,
-  url
+  url,
 ) => {
   const cached = flagStore.get(name)
   if (cached !== undefined) return cached

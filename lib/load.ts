@@ -1,7 +1,8 @@
-import { decompressFrames, parseGIF } from 'gifuct-js'
+/* eslint-disable n/prefer-global/url */
 import { parse as parsePath } from 'path'
-import { type Dispatch } from 'react'
-import { type Action } from '~/components/app/Store'
+import { decompressFrames, parseGIF } from 'gifuct-js'
+import type { Dispatch } from 'react'
+import type { Action } from '~/components/app/Store'
 
 export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
   const { name: filename } = parsePath(file.name)
@@ -34,11 +35,13 @@ export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
       const ctx = canvas.getContext('2d')
       if (ctx === null) throw new Error('oh no')
 
-      const data = new ImageData(patch, width, height)
-      ctx.putImageData(data, left, top)
+      const image = ctx.createImageData(width, height)
+      image.data.set(patch)
+
+      ctx.putImageData(image, left, top)
 
       return canvas
-    }
+    },
   )
 
   dispatch({ type: 'setGif', value: [frames, delay] })

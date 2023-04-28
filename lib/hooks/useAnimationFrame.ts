@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react'
 
 export const useAnimationFrame = (
   cb: (arg: { time: number; delta: number }) => void,
-  deps: readonly unknown[]
+  deps: readonly unknown[],
 ) => {
   /* eslint-disable react-hooks/rules-of-hooks */
   if (typeof window === 'undefined') return
@@ -13,9 +13,10 @@ export const useAnimationFrame = (
 
   const animate = useCallback(() => {
     const now = performance.now()
-    const time = (now - init.current) / 1000
-    const delta = (now - last.current) / 1000
+    const time = (now - init.current) / 1_000
+    const delta = (now - last.current) / 1_000
 
+    // eslint-disable-next-line n/callback-return, n/no-callback-literal, promise/prefer-await-to-callbacks
     cb({ time, delta })
     last.current = now
     frame.current = requestAnimationFrame(animate)

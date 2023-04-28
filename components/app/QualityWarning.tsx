@@ -1,4 +1,5 @@
-import { type FC, useMemo } from 'react'
+import { useMemo } from 'react'
+import type { FC } from 'react'
 import { Warning } from '~/components/app/Warning'
 import { useStore } from '~/lib/hooks/useStore'
 import { qualities } from '~/lib/quality'

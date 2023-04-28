@@ -1,5 +1,8 @@
-import { type NextPage } from 'next'
+import type { NextPage } from 'next'
 import { useCallback, useRef } from 'react'
+import { ExtLink } from '~/components/ExtLink'
+import { Meta } from '~/components/Meta'
+import { PreloadFlags } from '~/components/PreloadFlags'
 import { Advert } from '~/components/app/Advert'
 import { Canvas } from '~/components/app/Canvas'
 import { ExperimentalWarning } from '~/components/app/ExperimentalWarning'
@@ -7,10 +10,7 @@ import { Inputs } from '~/components/app/Inputs'
 import { LoadImage } from '~/components/app/LoadImage'
 import { QualityWarning } from '~/components/app/QualityWarning'
 import { SaveImage } from '~/components/app/SaveImage'
-import { ExtLink } from '~/components/ExtLink'
 import { Button } from '~/components/input/Button'
-import { Meta } from '~/components/Meta'
-import { PreloadFlags } from '~/components/PreloadFlags'
 import { useKonami } from '~/lib/hooks/useKonami'
 import { useStore } from '~/lib/hooks/useStore'
 
@@ -40,10 +40,10 @@ const Home: NextPage = () => {
       <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
         <PreloadFlags />
         <Meta
-          title='Pride Avatars!'
-          description='Enhance your social media avatars with a pride flag border!'
           colour='#afa5fd'
+          description='Enhance your social media avatars with a pride flag border!'
           ogImage='/favicon.png'
+          title='Pride Avatars!'
         />
 
         <h1 className='text-4xl mt-6 mb-2 font-title'>Pride Avatars! 🏳️‍🌈</h1>

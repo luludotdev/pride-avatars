@@ -1,6 +1,6 @@
+import { setTimeout } from 'timers'
+
 export const sleep = async (ms: number) =>
   new Promise<void>(resolve => {
-    setTimeout(() => {
-      resolve()
-    }, ms)
+    setTimeout(() => resolve(), ms)
   })

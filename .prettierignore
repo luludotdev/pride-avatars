@@ -1,0 +1,10 @@
+# VSCode
+.vscode/
+
+# Generated
+.next/
+out/
+next-env.d.ts
+
+# Zod Prisma
+prisma/zod

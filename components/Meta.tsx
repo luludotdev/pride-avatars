@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { type FC } from 'react'
+import type { FC } from 'react'
 
 interface Props {
   title: string
@@ -22,21 +22,21 @@ export const Meta: FC<Props> = ({
   <Head>
     <title>{title}</title>
 
-    {description && <meta name='description' content={description} />}
-    {colour && <meta name='theme-color' content={colour} />}
+    {description && <meta content={description} name='description' />}
+    {colour && <meta content={colour} name='theme-color' />}
 
-    <meta property='og:type' content='website' />
-    <meta property='og:title' content={title} />
-    {description && <meta property='og:description' content={description} />}
-    {url && <meta property='og:url' content={url} />}
+    <meta content='website' property='og:type' />
+    <meta content={title} property='og:title' />
+    {description && <meta content={description} property='og:description' />}
+    {url && <meta content={url} property='og:url' />}
     {(ogImage ?? image) && (
-      <meta property='og:image' content={ogImage ?? image} />
+      <meta content={ogImage ?? image} property='og:image' />
     )}
 
-    <meta name='twitter:title' content={title} />
-    {description && <meta name='twitter:description' content={description} />}
-    {image && <meta name='twitter:card' content='summary_large_image' />}
-    {image && <meta name='twitter:image' content={image} />}
-    {url && <meta property='twitter:url' content={url} />}
+    <meta content={title} name='twitter:title' />
+    {description && <meta content={description} name='twitter:description' />}
+    {image && <meta content='summary_large_image' name='twitter:card' />}
+    {image && <meta content={image} name='twitter:image' />}
+    {url && <meta content={url} property='twitter:url' />}
   </Head>
 )

@@ -1,11 +1,6 @@
 import clsx from 'clsx'
-import {
-  type DragEventHandler,
-  type FC,
-  type RefObject,
-  useCallback,
-  useMemo,
-} from 'react'
+import { useCallback, useMemo } from 'react'
+import type { DragEventHandler, FC, RefObject } from 'react'
 import { useAnimationFrame } from '~/lib/hooks/useAnimationFrame'
 import { useStore } from '~/lib/hooks/useStore'
 import { loadImage } from '~/lib/load'
@@ -18,24 +13,27 @@ interface Props {
 
 export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
   const { state, dispatch } = useStore()
-  useAnimationFrame(({ time }) => {
-    if (state.saving) return
-    if (!ref.current) return
-    if (!state.dirty && state.frames === null) return
+  useAnimationFrame(
+    ({ time }) => {
+      if (state.saving) return
+      if (!ref.current) return
+      if (!state.dirty && state.frames === null) return
 
-    const canvas = ref.current
-    const ctx = canvas.getContext('2d')
-    if (ctx === null) return
+      const canvas = ref.current
+      const ctx = canvas.getContext('2d')
+      if (ctx === null) return
 
-    void drawFrame(canvas, ctx, state, time)
-    if (state.blur === 0) dispatch({ type: 'markClean' })
-  }, [])
+      void drawFrame(canvas, ctx, state, time)
+      if (state.blur === 0) dispatch({ type: 'markClean' })
+    },
+    [ref, state, dispatch],
+  )
 
   const handleDragOver = useCallback<DragEventHandler<HTMLCanvasElement>>(
     ev => {
       ev.preventDefault()
     },
-    []
+    [],
   )
 
   const handleDrop = useCallback<DragEventHandler<HTMLCanvasElement>>(
@@ -52,22 +50,22 @@ export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
 
       await loadImage(dispatch, file)
     },
-    [dispatch]
+    [dispatch],
   )
 
   const resolution = useMemo(
     () => qualityToResolution(state.quality),
-    [state.quality]
+    [state.quality],
   )
 
   return (
     <canvas
-      ref={ref}
       className={clsx('w-full h-auto rounded', state.preview && 'rounded-full')}
-      width={resolution}
       height={resolution}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
+      ref={ref}
+      width={resolution}
     />
   )
 }

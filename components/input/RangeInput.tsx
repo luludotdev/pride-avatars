@@ -1,4 +1,5 @@
-import { ChangeEventHandler, type FC, useCallback } from 'react'
+import { useCallback } from 'react'
+import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
   id: string
@@ -9,8 +10,8 @@ interface Props {
   step: number
 
   value: number
-  onChange: (value: number) => void
-  formatter?: (value: number) => string
+  onChange(value: number): void
+  formatter?(value: number): string
 }
 
 export const RangeInput: FC<Props> = ({
@@ -34,15 +35,15 @@ export const RangeInput: FC<Props> = ({
         onChange(value)
       }
     },
-    [step, onChange]
+    [step, onChange],
   )
 
   const formatValue = useCallback<(v: number) => string>(
-    v => {
-      if (typeof formatter === 'function') return formatter(v)
-      return v.toString()
+    value => {
+      if (typeof formatter === 'function') return formatter(value)
+      return value.toString()
     },
-    [formatter]
+    [formatter],
   )
 
   return (
@@ -53,14 +54,14 @@ export const RangeInput: FC<Props> = ({
       </label>
 
       <input
-        type='range'
-        name={id}
         id={id}
-        min={min}
         max={max}
-        step={step}
-        value={value}
+        min={min}
+        name={id}
         onChange={handleChange}
+        step={step}
+        type='range'
+        value={value}
       />
     </>
   )

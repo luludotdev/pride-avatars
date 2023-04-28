@@ -1,7 +1,9 @@
+/* eslint-disable n/prefer-global/url */
 import { saveAs } from 'file-saver'
 import GIFEncoder from 'gif-encoder-2'
 import ms from 'ms'
-import { type FC, type RefObject, useCallback } from 'react'
+import { useCallback } from 'react'
+import type { FC, RefObject } from 'react'
 import { Button } from '~/components/input/Button'
 import { useStore } from '~/lib/hooks/useStore'
 import { drawFrame } from '~/lib/render'
@@ -19,7 +21,7 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
       const base = state.filename ?? 'avatar'
       return `${base}.pride.${ext}`
     },
-    [state.filename]
+    [state.filename],
   )
 
   const onSaveClicked = useCallback(async () => {
@@ -55,15 +57,15 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
           canvas.width,
           canvas.height,
           'neuquant',
-          true
+          true,
         )
 
         encoder.setDelay(state.delay)
         encoder.start()
 
         /* eslint-disable no-await-in-loop */
-        for (let i = 0; i < state.frames.length; i++) {
-          const time = (i * state.delay) / 1000
+        for (let idx = 0; idx < state.frames.length; idx++) {
+          const time = (idx * state.delay) / 1_000
           await drawFrame(canvas, ctx, state, time)
 
           encoder.addFrame(ctx)

@@ -1,4 +1,5 @@
-import { ChangeEventHandler, type FC, useCallback, useRef } from 'react'
+import { useCallback, useRef } from 'react'
+import type { ChangeEventHandler, FC } from 'react'
 import { Button } from '~/components/input/Button'
 import { useStore } from '~/lib/hooks/useStore'
 import { loadImage } from '~/lib/load'
@@ -18,7 +19,7 @@ export const LoadImage: FC = () => {
 
       await loadImage(dispatch, file)
     },
-    [dispatch]
+    [dispatch],
   )
 
   return (
@@ -28,12 +29,12 @@ export const LoadImage: FC = () => {
       </Button>
 
       <input
-        ref={ref}
-        type='file'
-        name='avatar'
         accept='image/*'
         className='hidden'
+        name='avatar'
         onChange={handleChange}
+        ref={ref}
+        type='file'
       />
     </>
   )

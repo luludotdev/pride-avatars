@@ -1,9 +1,10 @@
 import clsx from 'clsx'
-import { type FC, type PropsWithChildren, useCallback } from 'react'
+import { useCallback } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 
 interface Props {
   disabled?: boolean
-  onClick: () => void
+  onClick(): void
 }
 
 export const Button: FC<PropsWithChildren<Props>> = ({
@@ -17,8 +18,6 @@ export const Button: FC<PropsWithChildren<Props>> = ({
 
   return (
     <button
-      type='button'
-      disabled={disabled}
       className={clsx(
         'w-full',
         'py-2',
@@ -40,9 +39,11 @@ export const Button: FC<PropsWithChildren<Props>> = ({
         'disabled:shadow-none',
         'disabled:cursor-not-allowed',
         'disabled:hover:border-gray-400',
-        'dark:disabled:hover:border-gray-500'
+        'dark:disabled:hover:border-gray-500',
       )}
+      disabled={disabled}
       onClick={handleClick}
+      type='button'
     >
       {children}
     </button>

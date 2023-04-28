@@ -1,13 +1,6 @@
-import {
-  createContext,
-  type Dispatch,
-  type FC,
-  type PropsWithChildren,
-  type Reducer,
-  useMemo,
-  useReducer,
-} from 'react'
-import { type FlagName } from '~/lib/flags'
+import { createContext, useMemo, useReducer } from 'react'
+import type { Dispatch, FC, PropsWithChildren, Reducer } from 'react'
+import type { FlagName } from '~/lib/flags'
 
 export interface State {
   dirty: boolean
@@ -20,11 +13,10 @@ export interface State {
   dualFlag: boolean
   flag: FlagName
   flag2: FlagName
-  /* eslint-disable @typescript-eslint/ban-types */
+
   filename: string | null
   image: HTMLImageElement | null
   frames: HTMLCanvasElement[] | null
-  /* eslint-enable @typescript-eslint/ban-types */
   delay: number
   showEasterEgg: boolean
   saving: boolean
@@ -41,8 +33,7 @@ const loadLastShownAd: () => State['lastShownAd'] = () => {
   const parsed = Number.parseInt(stored, 10)
   if (Number.isNaN(parsed)) return undefined
 
-  const date = new Date(parsed)
-  return date
+  return new Date(parsed)
 }
 
 const initialState: State = {
@@ -75,27 +66,26 @@ interface Context {
 export const store = createContext<Context>({ state: initialState })
 
 export type Action =
+  | { type: 'markAdShown' }
   | { type: 'markClean' }
-  | { type: 'setQuality'; value: number }
-  | { type: 'setPadding'; value: number }
+  | { type: 'setAdShowing'; value: boolean }
   | { type: 'setAngle'; value: number }
   | { type: 'setBlur'; value: number }
-  | { type: 'setPreview'; value: boolean }
   | { type: 'setClip'; value: boolean }
   | { type: 'setDualFlag'; value: boolean }
+  | { type: 'setFilename'; value: string }
   | { type: 'setFlag'; value: FlagName }
   | { type: 'setFlag2'; value: FlagName }
-  | { type: 'setFilename'; value: string }
-  | { type: 'setImage'; value: string }
   | { type: 'setGif'; value: [frames: HTMLCanvasElement[], delay: number] }
-  | { type: 'toggleEasterEgg' }
+  | { type: 'setImage'; value: string }
+  | { type: 'setPadding'; value: number }
+  | { type: 'setPreview'; value: boolean }
+  | { type: 'setQuality'; value: number }
   | { type: 'setSaving'; value: boolean }
-  | { type: 'setAdShowing'; value: boolean }
-  | { type: 'markAdShown' }
+  | { type: 'toggleEasterEgg' }
 
 export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
   const [state, dispatch] = useReducer<Reducer<State, Action>>(
-    // eslint-disable-next-line complexity
     (previousState, action) => {
       switch (action.type) {
         case 'markClean':
@@ -186,7 +176,7 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
           throw new Error('Invalid Action')
       }
     },
-    initialState
+    initialState,
   )
 
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch])

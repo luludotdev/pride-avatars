@@ -1,4 +1,5 @@
-import { FC, useCallback } from 'react'
+import { useCallback } from 'react'
+import type { FC } from 'react'
 import { ExtLink } from '~/components/ExtLink'
 import { Button } from '~/components/input/Button'
 import { useStore } from '~/lib/hooks/useStore'

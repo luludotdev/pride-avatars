@@ -1,11 +1,12 @@
-import { ChangeEventHandler, type FC, useCallback } from 'react'
+import { useCallback } from 'react'
+import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
   id: string
   label: string
 
   value: boolean
-  onChange: (value: boolean) => void
+  onChange(value: boolean): void
 }
 
 export const CheckboxInput: FC<Props> = ({ id, label, value, onChange }) => {
@@ -13,19 +14,19 @@ export const CheckboxInput: FC<Props> = ({ id, label, value, onChange }) => {
     ev => {
       if (typeof onChange === 'function') onChange(ev.target.checked)
     },
-    [onChange]
+    [onChange],
   )
 
   return (
     <>
       <label htmlFor={id}>{label}:</label>
       <input
-        type='checkbox'
-        className='self-end mb-[1px]'
-        name={id}
-        id={id}
         checked={value}
+        className='self-end mb-[1px]'
+        id={id}
+        name={id}
         onChange={handleChange}
+        type='checkbox'
       />
     </>
   )

@@ -1,17 +1,17 @@
 declare module 'gif-encoder-2' {
-  import { type Buffer } from 'buffer'
+  import type { Buffer } from 'buffer'
 
   type Algorithm = 'neuquant' | 'octree'
 
   class GIFEncoder extends EventEmitter {
     public readonly out: ByteArray
 
-    constructor(
+    public constructor(
       width: number,
       height: number,
       algorithm: Algorithm = 'neuquant',
       useOptimizer = false,
-      totalFrames = 0
+      totalFrames = 0,
     )
 
     public start(): void

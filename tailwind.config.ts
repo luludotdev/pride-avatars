@@ -1,12 +1,11 @@
-const colors = require('tailwindcss/colors')
-const { fontFamily } = require('tailwindcss/defaultTheme')
+import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
-module.exports = {
+export default {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -15,7 +14,6 @@ module.exports = {
         title: ['Montserrat', ...fontFamily.sans],
       },
       colors: {
-        gray: colors.gray,
         light: '#fefdfe',
         dark: '#1f1e1f',
         accent: {
@@ -29,4 +27,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+} satisfies Config

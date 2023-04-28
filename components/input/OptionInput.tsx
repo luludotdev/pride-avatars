@@ -1,4 +1,5 @@
-import { ChangeEventHandler, type FC, useCallback } from 'react'
+import { useCallback } from 'react'
+import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
   id: string
@@ -6,7 +7,7 @@ interface Props {
   options: string[]
 
   value: string
-  onChange: (value: string) => void
+  onChange(value: string): void
 }
 
 export const OptionInput: FC<Props> = ({
@@ -20,21 +21,21 @@ export const OptionInput: FC<Props> = ({
     ev => {
       if (typeof onChange === 'function') onChange(ev.target.value)
     },
-    [onChange]
+    [onChange],
   )
 
   return (
     <>
-      <label htmlFor={id} className='my-auto'>
+      <label className='my-auto' htmlFor={id}>
         {label}:
       </label>
 
       <select
-        name={id}
-        id={id}
-        value={value}
         className='p-1 mt-2 text-sm bg-light dark:bg-dark rounded border border-gray-400 dark:border-gray-500'
+        id={id}
+        name={id}
         onChange={handleChange}
+        value={value}
       >
         {options.map(option => (
           <option key={option} value={option}>

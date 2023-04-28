@@ -1,24 +1,19 @@
-import Document, {
-  type DocumentContext,
-  Head,
-  Html,
-  Main,
-  NextScript,
-} from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
+import type { DocumentContext } from 'next/document'
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
+  public static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }
 
-  render() {
+  public render() {
     return (
       <Html lang='en'>
         <Head>
-          <link rel='icon' type='image/png' href='./favicon.png' />
+          <link href='./favicon.png' rel='icon' type='image/png' />
 
-          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link href='https://fonts.gstatic.com' rel='preconnect' />
           <link
             // Body
             href='https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap'

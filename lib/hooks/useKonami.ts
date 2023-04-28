@@ -9,5 +9,5 @@ export const useKonami = (fn: () => void) => {
     return () => {
       konami.unload()
     }
-  })
+  }, [fn])
 }
