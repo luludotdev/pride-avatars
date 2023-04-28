@@ -10,7 +10,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
-        mono: ['Fira Mono', ...fontFamily.mono],
+        mono: ['Fira Code', ...fontFamily.mono],
         title: ['Montserrat', ...fontFamily.sans],
       },
       colors: {

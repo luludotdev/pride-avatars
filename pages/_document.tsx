@@ -16,19 +16,13 @@ class MyDocument extends Document {
           <link href='https://fonts.gstatic.com' rel='preconnect' />
           <link
             // Body
-            href='https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap'
-            rel='stylesheet'
-          />
-
-          <link
-            // Title
-            href='https://fonts.googleapis.com/css2?&family=Montserrat:wght@700&display=swap&text=Pride Avatars!'
+            href='https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap'
             rel='stylesheet'
           />
 
           <link
             // Mono
-            href='https://fonts.googleapis.com/css2?&family=Fira+Mono:wght@500&display=swap&text=0.123456789px-%C2%B0shit'
+            href='https://fonts.googleapis.com/css2?&family=Fira+Code:wght@500&display=swap&text=0.123456789px-%C2%B0shit'
             rel='stylesheet'
           />
         </Head>

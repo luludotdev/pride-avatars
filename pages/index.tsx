@@ -46,7 +46,7 @@ const Home: NextPage = () => {
           title='Pride Avatars!'
         />
 
-        <h1 className='text-4xl mt-6 mb-2 font-title'>Pride Avatars! 🏳️‍🌈</h1>
+        <h1 className='text-4xl mt-6 mb-2 font-bold'>Pride Avatars! 🏳️‍🌈</h1>
 
         <ExperimentalWarning />
         <LoadImage />
