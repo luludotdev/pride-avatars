@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
 export const useExperimental = () => {
-  const { query } = useRouter()
-  return useMemo<boolean>(() => query.experimental !== undefined, [query])
+  const query = useSearchParams()
+  return useMemo<boolean>(() => query?.has('experimental') ?? false, [query])
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from 'clsx'
 import { useCallback } from 'react'
 import type { FC, PropsWithChildren } from 'react'

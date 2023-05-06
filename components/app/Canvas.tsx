@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from 'clsx'
 import { useCallback, useMemo } from 'react'
 import type { DragEventHandler, FC, RefObject } from 'react'

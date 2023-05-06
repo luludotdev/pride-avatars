@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
+'use client'
+
 import { useCallback, useRef } from 'react'
+import type { FC } from 'react'
 import useKonami from 'react-use-konami'
 import { ExtLink } from '~/components/ExtLink'
-import { Meta } from '~/components/Meta'
-import { PreloadFlags } from '~/components/PreloadFlags'
 import { Advert } from '~/components/app/Advert'
 import { Canvas } from '~/components/app/Canvas'
 import { ExperimentalWarning } from '~/components/app/ExperimentalWarning'
@@ -14,7 +14,7 @@ import { SaveImage } from '~/components/app/SaveImage'
 import { Button } from '~/components/input/Button'
 import { useStore } from '~/lib/hooks/useStore'
 
-const Home: NextPage = () => {
+export const App: FC = () => {
   const { state, dispatch } = useStore()
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -51,14 +51,6 @@ const Home: NextPage = () => {
       <Advert />
 
       <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
-        <PreloadFlags />
-        <Meta
-          colour='#afa5fd'
-          description='Enhance your social media avatars with a pride flag border!'
-          ogImage='/favicon.png'
-          title='Pride Avatars!'
-        />
-
         <h1 className='text-4xl mt-6 mb-2 font-bold'>Pride Avatars! 🏳️‍🌈</h1>
 
         <ExperimentalWarning />
@@ -92,5 +84,3 @@ const Home: NextPage = () => {
     </>
   )
 }
-
-export default Home

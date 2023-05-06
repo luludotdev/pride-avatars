@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback } from 'react'
 import type { FC } from 'react'
 import { ExtLink } from '~/components/ExtLink'
