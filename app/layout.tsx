@@ -3,6 +3,7 @@ import './tailwind.css'
 import { clsx } from 'clsx'
 import { Fira_Code as FiraCode, Inter } from 'next/font/google'
 import type { FC, PropsWithChildren } from 'react'
+import { PreloadFlags } from '~/components/PreloadFlags'
 import { Provider } from '~/components/app/Store'
 
 const inter = Inter({
@@ -21,6 +22,10 @@ const firaCode = FiraCode({
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => (
   <html className={clsx(inter.variable, firaCode.variable)} lang='en'>
+    <head>
+      <PreloadFlags />
+    </head>
+
     <body className='bg-light dark:bg-dark dark:text-light'>
       <div className='w-full h-screen flex flex-col items-center px-4'>
         <Provider>{children}</Provider>
