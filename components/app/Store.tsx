@@ -1,14 +1,12 @@
 'use client'
 
-import { createContext, useMemo, useReducer } from 'react'
-import type { Dispatch, FC, PropsWithChildren, Reducer } from 'react'
+import { castDraft } from 'immer'
+import { createContext, useMemo } from 'react'
+import type { Dispatch, FC, PropsWithChildren } from 'react'
+import { useImmerReducer } from 'use-immer'
 import type { FlagName } from '~/lib/flags'
 
-export type AnimationFrame = readonly [
-  canvas: HTMLCanvasElement,
-  clear: boolean,
-]
-
+export type AnimationFrame = [canvas: HTMLCanvasElement, clear: boolean]
 export interface State {
   dirty: boolean
   quality: number
@@ -96,102 +94,151 @@ export type Action =
   | { type: 'toggleEasterEgg' }
 
 export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
-  const [state, dispatch] = useReducer<Reducer<State, Action>>(
-    (previousState, action) => {
-      switch (action.type) {
-        case 'markClean':
-          return { ...previousState, dirty: false }
+  const [state, dispatch] = useImmerReducer<State, Action>((state, action) => {
+    switch (action.type) {
+      case 'markClean': {
+        state.dirty = false
 
-        case 'setQuality':
-          return { ...previousState, dirty: true, quality: action.value }
-
-        case 'setPadding':
-          return { ...previousState, dirty: true, padding: action.value }
-
-        case 'setAngle': {
-          const snap = 0.25
-          const raw = action.value
-
-          const angle = raw > snap * -1 && raw < snap ? 0 : raw
-          return { ...previousState, dirty: true, angle }
-        }
-
-        case 'setBlur':
-          return { ...previousState, dirty: true, blur: action.value }
-
-        case 'setFeather':
-          return { ...previousState, dirty: true, feather: action.value }
-
-        case 'setPreview':
-          return { ...previousState, dirty: true, preview: action.value }
-
-        case 'setClip':
-          return { ...previousState, dirty: true, clip: action.value }
-
-        case 'setDualFlag':
-          return { ...previousState, dirty: true, dualFlag: action.value }
-
-        case 'setFlag':
-          return { ...previousState, dirty: true, flag: action.value }
-
-        case 'setFlag2':
-          return { ...previousState, dirty: true, flag2: action.value }
-
-        case 'setFilename':
-          return { ...previousState, dirty: true, filename: action.value }
-
-        case 'setImage': {
-          previousState.image?.remove()
-          for (const [frame] of previousState?.frames ?? []) {
-            frame.remove()
-          }
-
-          const image = new Image()
-          image.src = action.value
-
-          return {
-            ...previousState,
-            dirty: true,
-            frames: null,
-            delay: -1,
-            image,
-          }
-        }
-
-        case 'setGif': {
-          previousState.image?.remove()
-          for (const [frame] of previousState?.frames ?? []) {
-            frame.remove()
-          }
-
-          const [frames, delay] = action.value
-          return { ...previousState, dirty: true, image: null, frames, delay }
-        }
-
-        case 'toggleEasterEgg':
-          return {
-            ...previousState,
-            showEasterEgg: !previousState.showEasterEgg,
-          }
-
-        case 'setSaving':
-          return { ...previousState, saving: action.value }
-
-        case 'setAdShowing':
-          return { ...previousState, advertOpen: action.value }
-
-        case 'markAdShown': {
-          const now = new Date()
-          localStorage.setItem(LAST_SHOW_ADD_KEY, now.getTime().toString())
-          return { ...previousState, lastShownAd: now }
-        }
-
-        default:
-          throw new Error('Invalid Action')
+        break
       }
-    },
-    initialState,
-  )
+
+      case 'setQuality': {
+        state.dirty = true
+        state.quality = action.value
+
+        break
+      }
+
+      case 'setPadding': {
+        state.dirty = true
+        state.padding = action.value
+
+        break
+      }
+
+      case 'setAngle': {
+        const snap = 0.25
+        const raw = action.value
+
+        state.dirty = true
+        state.angle = raw > snap * -1 && raw < snap ? 0 : raw
+
+        break
+      }
+
+      case 'setBlur': {
+        state.dirty = true
+        state.blur = action.value
+
+        break
+      }
+
+      case 'setFeather': {
+        state.dirty = true
+        state.feather = action.value
+
+        break
+      }
+
+      case 'setPreview': {
+        state.dirty = true
+        state.preview = action.value
+
+        break
+      }
+
+      case 'setClip': {
+        state.dirty = true
+        state.clip = action.value
+
+        break
+      }
+
+      case 'setDualFlag': {
+        state.dirty = true
+        state.dualFlag = action.value
+
+        break
+      }
+
+      case 'setFlag': {
+        state.dirty = true
+        state.flag = action.value
+
+        break
+      }
+
+      case 'setFlag2': {
+        state.dirty = true
+        state.flag2 = action.value
+
+        break
+      }
+
+      case 'setFilename': {
+        state.dirty = true
+        state.filename = action.value
+
+        break
+      }
+
+      case 'setImage': {
+        state.image?.remove()
+        for (const [frame] of state?.frames ?? []) {
+          frame.remove()
+        }
+
+        const image = new Image()
+        image.src = action.value
+
+        state.dirty = true
+        state.frames = null
+        state.delay = -1
+        state.image = castDraft(image)
+
+        break
+      }
+
+      case 'setGif': {
+        state.image?.remove()
+        for (const [frame] of state?.frames ?? []) {
+          frame.remove()
+        }
+
+        const [frames, delay] = action.value
+        state.dirty = true
+        state.image = null
+        state.frames = castDraft(frames)
+        state.delay = delay
+
+        break
+      }
+
+      case 'toggleEasterEgg': {
+        state.showEasterEgg = !state.showEasterEgg
+        break
+      }
+
+      case 'setSaving': {
+        state.saving = action.value
+        break
+      }
+
+      case 'setAdShowing': {
+        state.advertOpen = action.value
+        break
+      }
+
+      case 'markAdShown': {
+        const now = new Date()
+
+        localStorage.setItem(LAST_SHOW_ADD_KEY, now.getTime().toString())
+        state.lastShownAd = now
+
+        break
+      }
+    }
+  }, initialState)
 
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch])
   return <store.Provider value={value}>{children}</store.Provider>
