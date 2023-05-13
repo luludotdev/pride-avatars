@@ -2,7 +2,7 @@
 import { parse as parsePath } from 'path'
 import { decompressFrames, parseGIF } from 'gifuct-js'
 import type { Dispatch } from 'react'
-import type { Action } from '~/components/app/Store'
+import type { Action, AnimationFrame } from '~/components/app/Store'
 
 export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
   const { name: filename } = parsePath(file.name)
@@ -26,8 +26,8 @@ export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
   }
 
   const { delay } = decoded[0]
-  const frames = decoded.map(
-    ({ patch, dims: { width, height, top, left } }) => {
+  const frames: AnimationFrame[] = decoded.map(
+    ({ patch, disposalType, dims: { width, height, top, left } }) => {
       const canvas = document.createElement('canvas')
       canvas.width = gif.lsd.width
       canvas.height = gif.lsd.height
@@ -40,7 +40,7 @@ export const loadImage = async (dispatch: Dispatch<Action>, file: File) => {
 
       ctx.putImageData(image, left, top)
 
-      return canvas
+      return [canvas, disposalType === 2]
     },
   )
 

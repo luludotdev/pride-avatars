@@ -12,11 +12,13 @@ import { LoadImage } from '~/components/app/LoadImage'
 import { QualityWarning } from '~/components/app/QualityWarning'
 import { SaveImage } from '~/components/app/SaveImage'
 import { Button } from '~/components/input/Button'
+import { useComposite } from '~/lib/hooks/useComposite'
 import { useStore } from '~/lib/hooks/useStore'
 
 export const App: FC = () => {
   const { state, dispatch } = useStore()
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const composite = useComposite()
 
   const onEasterEggClicked = useCallback(() => {
     if (!canvasRef.current) return
@@ -61,9 +63,9 @@ export const App: FC = () => {
           <Button onClick={onEasterEggClicked}>⭕</Button>
         )}
 
-        <Canvas canvasRef={canvasRef} />
+        <Canvas canvasRef={canvasRef} {...composite} />
         <QualityWarning />
-        <SaveImage canvasRef={canvasRef} />
+        <SaveImage canvasRef={canvasRef} {...composite} />
       </div>
 
       <footer className='text-center py-3'>

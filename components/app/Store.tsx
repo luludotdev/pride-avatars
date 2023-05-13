@@ -4,12 +4,18 @@ import { createContext, useMemo, useReducer } from 'react'
 import type { Dispatch, FC, PropsWithChildren, Reducer } from 'react'
 import type { FlagName } from '~/lib/flags'
 
+export type AnimationFrame = readonly [
+  canvas: HTMLCanvasElement,
+  clear: boolean,
+]
+
 export interface State {
   dirty: boolean
   quality: number
   padding: number
   angle: number
   blur: number
+  feather: number
   preview: boolean
   clip: boolean
   dualFlag: boolean
@@ -18,7 +24,7 @@ export interface State {
 
   filename: string | null
   image: HTMLImageElement | null
-  frames: HTMLCanvasElement[] | null
+  frames: AnimationFrame[] | null
   delay: number
   showEasterEgg: boolean
   saving: boolean
@@ -45,6 +51,7 @@ const initialState: State = {
   padding: 24,
   angle: 0,
   blur: 0,
+  feather: 0,
   preview: false,
   clip: true,
   dualFlag: false,
@@ -76,10 +83,11 @@ export type Action =
   | { type: 'setBlur'; value: number }
   | { type: 'setClip'; value: boolean }
   | { type: 'setDualFlag'; value: boolean }
+  | { type: 'setFeather'; value: number }
   | { type: 'setFilename'; value: string }
   | { type: 'setFlag'; value: FlagName }
   | { type: 'setFlag2'; value: FlagName }
-  | { type: 'setGif'; value: [frames: HTMLCanvasElement[], delay: number] }
+  | { type: 'setGif'; value: [frames: AnimationFrame[], delay: number] }
   | { type: 'setImage'; value: string }
   | { type: 'setPadding'; value: number }
   | { type: 'setPreview'; value: boolean }
@@ -111,6 +119,9 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
         case 'setBlur':
           return { ...previousState, dirty: true, blur: action.value }
 
+        case 'setFeather':
+          return { ...previousState, dirty: true, feather: action.value }
+
         case 'setPreview':
           return { ...previousState, dirty: true, preview: action.value }
 
@@ -131,7 +142,7 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 
         case 'setImage': {
           previousState.image?.remove()
-          for (const frame of previousState?.frames ?? []) {
+          for (const [frame] of previousState?.frames ?? []) {
             frame.remove()
           }
 
@@ -149,7 +160,7 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
 
         case 'setGif': {
           previousState.image?.remove()
-          for (const frame of previousState?.frames ?? []) {
+          for (const [frame] of previousState?.frames ?? []) {
             frame.remove()
           }
 

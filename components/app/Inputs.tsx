@@ -65,6 +65,11 @@ export const Inputs: FC = () => {
     [state.quality],
   )
 
+  const onFeatherChanged = useCallback(
+    (feather: number) => dispatch({ type: 'setFeather', value: feather }),
+    [dispatch],
+  )
+
   const onFlagChanged = useCallback(
     (flag: string) => {
       if (!isFlagName(flag)) return
@@ -141,6 +146,19 @@ export const Inputs: FC = () => {
         step={0.01}
         value={state.blur}
       />
+
+      {experimental && (
+        <RangeInput
+          formatter={formatBlur}
+          id='feather'
+          label='Feather'
+          max={10}
+          min={0}
+          onChange={onFeatherChanged}
+          step={0.01}
+          value={state.feather}
+        />
+      )}
 
       <OptionInput
         id='flags'

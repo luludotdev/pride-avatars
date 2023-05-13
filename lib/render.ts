@@ -1,4 +1,5 @@
-import type { State } from '~/components/app/Store'
+import type { CompositeCtx } from './hooks/useComposite'
+import type { AnimationFrame, State } from '~/components/app/Store'
 import { getFlag } from '~/lib/flags'
 import { scaleQualityValue } from '~/lib/quality'
 
@@ -13,11 +14,10 @@ interface DrawOptions {
   offsetY: number
 }
 
-export const drawFrame = async (
-  canvas: HTMLCanvasElement,
+const drawImage = async (
   ctx: CanvasRenderingContext2D,
-  state: State,
-  time: number,
+  input: HTMLCanvasElement | HTMLImageElement,
+  options: Partial<DrawOptions>,
 ) => {
   const defaultOptions: DrawOptions = {
     x: 0,
@@ -28,56 +28,69 @@ export const drawFrame = async (
     offsetY: 0.5,
   }
 
-  const drawImage = async (
-    input: HTMLCanvasElement | HTMLImageElement,
-    options: Partial<DrawOptions>,
-  ) => {
-    const { x, y, width, height, offsetX, offsetY } = {
-      ...defaultOptions,
-      ...options,
-    }
-
-    if (input instanceof HTMLImageElement && input.complete === false) {
-      await new Promise<void>(resolve => {
-        input.addEventListener('load', () => {
-          resolve()
-        })
-      })
-    }
-
-    const iw = input.width
-    const ih = input.height
-    const radius = Math.min(width / iw, height / ih)
-    let nw = iw * radius
-    let nh = ih * radius
-    let cx
-    let cy
-    let cw
-    let ch
-    let ar = 1
-
-    if (nw < width) ar = width / nw
-    if (Math.abs(ar - 1) < 1e-14 && nh < height) ar = height / nh
-    nw *= ar
-    nh *= ar
-
-    cw = iw / (nw / width)
-    ch = ih / (nh / height)
-
-    cx = (iw - cw) * Math.max(0, Math.min(1, offsetX))
-    cy = (ih - ch) * Math.max(0, Math.min(1, offsetY))
-
-    if (cx < 0) cx = 0
-    if (cy < 0) cy = 0
-    if (cw > iw) cw = iw
-    if (ch > ih) ch = ih
-
-    ctx.drawImage(input, cx, cy, cw, ch, x, y, width, height)
+  const { x, y, width, height, offsetX, offsetY } = {
+    ...defaultOptions,
+    ...options,
   }
+
+  if (input instanceof HTMLImageElement && input.complete === false) {
+    await new Promise<void>(resolve => {
+      input.addEventListener('load', () => {
+        resolve()
+      })
+    })
+  }
+
+  const iw = input.width
+  const ih = input.height
+  const radius = Math.min(width / iw, height / ih)
+  let nw = iw * radius
+  let nh = ih * radius
+  let cx
+  let cy
+  let cw
+  let ch
+  let ar = 1
+
+  if (nw < width) ar = width / nw
+  if (Math.abs(ar - 1) < 1e-14 && nh < height) ar = height / nh
+  nw *= ar
+  nh *= ar
+
+  cw = iw / (nw / width)
+  ch = ih / (nh / height)
+
+  cx = (iw - cw) * Math.max(0, Math.min(1, offsetX))
+  cy = (ih - ch) * Math.max(0, Math.min(1, offsetY))
+
+  if (cx < 0) cx = 0
+  if (cy < 0) cy = 0
+  if (cw > iw) cw = iw
+  if (ch > ih) ch = ih
+
+  ctx.drawImage(input, cx, cy, cw, ch, x, y, width, height)
+}
+
+export const drawFrame = async (
+  // canvas: HTMLCanvasElement,
+  ctx: CanvasRenderingContext2D,
+  { ctxImage, ctxMask, ctxComp }: CompositeCtx,
+  state: State,
+  time: number,
+) => {
+  const { width: canvasWidth, height: canvasHeight } = ctx.canvas
+
+  const compScaleFactor = 2
+  ctxImage.canvas.width = canvasWidth * compScaleFactor
+  ctxImage.canvas.height = canvasHeight * compScaleFactor
+  ctxMask.canvas.width = canvasWidth * compScaleFactor
+  ctxMask.canvas.height = canvasHeight * compScaleFactor
+  ctxComp.canvas.width = canvasWidth * compScaleFactor
+  ctxComp.canvas.height = canvasHeight * compScaleFactor
 
   ctx.save()
 
-  ctx.translate(canvas.width / 2, canvas.height / 2)
+  ctx.translate(canvasWidth / 2, canvasHeight / 2)
   ctx.rotate((Math.PI / 180) * state.angle)
 
   const scale = Math.abs(state.angle) / 50 + 1.01
@@ -97,10 +110,10 @@ export const drawFrame = async (
   ctx.filter = blur !== 0 ? `blur(${blur}px)` : ''
   ctx.drawImage(
     flagImage,
-    (canvas.width / 2) * -1,
-    (canvas.height / 2) * -1,
-    canvas.width,
-    canvas.height,
+    (canvasWidth / 2) * -1,
+    (canvasHeight / 2) * -1,
+    canvasWidth,
+    canvasHeight,
   )
 
   if (state.dualFlag) {
@@ -114,27 +127,22 @@ export const drawFrame = async (
     }
 
     const region = new Path2D()
-    region.rect(
-      0,
-      (ctx.canvas.height / 2) * -1,
-      ctx.canvas.width,
-      ctx.canvas.height,
-    )
+    region.rect(0, (canvasHeight / 2) * -1, canvasWidth, canvasHeight)
 
     ctx.clip(region, 'evenodd')
 
     ctx.drawImage(
       flagImage2,
-      (canvas.width / 2) * -1,
-      (canvas.height / 2) * -1,
-      canvas.width,
-      canvas.height,
+      (canvasWidth / 2) * -1,
+      (canvasHeight / 2) * -1,
+      canvasWidth,
+      canvasHeight,
     )
   }
 
   ctx.restore()
 
-  const renderFrames = (): (HTMLCanvasElement | HTMLImageElement)[] => {
+  const renderFrames = (): (AnimationFrame | HTMLImageElement)[] => {
     if (state.image !== null) return [state.image]
     if (state.frames === null || state.frames.length === 0) return []
 
@@ -146,35 +154,84 @@ export const drawFrame = async (
 
   const frames = renderFrames()
   if (frames.length > 0) {
-    ctx.save()
     const padding = scaleQualityValue(state.quality, state.padding)
+    const feather = scaleQualityValue(state.quality, state.feather)
+
+    ctxImage.clearRect(0, 0, ctxImage.canvas.width, ctxImage.canvas.width)
+    ctxImage.translate(ctxImage.canvas.width / 2, ctxImage.canvas.height / 2)
+
+    // eslint-disable-next-line id-length
+    for (const f of frames) {
+      const frame = f instanceof HTMLImageElement ? ([f, false] as const) : f
+      const [image, clear] = frame
+
+      if (clear) {
+        ctxImage.save()
+        ctxImage.setTransform(1, 0, 0, 1, 0, 0)
+        ctxImage.clearRect(0, 0, ctxImage.canvas.width, ctxImage.canvas.width)
+        ctxImage.restore()
+      }
+
+      // eslint-disable-next-line no-await-in-loop
+      await drawImage(ctxImage, image, {
+        x: (ctxImage.canvas.width / 2) * -1,
+        y: (ctxImage.canvas.height / 2) * -1,
+        width: ctxImage.canvas.width,
+        height: ctxImage.canvas.height,
+      })
+    }
+
+    ctxMask.clearRect(0, 0, ctxMask.canvas.width, ctxMask.canvas.width)
+    ctxMask.filter = `blur(${feather}px)`
 
     if (state.clip) {
-      ctx.beginPath()
-      ctx.arc(
-        canvas.width / 2,
-        canvas.height / 2,
-        canvas.height / 2 - padding,
+      ctxMask.beginPath()
+      ctxMask.arc(
+        ctxMask.canvas.width / 2,
+        ctxMask.canvas.height / 2,
+        ctxMask.canvas.height / 2 - feather * 2,
         0,
         Math.PI * 2,
         true,
       )
 
-      ctx.closePath()
-      ctx.clip()
+      ctxMask.closePath()
+      ctxMask.fill()
+    } else {
+      ctxMask.rect(
+        feather,
+        feather,
+        ctxMask.canvas.width - feather * 2,
+        ctxMask.canvas.height - feather * 2,
+      )
+
+      ctxMask.fill()
     }
 
-    ctx.translate(canvas.width / 2, canvas.height / 2)
-    for (const frame of frames) {
-      // eslint-disable-next-line no-await-in-loop
-      await drawImage(frame, {
-        x: (canvas.width / 2) * -1 + padding,
-        y: (canvas.height / 2) * -1 + padding,
-        width: canvas.width - padding * 2,
-        height: canvas.height - padding * 2,
-      })
-    }
+    ctxComp.clearRect(0, 0, ctxComp.canvas.width, ctxComp.canvas.width)
+    ctxComp.drawImage(
+      ctxMask.canvas,
+      0,
+      0,
+      ctxComp.canvas.width,
+      ctxComp.canvas.height,
+    )
 
-    ctx.restore()
+    ctxComp.globalCompositeOperation = 'source-in'
+    ctxComp.drawImage(
+      ctxImage.canvas,
+      0,
+      0,
+      ctxComp.canvas.width,
+      ctxComp.canvas.height,
+    )
+
+    ctx.drawImage(
+      ctxComp.canvas,
+      padding / 2,
+      padding / 2,
+      canvasWidth - padding,
+      canvasHeight - padding,
+    )
   }
 }

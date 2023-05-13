@@ -5,15 +5,16 @@ import ms from 'ms'
 import { useCallback } from 'react'
 import type { FC, RefObject } from 'react'
 import { Button } from '~/components/input/Button'
+import type { Composite } from '~/lib/hooks/useComposite'
 import { useStore } from '~/lib/hooks/useStore'
 import { drawFrame } from '~/lib/render'
 import { sleep } from '~/lib/sleep'
 
-interface Props {
+interface Props extends Composite {
   canvasRef: RefObject<HTMLCanvasElement>
 }
 
-export const SaveImage: FC<Props> = ({ canvasRef }) => {
+export const SaveImage: FC<Props> = ({ canvasRef, ...composite }) => {
   const { state, dispatch } = useStore()
 
   const filename = useCallback(
@@ -51,7 +52,8 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
 
       try {
         const ctx = canvas.getContext('2d')
-        if (ctx === null) throw new Error('oh no')
+        const { ctxImage, ctxMask, ctxComp } = composite
+        if (!ctx || !ctxImage || !ctxMask || !ctxComp) throw new Error('oh no')
 
         const encoder = new GIFEncoder(
           canvas.width,
@@ -66,7 +68,7 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
         /* eslint-disable no-await-in-loop */
         for (let idx = 0; idx < state.frames.length; idx++) {
           const time = (idx * state.delay) / 1_000
-          await drawFrame(canvas, ctx, state, time)
+          await drawFrame(ctx, { ctxImage, ctxMask, ctxComp }, state, time)
 
           encoder.addFrame(ctx)
         }
@@ -86,7 +88,7 @@ export const SaveImage: FC<Props> = ({ canvasRef }) => {
       const url = canvas.toDataURL('image/png;base64')
       saveAs(url, filename('png'))
     }
-  }, [canvasRef, state, dispatch, filename])
+  }, [canvasRef, composite, state, dispatch, filename])
 
   return (
     <Button disabled={state.saving} onClick={onSaveClicked}>

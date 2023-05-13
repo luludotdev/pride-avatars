@@ -4,16 +4,17 @@ import clsx from 'clsx'
 import { useCallback, useMemo } from 'react'
 import type { DragEventHandler, FC, RefObject } from 'react'
 import { useAnimationFrame } from '~/lib/hooks/useAnimationFrame'
+import type { Composite } from '~/lib/hooks/useComposite'
 import { useStore } from '~/lib/hooks/useStore'
 import { loadImage } from '~/lib/load'
 import { qualityToResolution } from '~/lib/quality'
 import { drawFrame } from '~/lib/render'
 
-interface Props {
+interface Props extends Composite {
   canvasRef: RefObject<HTMLCanvasElement>
 }
 
-export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
+export const Canvas: FC<Props> = ({ canvasRef: ref, ...composite }) => {
   const { state, dispatch } = useStore()
   useAnimationFrame(
     ({ time }) => {
@@ -23,12 +24,13 @@ export const Canvas: FC<Props> = ({ canvasRef: ref }) => {
 
       const canvas = ref.current
       const ctx = canvas.getContext('2d')
-      if (ctx === null) return
+      const { ctxImage, ctxMask, ctxComp } = composite
+      if (!ctx || !ctxImage || !ctxMask || !ctxComp) return
 
-      void drawFrame(canvas, ctx, state, time)
+      void drawFrame(ctx, { ctxImage, ctxMask, ctxComp }, state, time)
       if (state.blur === 0) dispatch({ type: 'markClean' })
     },
-    [ref, state, dispatch],
+    [ref, composite, state, dispatch],
   )
 
   const handleDragOver = useCallback<DragEventHandler<HTMLCanvasElement>>(
