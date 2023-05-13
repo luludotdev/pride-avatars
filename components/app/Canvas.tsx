@@ -5,6 +5,7 @@ import { useCallback, useMemo } from 'react'
 import type { DragEventHandler, FC, RefObject } from 'react'
 import { useAnimationFrame } from '~/lib/hooks/useAnimationFrame'
 import type { Composite } from '~/lib/hooks/useComposite'
+import { useDebug } from '~/lib/hooks/useDebug'
 import { useStore } from '~/lib/hooks/useStore'
 import { loadImage } from '~/lib/load'
 import { qualityToResolution } from '~/lib/quality'
@@ -15,12 +16,14 @@ interface Props extends Composite {
 }
 
 export const Canvas: FC<Props> = ({ canvasRef: ref, ...composite }) => {
+  const debug = useDebug()
   const { state, dispatch } = useStore()
+
   useAnimationFrame(
     async ({ time }) => {
       if (state.saving) return
       if (!ref.current) return
-      if (!state.dirty && state.frames === null) return
+      if (!debug && !state.dirty && state.frames === null) return
 
       const canvas = ref.current
       const ctx = canvas.getContext('2d')
@@ -30,7 +33,7 @@ export const Canvas: FC<Props> = ({ canvasRef: ref, ...composite }) => {
       await drawFrame(ctx, { ctxImage, ctxMask, ctxComp }, state, time)
       if (state.blur === 0) dispatch({ type: 'markClean' })
     },
-    [ref, composite, state, dispatch],
+    [debug, ref, composite, state, dispatch],
   )
 
   const handleDragOver = useCallback<DragEventHandler<HTMLCanvasElement>>(
