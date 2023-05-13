@@ -17,7 +17,7 @@ interface Props extends Composite {
 export const Canvas: FC<Props> = ({ canvasRef: ref, ...composite }) => {
   const { state, dispatch } = useStore()
   useAnimationFrame(
-    ({ time }) => {
+    async ({ time }) => {
       if (state.saving) return
       if (!ref.current) return
       if (!state.dirty && state.frames === null) return
@@ -27,7 +27,7 @@ export const Canvas: FC<Props> = ({ canvasRef: ref, ...composite }) => {
       const { ctxImage, ctxMask, ctxComp } = composite
       if (!ctx || !ctxImage || !ctxMask || !ctxComp) return
 
-      void drawFrame(ctx, { ctxImage, ctxMask, ctxComp }, state, time)
+      await drawFrame(ctx, { ctxImage, ctxMask, ctxComp }, state, time)
       if (state.blur === 0) dispatch({ type: 'markClean' })
     },
     [ref, composite, state, dispatch],
