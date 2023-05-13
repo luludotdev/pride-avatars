@@ -33,7 +33,7 @@ const drawImage = async (
     ...options,
   }
 
-  if (input instanceof HTMLImageElement) {
+  if (input instanceof HTMLImageElement && !input.complete) {
     await input.decode()
   }
 
@@ -93,7 +93,7 @@ export const drawFrame = async (
   ctx.scale(scale, scale)
 
   const flagImage = getFlag(state.flag)
-  await flagImage.decode()
+  if (!flagImage.complete) await flagImage.decode()
 
   const blur = scaleQualityValue(state.quality, state.blur)
   // eslint-disable-next-line require-atomic-updates
@@ -108,7 +108,7 @@ export const drawFrame = async (
 
   if (state.dualFlag) {
     const flagImage2 = getFlag(state.flag2)
-    await flagImage2.decode()
+    if (flagImage2.complete) await flagImage2.decode()
 
     const region = new Path2D()
     region.rect(0, (canvasHeight / 2) * -1, canvasWidth, canvasHeight)
