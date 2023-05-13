@@ -33,12 +33,8 @@ const drawImage = async (
     ...options,
   }
 
-  if (input instanceof HTMLImageElement && input.complete === false) {
-    await new Promise<void>(resolve => {
-      input.addEventListener('load', () => {
-        resolve()
-      })
-    })
+  if (input instanceof HTMLImageElement) {
+    await input.decode()
   }
 
   const iw = input.width
@@ -97,13 +93,7 @@ export const drawFrame = async (
   ctx.scale(scale, scale)
 
   const flagImage = getFlag(state.flag)
-  if (flagImage.complete === false) {
-    await new Promise<void>(resolve => {
-      flagImage.addEventListener('load', () => {
-        resolve()
-      })
-    })
-  }
+  await flagImage.decode()
 
   const blur = scaleQualityValue(state.quality, state.blur)
   // eslint-disable-next-line require-atomic-updates
@@ -118,13 +108,7 @@ export const drawFrame = async (
 
   if (state.dualFlag) {
     const flagImage2 = getFlag(state.flag2)
-    if (flagImage2.complete === false) {
-      await new Promise<void>(resolve => {
-        flagImage2.addEventListener('load', () => {
-          resolve()
-        })
-      })
-    }
+    await flagImage2.decode()
 
     const region = new Path2D()
     region.rect(0, (canvasHeight / 2) * -1, canvasWidth, canvasHeight)
