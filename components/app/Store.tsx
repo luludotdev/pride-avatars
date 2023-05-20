@@ -74,6 +74,7 @@ interface Context {
 export const store = createContext<Context>({ state: initialState })
 
 export type Action =
+  | { type: 'clearImage' }
   | { type: 'markAdShown' }
   | { type: 'markClean' }
   | { type: 'setAdShowing'; value: boolean }
@@ -178,6 +179,20 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
       case 'setFilename': {
         state.dirty = true
         state.filename = action.value
+
+        break
+      }
+
+      case 'clearImage': {
+        state.image?.remove()
+        for (const [frame] of state?.frames ?? []) {
+          frame.remove()
+        }
+
+        state.dirty = true
+        state.image = null
+        state.frames = null
+        state.delay = -1
 
         break
       }
