@@ -4,18 +4,20 @@ import clsx from 'clsx'
 import { useCallback, useMemo } from 'react'
 import type { DragEventHandler, FC, RefObject } from 'react'
 import { useAnimationFrame } from '~/lib/hooks/useAnimationFrame'
-import type { Composite } from '~/lib/hooks/useComposite'
 import { useDebug } from '~/lib/hooks/useDebug'
 import { useStore } from '~/lib/hooks/useStore'
+import { ensureLayers } from '~/lib/layers'
+import type { MaybeLayers } from '~/lib/layers'
 import { loadImage } from '~/lib/load'
 import { qualityToResolution } from '~/lib/quality'
 import { drawFrame } from '~/lib/render'
 
-interface Props extends Composite {
+interface Props {
   canvasRef: RefObject<HTMLCanvasElement>
+  layers: MaybeLayers
 }
 
-export const Canvas: FC<Props> = ({ canvasRef: ref, ...composite }) => {
+export const Canvas: FC<Props> = ({ canvasRef: ref, layers: maybeLayers }) => {
   const debug = useDebug()
   const { state, dispatch } = useStore()
 
@@ -27,13 +29,13 @@ export const Canvas: FC<Props> = ({ canvasRef: ref, ...composite }) => {
 
       const canvas = ref.current
       const ctx = canvas.getContext('2d')
-      const { ctxImage, ctxMask, ctxComp } = composite
-      if (!ctx || !ctxImage || !ctxMask || !ctxComp) return
+      const layers = ensureLayers(maybeLayers)
+      if (!ctx || !layers) return
 
-      await drawFrame(ctx, { ctxImage, ctxMask, ctxComp }, state, time)
+      await drawFrame(ctx, layers, state, time)
       if (state.blur === 0) dispatch({ type: 'markClean' })
     },
-    [debug, ref, composite, state, dispatch],
+    [debug, ref, maybeLayers, state, dispatch],
   )
 
   const handleDragOver = useCallback<DragEventHandler<HTMLCanvasElement>>(

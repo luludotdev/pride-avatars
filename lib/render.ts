@@ -1,6 +1,6 @@
-import type { CompositeCtx } from './hooks/useComposite'
 import type { AnimationFrame, State } from '~/components/app/Store'
 import { getFlag } from '~/lib/flags'
+import type { Layers } from '~/lib/layers'
 import { scaleQualityValue } from '~/lib/quality'
 
 interface DrawOptions {
@@ -68,21 +68,19 @@ const drawImage = async (
 }
 
 export const drawFrame = async (
-  // canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
-  { ctxImage, ctxMask, ctxComp }: CompositeCtx,
+  layers: Layers,
   state: State,
   time: number,
 ) => {
+  const { image: ctxImage, mask: ctxMask, composite: ctxComp } = layers
   const { width: canvasWidth, height: canvasHeight } = ctx.canvas
 
   const compScaleFactor = 2
-  ctxImage.canvas.width = canvasWidth * compScaleFactor
-  ctxImage.canvas.height = canvasHeight * compScaleFactor
-  ctxMask.canvas.width = canvasWidth * compScaleFactor
-  ctxMask.canvas.height = canvasHeight * compScaleFactor
-  ctxComp.canvas.width = canvasWidth * compScaleFactor
-  ctxComp.canvas.height = canvasHeight * compScaleFactor
+  for (const ctx of Object.values(layers)) {
+    ctx.canvas.width = canvasWidth * compScaleFactor
+    ctx.canvas.height = canvasHeight * compScaleFactor
+  }
 
   ctx.save()
 

@@ -5,16 +5,18 @@ import ms from 'ms'
 import { useCallback } from 'react'
 import type { FC, RefObject } from 'react'
 import { Button } from '~/components/input/Button'
-import type { Composite } from '~/lib/hooks/useComposite'
 import { useStore } from '~/lib/hooks/useStore'
+import { ensureLayers } from '~/lib/layers'
+import type { MaybeLayers } from '~/lib/layers'
 import { drawFrame } from '~/lib/render'
 import { sleep } from '~/lib/sleep'
 
-interface Props extends Composite {
+interface Props {
   canvasRef: RefObject<HTMLCanvasElement>
+  layers: MaybeLayers
 }
 
-export const SaveImage: FC<Props> = ({ canvasRef, ...composite }) => {
+export const SaveImage: FC<Props> = ({ canvasRef, layers: maybeLayers }) => {
   const { state, dispatch } = useStore()
 
   const filename = useCallback(
@@ -52,8 +54,8 @@ export const SaveImage: FC<Props> = ({ canvasRef, ...composite }) => {
 
       try {
         const ctx = canvas.getContext('2d')
-        const { ctxImage, ctxMask, ctxComp } = composite
-        if (!ctx || !ctxImage || !ctxMask || !ctxComp) throw new Error('oh no')
+        const layers = ensureLayers(maybeLayers)
+        if (!ctx || !layers) throw new Error('oh no')
 
         const encoder = new GIFEncoder(
           canvas.width,
@@ -68,7 +70,7 @@ export const SaveImage: FC<Props> = ({ canvasRef, ...composite }) => {
         /* eslint-disable no-await-in-loop */
         for (let idx = 0; idx < state.frames.length; idx++) {
           const time = (idx * state.delay) / 1_000
-          await drawFrame(ctx, { ctxImage, ctxMask, ctxComp }, state, time)
+          await drawFrame(ctx, layers, state, time)
 
           encoder.addFrame(ctx)
         }
@@ -88,7 +90,7 @@ export const SaveImage: FC<Props> = ({ canvasRef, ...composite }) => {
       const url = canvas.toDataURL('image/png;base64')
       saveAs(url, filename('png'))
     }
-  }, [canvasRef, composite, state, dispatch, filename])
+  }, [canvasRef, maybeLayers, state, dispatch, filename])
 
   return (
     <Button disabled={state.saving} onClick={onSaveClicked}>
