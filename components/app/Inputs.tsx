@@ -60,7 +60,7 @@ export const Inputs: FC = () => {
   const formatBlur = useCallback<(v: number) => string>(
     value => {
       const scaled = scaleQualityValue(state.quality, value)
-      return `${scaled.toFixed(2)}px`
+      return `${scaled.toFixed(2)}px`.padEnd(7, ' ')
     },
     [state.quality],
   )
