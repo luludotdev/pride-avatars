@@ -7,6 +7,7 @@ import { qualities } from '~/lib/quality'
 const MAX_QUALITY = 2
 export const QualityWarning: FC = () => {
   const { state } = useStore()
+
   const shouldShow = useMemo<boolean>(() => {
     if (state.frames === null) return false
     return state.quality > MAX_QUALITY

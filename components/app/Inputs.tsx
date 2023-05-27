@@ -1,5 +1,6 @@
-import { useCallback } from 'react'
+import { Suspense, useCallback } from 'react'
 import type { FC } from 'react'
+import type { State } from '~/components/app/Store'
 import { CheckboxInput } from '~/components/input/CheckboxInput'
 import { OptionInput } from '~/components/input/OptionInput'
 import { RangeInput } from '~/components/input/RangeInput'
@@ -14,7 +15,6 @@ import {
 
 export const Inputs: FC = () => {
   const { state, dispatch } = useStore()
-  const experimental = useExperimental()
 
   const onQualityChanged = useCallback(
     (quality: number) => dispatch({ type: 'setQuality', value: quality }),
@@ -148,17 +148,13 @@ export const Inputs: FC = () => {
         value={state.blur}
       />
 
-      {experimental && (
-        <RangeInput
-          formatter={formatBlur}
-          label='Feather'
-          max={10}
-          min={0}
-          onChange={onFeatherChanged}
-          step={0.01}
-          value={state.feather}
+      <Suspense fallback={null}>
+        <FeatherInput
+          formatBlur={formatBlur}
+          onFeatherChanged={onFeatherChanged}
+          state={state}
         />
-      )}
+      </Suspense>
 
       <OptionInput
         label='Flag'
@@ -167,32 +163,14 @@ export const Inputs: FC = () => {
         value={state.flag}
       />
 
-      {experimental && (
-        <>
-          {state.dualFlag ? (
-            <OptionInput
-              label='Second Flag'
-              onChange={onFlag2Changed}
-              options={flagNames}
-              value={state.flag2}
-            />
-          ) : null}
-
-          <CheckboxInput
-            label='Dual Flags'
-            onChange={onDualFlagChanged}
-            value={state.dualFlag}
-          />
-
-          {state.dualFlag ? (
-            <CheckboxInput
-              label='Blur Boundary'
-              onChange={onBlurFlagBoundaryChanged}
-              value={state.blurFlagBoundary}
-            />
-          ) : null}
-        </>
-      )}
+      <Suspense fallback={null}>
+        <DualFlagInput
+          onBlurFlagBoundaryChanged={onBlurFlagBoundaryChanged}
+          onDualFlagChanged={onDualFlagChanged}
+          onFlag2Changed={onFlag2Changed}
+          state={state}
+        />
+      </Suspense>
 
       <CheckboxInput
         label='Preview'
@@ -202,5 +180,78 @@ export const Inputs: FC = () => {
 
       <CheckboxInput label='Clip' onChange={onClipChanged} value={state.clip} />
     </div>
+  )
+}
+
+interface FeatherProps {
+  state: State
+
+  formatBlur(v: number): string
+  onFeatherChanged(feather: number): void
+}
+
+const FeatherInput: FC<FeatherProps> = ({
+  state,
+  formatBlur,
+  onFeatherChanged,
+}) => {
+  const experimental = useExperimental()
+  if (!experimental) return null
+
+  return (
+    <RangeInput
+      formatter={formatBlur}
+      label='Feather'
+      max={10}
+      min={0}
+      onChange={onFeatherChanged}
+      step={0.01}
+      value={state.feather}
+    />
+  )
+}
+
+interface DualFlagProps {
+  state: State
+
+  onFlag2Changed(flag: string): void
+  onDualFlagChanged(value: boolean): void
+  onBlurFlagBoundaryChanged(value: boolean): void
+}
+
+const DualFlagInput: FC<DualFlagProps> = ({
+  state,
+  onFlag2Changed,
+  onDualFlagChanged,
+  onBlurFlagBoundaryChanged,
+}) => {
+  const experimental = useExperimental()
+  if (!experimental) return null
+
+  return (
+    <>
+      {state.dualFlag ? (
+        <OptionInput
+          label='Second Flag'
+          onChange={onFlag2Changed}
+          options={flagNames}
+          value={state.flag2}
+        />
+      ) : null}
+
+      <CheckboxInput
+        label='Dual Flags'
+        onChange={onDualFlagChanged}
+        value={state.dualFlag}
+      />
+
+      {state.dualFlag ? (
+        <CheckboxInput
+          label='Blur Boundary'
+          onChange={onBlurFlagBoundaryChanged}
+          value={state.blurFlagBoundary}
+        />
+      ) : null}
+    </>
   )
 }

@@ -4,16 +4,19 @@ import { layers, makeLayers } from '~/lib/layers'
 import type { MaybeLayers } from '~/lib/layers'
 
 export const useLayers = () => {
-  const debug = useDebug()
-
   const isServer = useMemo(() => typeof window === 'undefined', [])
-  const layersMemo = useMemo<MaybeLayers>(() => {
+
+  return useMemo<MaybeLayers>(() => {
     if (!isServer) return makeLayers()
 
     return Object.fromEntries(
       layers.map(layer => [layer, undefined] as const),
     ) as MaybeLayers
   }, [isServer])
+}
+
+export const useDisplayLayers = (layers: MaybeLayers) => {
+  const debug = useDebug()
 
   useEffect(() => {
     if (!debug) return
@@ -35,7 +38,7 @@ export const useLayers = () => {
     container.style.gap = gap
     container.style.gridTemplateColumns = `repeat(${cols}, auto)`
 
-    for (const ctx of Object.values(layersMemo)) {
+    for (const ctx of Object.values(layers)) {
       if (!ctx) continue
 
       const canvas = ctx.canvas
@@ -47,13 +50,11 @@ export const useLayers = () => {
     }
 
     return () => {
-      for (const ctx of Object.values(layersMemo)) {
+      for (const ctx of Object.values(layers)) {
         ctx?.canvas.remove()
       }
 
       container.remove()
     }
-  }, [debug, layersMemo])
-
-  return layersMemo
+  }, [debug, layers])
 }

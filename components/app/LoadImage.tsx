@@ -1,5 +1,6 @@
-import { useCallback, useRef } from 'react'
+import { Suspense, useCallback, useRef } from 'react'
 import type { ChangeEventHandler, FC } from 'react'
+import type { State } from '~/components/app/Store'
 import { Button } from '~/components/input/Button'
 import { useDebug } from '~/lib/hooks/useDebug'
 import { useStore } from '~/lib/hooks/useStore'
@@ -7,7 +8,6 @@ import { loadImage } from '~/lib/load'
 
 export const LoadImage: FC = () => {
   const { state, dispatch } = useStore()
-  const debug = useDebug()
   const ref = useRef<HTMLInputElement>(null)
 
   const onLoadClicked = useCallback(() => {
@@ -35,11 +35,9 @@ export const LoadImage: FC = () => {
         📸 Load Image
       </Button>
 
-      {debug && (
-        <Button disabled={state.saving} onClick={onClearClicked}>
-          🗑️ Clear Image
-        </Button>
-      )}
+      <Suspense fallback={null}>
+        <ClearImage onClearClicked={onClearClicked} state={state} />
+      </Suspense>
 
       <input
         accept='image/*'
@@ -50,5 +48,21 @@ export const LoadImage: FC = () => {
         type='file'
       />
     </>
+  )
+}
+
+interface ClearImageProps {
+  state: State
+  onClearClicked(): void
+}
+
+const ClearImage: FC<ClearImageProps> = ({ state, onClearClicked }) => {
+  const debug = useDebug()
+  if (!debug) return null
+
+  return (
+    <Button disabled={state.saving} onClick={onClearClicked}>
+      🗑️ Clear Image
+    </Button>
   )
 }

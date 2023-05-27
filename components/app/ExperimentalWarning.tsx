@@ -1,8 +1,9 @@
 import type { FC } from 'react'
+import { Suspense } from 'react'
 import { Warning } from '~/components/app/Warning'
 import { useExperimental } from '~/lib/hooks/useExperimental'
 
-export const ExperimentalWarning: FC = () => {
+const ExperimentalWarning: FC = () => {
   const experimental = useExperimental()
 
   return experimental ? (
@@ -17,3 +18,11 @@ export const ExperimentalWarning: FC = () => {
     </Warning>
   ) : null
 }
+
+const ExperimentalWarningSuspense: FC = () => (
+  <Suspense fallback={null}>
+    <ExperimentalWarning />
+  </Suspense>
+)
+
+export { ExperimentalWarningSuspense as ExperimentalWarning }

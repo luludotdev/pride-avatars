@@ -10,6 +10,7 @@ import { ExperimentalWarning } from '~/components/app/ExperimentalWarning'
 import { Inputs } from '~/components/app/Inputs'
 import { LoadImage } from '~/components/app/LoadImage'
 import { QualityWarning } from '~/components/app/QualityWarning'
+import { RenderDebugLayers } from '~/components/app/RenderDebugLayers'
 import { SaveImage } from '~/components/app/SaveImage'
 import { Button } from '~/components/input/Button'
 import { useLayers } from '~/lib/hooks/useLayers'
@@ -51,6 +52,7 @@ export const App: FC = () => {
   return (
     <>
       <Advert />
+      <RenderDebugLayers layers={layers} />
 
       <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
         <h1 className='text-4xl mt-6 mb-2 font-bold'>Pride Avatars! 🏳️‍🌈</h1>

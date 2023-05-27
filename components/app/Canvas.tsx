@@ -1,8 +1,9 @@
 'use client'
 
 import clsx from 'clsx'
-import { useCallback, useMemo } from 'react'
-import type { DragEventHandler, FC, RefObject } from 'react'
+import { Suspense, useCallback, useMemo } from 'react'
+import type { Dispatch, DragEventHandler, FC, RefObject } from 'react'
+import type { Action, State } from '~/components/app/Store'
 import { useAnimationFrame } from '~/lib/hooks/useAnimationFrame'
 import { useDebug } from '~/lib/hooks/useDebug'
 import { useStore } from '~/lib/hooks/useStore'
@@ -17,31 +18,11 @@ interface Props {
   layers: MaybeLayers
 }
 
-export const Canvas: FC<Props> = ({ canvasRef: ref, layers: maybeLayers }) => {
-  const debug = useDebug()
+export const Canvas: FC<Props> = ({ canvasRef: ref, layers }) => {
   const { state, dispatch } = useStore()
 
-  useAnimationFrame(
-    async ({ time }) => {
-      if (state.saving) return
-      if (!ref.current) return
-      if (!debug && !state.dirty && state.frames === null) return
-
-      const canvas = ref.current
-      const ctx = canvas.getContext('2d')
-      const layers = ensureLayers(maybeLayers)
-      if (!ctx || !layers) return
-
-      await drawFrame(ctx, layers, state, time)
-      if (state.blur === 0) dispatch({ type: 'markClean' })
-    },
-    [debug, ref, maybeLayers, state, dispatch],
-  )
-
   const handleDragOver = useCallback<DragEventHandler<HTMLCanvasElement>>(
-    ev => {
-      ev.preventDefault()
-    },
+    ev => ev.preventDefault(),
     [],
   )
 
@@ -68,13 +49,63 @@ export const Canvas: FC<Props> = ({ canvasRef: ref, layers: maybeLayers }) => {
   )
 
   return (
-    <canvas
-      className={clsx('w-full h-auto rounded', state.preview && 'rounded-full')}
-      height={resolution}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-      ref={ref}
-      width={resolution}
-    />
+    <>
+      <canvas
+        className={clsx(
+          'w-full h-auto rounded',
+          state.preview && 'rounded-full',
+        )}
+        height={resolution}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        ref={ref}
+        width={resolution}
+      />
+
+      <Suspense fallback={null}>
+        <Render
+          canvasRef={ref}
+          dispatch={dispatch}
+          layers={layers}
+          state={state}
+        />
+      </Suspense>
+    </>
   )
+}
+
+interface RenderProps {
+  state: State
+  dispatch: Dispatch<Action>
+
+  canvasRef: RefObject<HTMLCanvasElement>
+  layers: MaybeLayers
+}
+
+const Render: FC<RenderProps> = ({
+  state,
+  dispatch,
+  canvasRef: ref,
+  layers: maybeLayers,
+}) => {
+  const debug = useDebug()
+
+  useAnimationFrame(
+    async ({ time }) => {
+      if (state.saving) return
+      if (!ref.current) return
+      if (!debug && !state.dirty && state.frames === null) return
+
+      const canvas = ref.current
+      const ctx = canvas.getContext('2d')
+      const layers = ensureLayers(maybeLayers)
+      if (!ctx || !layers) return
+
+      await drawFrame(ctx, layers, state, time)
+      if (state.blur === 0) dispatch({ type: 'markClean' })
+    },
+    [debug, ref, maybeLayers, state, dispatch],
+  )
+
+  return null
 }
