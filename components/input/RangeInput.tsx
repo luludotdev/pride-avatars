@@ -1,10 +1,9 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useId } from 'react'
 import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
-  id: string
   label: string
 
   min: number
@@ -17,7 +16,6 @@ interface Props {
 }
 
 export const RangeInput: FC<Props> = ({
-  id,
   label,
   min,
   max,
@@ -26,6 +24,8 @@ export const RangeInput: FC<Props> = ({
   onChange,
   formatter,
 }) => {
+  const id = useId()
+
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ev => {
       if (typeof onChange === 'function') {

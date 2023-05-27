@@ -1,17 +1,17 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useId } from 'react'
 import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
-  id: string
   label: string
 
   value: boolean
   onChange(value: boolean): void
 }
 
-export const CheckboxInput: FC<Props> = ({ id, label, value, onChange }) => {
+export const CheckboxInput: FC<Props> = ({ label, value, onChange }) => {
+  const id = useId()
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     ev => {
       if (typeof onChange === 'function') onChange(ev.target.checked)

@@ -105,7 +105,6 @@ export const Inputs: FC = () => {
     <div className='w-full grid grid-cols-input gap-x-3'>
       <RangeInput
         formatter={formatQuality}
-        id='quality'
         label='Quality'
         max={qualities.length - 1}
         min={0}
@@ -116,7 +115,6 @@ export const Inputs: FC = () => {
 
       <RangeInput
         formatter={formatPadding}
-        id='padding'
         label='Padding'
         max={64}
         min={0}
@@ -127,7 +125,6 @@ export const Inputs: FC = () => {
 
       <RangeInput
         formatter={formatAngle}
-        id='angle'
         label='Tilt'
         max={10}
         min={-10}
@@ -138,7 +135,6 @@ export const Inputs: FC = () => {
 
       <RangeInput
         formatter={formatBlur}
-        id='blur'
         label='Blur'
         max={10}
         min={0}
@@ -150,7 +146,6 @@ export const Inputs: FC = () => {
       {experimental && (
         <RangeInput
           formatter={formatBlur}
-          id='feather'
           label='Feather'
           max={10}
           min={0}
@@ -161,7 +156,6 @@ export const Inputs: FC = () => {
       )}
 
       <OptionInput
-        id='flags'
         label='Flag'
         onChange={onFlagChanged}
         options={flagNames}
@@ -172,7 +166,6 @@ export const Inputs: FC = () => {
         <>
           {state.dualFlag ? (
             <OptionInput
-              id='flags2'
               label='Second Flag'
               onChange={onFlag2Changed}
               options={flagNames}
@@ -181,7 +174,6 @@ export const Inputs: FC = () => {
           ) : null}
 
           <CheckboxInput
-            id='dual-flag'
             label='Dual Flags'
             onChange={onDualFlagChanged}
             value={state.dualFlag}
@@ -190,18 +182,12 @@ export const Inputs: FC = () => {
       )}
 
       <CheckboxInput
-        id='preview'
         label='Preview'
         onChange={onPreviewChanged}
         value={state.preview}
       />
 
-      <CheckboxInput
-        id='clip'
-        label='Clip'
-        onChange={onClipChanged}
-        value={state.clip}
-      />
+      <CheckboxInput label='Clip' onChange={onClipChanged} value={state.clip} />
     </div>
   )
 }

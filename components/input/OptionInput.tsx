@@ -1,10 +1,9 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useId } from 'react'
 import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
-  id: string
   label: string
   options: string[]
 
@@ -12,13 +11,8 @@ interface Props {
   onChange(value: string): void
 }
 
-export const OptionInput: FC<Props> = ({
-  id,
-  label,
-  options,
-  value,
-  onChange,
-}) => {
+export const OptionInput: FC<Props> = ({ label, options, value, onChange }) => {
+  const id = useId()
   const handleChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
     ev => {
       if (typeof onChange === 'function') onChange(ev.target.value)
