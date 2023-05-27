@@ -1,7 +1,7 @@
 import type { SetNonNullable } from 'type-fest'
 
 export type Layer = (typeof layers)[number]
-export const layers = ['image', 'mask', 'composite'] as const
+export const layers = ['flag', 'flag2', 'image', 'mask', 'composite'] as const
 
 const makeLayer = () => {
   const canvas = document.createElement('canvas')

@@ -17,6 +17,7 @@ export interface State {
   preview: boolean
   clip: boolean
   dualFlag: boolean
+  blurFlagBoundary: boolean
   flag: FlagName
   flag2: FlagName
 
@@ -53,6 +54,7 @@ const initialState: State = {
   preview: false,
   clip: true,
   dualFlag: false,
+  blurFlagBoundary: false,
   flag: 'Pastel',
   flag2: 'Pastel',
   filename: null,
@@ -80,6 +82,7 @@ export type Action =
   | { type: 'setAdShowing'; value: boolean }
   | { type: 'setAngle'; value: number }
   | { type: 'setBlur'; value: number }
+  | { type: 'setBlurFlagBoundary'; value: boolean }
   | { type: 'setClip'; value: boolean }
   | { type: 'setDualFlag'; value: boolean }
   | { type: 'setFeather'; value: number }
@@ -158,6 +161,13 @@ export const Provider: FC<PropsWithChildren<unknown>> = ({ children }) => {
       case 'setDualFlag': {
         state.dirty = true
         state.dualFlag = action.value
+
+        break
+      }
+
+      case 'setBlurFlagBoundary': {
+        state.dirty = true
+        state.blurFlagBoundary = action.value
 
         break
       }

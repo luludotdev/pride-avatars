@@ -91,6 +91,11 @@ export const Inputs: FC = () => {
     [dispatch],
   )
 
+  const onBlurFlagBoundaryChanged = useCallback(
+    (value: boolean) => dispatch({ type: 'setBlurFlagBoundary', value }),
+    [dispatch],
+  )
+
   const onPreviewChanged = useCallback(
     (value: boolean) => dispatch({ type: 'setPreview', value }),
     [dispatch],
@@ -178,6 +183,14 @@ export const Inputs: FC = () => {
             onChange={onDualFlagChanged}
             value={state.dualFlag}
           />
+
+          {state.dualFlag ? (
+            <CheckboxInput
+              label='Blur Boundary'
+              onChange={onBlurFlagBoundaryChanged}
+              value={state.blurFlagBoundary}
+            />
+          ) : null}
         </>
       )}
 

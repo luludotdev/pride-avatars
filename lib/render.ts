@@ -67,41 +67,58 @@ const drawImage = async (
   ctx.drawImage(input, cx, cy, cw, ch, x, y, width, height)
 }
 
+const clear = (ctx: CanvasRenderingContext2D): void => {
+  ctx.save()
+  ctx.setTransform(1, 0, 0, 1, 0, 0)
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.width)
+  ctx.restore()
+}
+
 export const drawFrame = async (
   ctx: CanvasRenderingContext2D,
   layers: Layers,
   state: State,
   time: number,
 ) => {
-  const { image: ctxImage, mask: ctxMask, composite: ctxComp } = layers
   const { width: canvasWidth, height: canvasHeight } = ctx.canvas
+  const {
+    flag: ctxFlag,
+    flag2: ctxFlag2,
+    image: ctxImage,
+    mask: ctxMask,
+    composite: ctxComp,
+  } = layers
 
   const compScaleFactor = 2
   for (const ctx of Object.values(layers)) {
     ctx.canvas.width = canvasWidth * compScaleFactor
     ctx.canvas.height = canvasHeight * compScaleFactor
+
+    clear(ctx)
   }
 
-  ctx.save()
-
-  ctx.translate(canvasWidth / 2, canvasHeight / 2)
-  ctx.rotate((Math.PI / 180) * state.angle)
+  ctxFlag.translate(ctxFlag.canvas.width / 2, ctxFlag.canvas.height / 2)
+  ctxFlag.rotate((Math.PI / 180) * state.angle)
 
   const scale = Math.abs(state.angle) / 50 + 1.01
-  ctx.scale(scale, scale)
+  ctxFlag.scale(scale, scale)
 
   const flagImage = getFlag(state.flag)
   if (!flagImage.complete) await flagImage.decode()
 
   const blur = scaleQualityValue(state.quality, state.blur)
-  // eslint-disable-next-line require-atomic-updates
-  ctx.filter = blur !== 0 ? `blur(${blur}px)` : ''
-  ctx.drawImage(
+  ctxFlag.filter = state.blurFlagBoundary
+    ? ''
+    : blur !== 0
+    ? `blur(${blur}px)`
+    : ''
+
+  ctxFlag.drawImage(
     flagImage,
-    (canvasWidth / 2) * -1,
-    (canvasHeight / 2) * -1,
-    canvasWidth,
-    canvasHeight,
+    (ctxFlag.canvas.width / 2) * -1,
+    (ctxFlag.canvas.height / 2) * -1,
+    ctxFlag.canvas.width,
+    ctxFlag.canvas.height,
   )
 
   if (state.dualFlag) {
@@ -109,20 +126,42 @@ export const drawFrame = async (
     if (flagImage2.complete) await flagImage2.decode()
 
     const region = new Path2D()
-    region.rect(0, (canvasHeight / 2) * -1, canvasWidth, canvasHeight)
+    region.rect(
+      0,
+      (ctxFlag.canvas.height / 2) * -1,
+      ctxFlag.canvas.width,
+      ctxFlag.canvas.height,
+    )
 
-    ctx.clip(region, 'evenodd')
-
-    ctx.drawImage(
+    ctxFlag.clip(region, 'evenodd')
+    ctxFlag.drawImage(
       flagImage2,
-      (canvasWidth / 2) * -1,
-      (canvasHeight / 2) * -1,
-      canvasWidth,
-      canvasHeight,
+      (ctxFlag.canvas.width / 2) * -1,
+      (ctxFlag.canvas.height / 2) * -1,
+      ctxFlag.canvas.width,
+      ctxFlag.canvas.height,
     )
   }
 
-  ctx.restore()
+  ctxFlag2.canvas.width = canvasWidth
+  ctxFlag2.canvas.width = canvasHeight
+
+  ctxFlag2.filter = state.blurFlagBoundary
+    ? blur !== 0
+      ? `blur(${blur}px)`
+      : ''
+    : ''
+
+  ctxFlag2.drawImage(
+    ctxFlag.canvas,
+    0,
+    0,
+    ctxFlag2.canvas.width,
+    ctxFlag2.canvas.height,
+  )
+
+  const copy = state.blurFlagBoundary ? ctxFlag2.canvas : ctxFlag.canvas
+  ctx.drawImage(copy, 0, 0, canvasWidth, canvasHeight)
 
   const renderFrames = (): (AnimationFrame | HTMLImageElement)[] => {
     if (state.image !== null) return [state.image]
@@ -139,20 +178,14 @@ export const drawFrame = async (
     const padding = scaleQualityValue(state.quality, state.padding)
     const feather = scaleQualityValue(state.quality, state.feather)
 
-    ctxImage.clearRect(0, 0, ctxImage.canvas.width, ctxImage.canvas.width)
     ctxImage.translate(ctxImage.canvas.width / 2, ctxImage.canvas.height / 2)
 
     // eslint-disable-next-line id-length
     for (const f of frames) {
       const frame = f instanceof HTMLImageElement ? ([f, false] as const) : f
-      const [image, clear] = frame
+      const [image, clearFrame] = frame
 
-      if (clear) {
-        ctxImage.save()
-        ctxImage.setTransform(1, 0, 0, 1, 0, 0)
-        ctxImage.clearRect(0, 0, ctxImage.canvas.width, ctxImage.canvas.width)
-        ctxImage.restore()
-      }
+      if (clearFrame) clear(ctxImage)
 
       // eslint-disable-next-line no-await-in-loop
       await drawImage(ctxImage, image, {
@@ -163,9 +196,7 @@ export const drawFrame = async (
       })
     }
 
-    ctxMask.clearRect(0, 0, ctxMask.canvas.width, ctxMask.canvas.width)
     ctxMask.filter = `blur(${feather}px)`
-
     if (state.clip) {
       ctxMask.beginPath()
       ctxMask.arc(
@@ -190,7 +221,6 @@ export const drawFrame = async (
       ctxMask.fill()
     }
 
-    ctxComp.clearRect(0, 0, ctxComp.canvas.width, ctxComp.canvas.width)
     ctxComp.drawImage(
       ctxMask.canvas,
       0,
