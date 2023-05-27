@@ -116,7 +116,7 @@ export const Inputs: FC = () => {
       <RangeInput
         formatter={formatPadding}
         label='Padding'
-        max={64}
+        max={96}
         min={0}
         onChange={onPaddingChanged}
         step={1}
