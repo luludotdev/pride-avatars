@@ -59,7 +59,6 @@ export const RangeInput: FC<Props> = ({
         id={id}
         max={max}
         min={min}
-        name={id}
         onChange={handleChange}
         step={step}
         type='range'

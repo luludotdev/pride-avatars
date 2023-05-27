@@ -26,7 +26,6 @@ export const CheckboxInput: FC<Props> = ({ label, value, onChange }) => {
         checked={value}
         className='self-end mb-[1px]'
         id={id}
-        name={id}
         onChange={handleChange}
         type='checkbox'
       />
