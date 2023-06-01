@@ -73,9 +73,7 @@ export const App: FC = () => {
       <footer className='text-center py-3'>
         <p>
           Made with 💝 by{' '}
-          <ExtLink href='https://twitter.com/JackBaron__'>
-            lolPants#0001
-          </ExtLink>
+          <ExtLink href='https://twitter.com/JackBaron__'>Lulu</ExtLink>
         </p>
 
         <p>
