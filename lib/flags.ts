@@ -1,6 +1,7 @@
 import Asexual from '~/assets/flags/Asexual.svg'
 import Bisexual from '~/assets/flags/Bisexual.svg'
 import Demisexual from '~/assets/flags/Demisexual.svg'
+import GayMen from '~/assets/flags/GayMen.svg'
 import Genderfluid from '~/assets/flags/Genderfluid.svg'
 import Lesbian from '~/assets/flags/Lesbian.svg'
 import Nonbinary from '~/assets/flags/Nonbinary.svg'
@@ -19,6 +20,7 @@ export const flags = [
   ['Demisexual', Demisexual.src],
   ['Genderfluid', Genderfluid.src],
   ['Lesbian', Lesbian.src],
+  ['Gay Men', GayMen.src],
   ['Nonbinary', Nonbinary.src],
   ['Pansexual', Pansexual.src],
   ['Transgender', Transgender.src],
