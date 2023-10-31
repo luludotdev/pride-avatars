@@ -21,8 +21,8 @@ const loadLastShownAd: () => State['lastShownAd'] = () => {
   return new Date(parsed)
 }
 
-type AnimationFrame = [canvas: HTMLCanvasElement, clear: boolean]
-interface State {
+export type AnimationFrame = [canvas: HTMLCanvasElement, clear: boolean]
+export interface State {
   dirty: boolean
   markClean(this: void): void
 
