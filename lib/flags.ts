@@ -12,26 +12,56 @@ import Pastel from '~/assets/flags/Pastel.svg'
 import PastelPlus from '~/assets/flags/PastelPlus.svg'
 import Rainbow from '~/assets/flags/Rainbow.svg'
 import Transgender from '~/assets/flags/Transgender.svg'
+import AsexualOrange from '~/assets/flags/orange/AsexualOrange.png'
+import BisexualOrange from '~/assets/flags/orange/BisexualOrange.png'
+import DemiboyOrange from '~/assets/flags/orange/DemiboyOrange.png'
+import DemigirlOrange from '~/assets/flags/orange/DemigirlOrange.png'
+import DemisexualOrange from '~/assets/flags/orange/DemisexualOrange.png'
+import GayMenOrange from '~/assets/flags/orange/GayMenOrange.png'
+import GenderfluidOrange from '~/assets/flags/orange/GenderfluidOrange.png'
+import LesbianOrange from '~/assets/flags/orange/LesbianOrange.png'
+import NonbinaryOrange from '~/assets/flags/orange/NonbinaryOrange.png'
+import PansexualOrange from '~/assets/flags/orange/PansexualOrange.png'
+import PastelOrange from '~/assets/flags/orange/PastelOrange.png'
+import PastelPlusOrange from '~/assets/flags/orange/PastelPlusOrange.png'
+import RainbowOrange from '~/assets/flags/orange/RainbowOrange.png'
+import TransgenderOrange from '~/assets/flags/orange/TransgenderOrange.png'
 
-export const flags = [
-  ['Pastel', Pastel.src],
-  ['Pastel+', PastelPlus.src],
-  ['Rainbow', Rainbow.src],
-  ['Asexual', Asexual.src],
-  ['Bisexual', Bisexual.src],
-  ['Demisexual', Demisexual.src],
-  ['Genderfluid', Genderfluid.src],
-  ['Lesbian', Lesbian.src],
-  ['Gay Men', GayMen.src],
-  ['Nonbinary', Nonbinary.src],
-  ['Pansexual', Pansexual.src],
-  ['Transgender', Transgender.src],
-  ['Demigirl', Demigirl.src],
-  ['Demiboy', Demiboy.src],
+export type FlagName = (typeof flagNames)[number]
+export const flagNames = [
+  'Pastel',
+  'Pastel+',
+  'Rainbow',
+  'Asexual',
+  'Bisexual',
+  'Demisexual',
+  'Genderfluid',
+  'Lesbian',
+  'Gay Men',
+  'Nonbinary',
+  'Pansexual',
+  'Transgender',
+  'Demigirl',
+  'Demiboy',
 ] as const
 
-export type FlagName = (typeof flags)[number][0]
-export const flagNames: FlagName[] = flags.map(([name]) => name)
+type Flag = readonly [name: FlagName, svg: string, orange: string]
+export const flags = [
+  ['Pastel', Pastel.src, PastelOrange.src],
+  ['Pastel+', PastelPlus.src, PastelPlusOrange.src],
+  ['Rainbow', Rainbow.src, RainbowOrange.src],
+  ['Asexual', Asexual.src, AsexualOrange.src],
+  ['Bisexual', Bisexual.src, BisexualOrange.src],
+  ['Demisexual', Demisexual.src, DemisexualOrange.src],
+  ['Genderfluid', Genderfluid.src, GenderfluidOrange.src],
+  ['Lesbian', Lesbian.src, LesbianOrange.src],
+  ['Gay Men', GayMen.src, GayMenOrange.src],
+  ['Nonbinary', Nonbinary.src, NonbinaryOrange.src],
+  ['Pansexual', Pansexual.src, PansexualOrange.src],
+  ['Transgender', Transgender.src, TransgenderOrange.src],
+  ['Demigirl', Demigirl.src, DemigirlOrange.src],
+  ['Demiboy', Demiboy.src, DemiboyOrange.src],
+] as const satisfies readonly Flag[]
 
 export function isFlagName(string: unknown): string is FlagName {
   if (typeof string !== 'string') return false
@@ -40,7 +70,7 @@ export function isFlagName(string: unknown): string is FlagName {
 }
 
 const flagStore: Map<FlagName, HTMLImageElement> = new Map()
-export const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
+const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
   name,
   url,
 ) => {
@@ -57,9 +87,35 @@ export const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
   return img
 }
 
-for (const [name, url] of flags) {
+const flagOrangeStore: Map<FlagName, HTMLImageElement> = new Map()
+const getFlagOrange: (name: FlagName, url?: string) => HTMLImageElement = (
+  name,
+  url,
+) => {
+  const cached = flagOrangeStore.get(name)
+  if (cached !== undefined) return cached
+
+  const href = url ?? flags.find(([flagName]) => flagName === name)?.[2]
+  if (href === undefined) throw new Error('Invalid Flag Name')
+
+  const img = new Image()
+  img.src = href
+
+  flagOrangeStore.set(name, img)
+  return img
+}
+
+const getFlagCombined = (name: FlagName, orange = false) => {
+  if (orange) return getFlagOrange(name)
+  return getFlag(name)
+}
+
+export { getFlagCombined as getFlag }
+
+for (const [name, url, orange] of flags) {
   // Only preload on client-side
   if (typeof window === 'undefined') continue
 
   getFlag(name, url)
+  getFlagOrange(name, orange)
 }
