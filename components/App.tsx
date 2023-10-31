@@ -19,6 +19,7 @@ import { useStore } from '~/lib/store'
 export const App: FC = () => {
   const frames = useStore(state => state.frames)
   const showRecursionEasterEgg = useStore(state => state.showRecursionEasterEgg)
+  const showOrangeEasterEgg = useStore(state => state.showOrangeEasterEgg)
 
   const loadImage = useStore(state => state.loadImage)
   const toggleRecursion = useStore(state => state.toggleRecursionEasterEgg)
@@ -95,6 +96,13 @@ export const App: FC = () => {
             GitHub
           </ExtLink>
         </p>
+
+        {showOrangeEasterEgg && (
+          <p>
+            Cursed Annoying Orange flags made by{' '}
+            <ExtLink href='https://twitter.com/vrbobbie'>Bobbie</ExtLink>
+          </p>
+        )}
       </footer>
     </>
   )
