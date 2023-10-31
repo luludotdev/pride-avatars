@@ -107,7 +107,7 @@ export const Inputs: FC = () => {
   )
 
   return (
-    <div className='w-full grid grid-cols-input gap-x-3'>
+    <div className='grid w-full grid-cols-input gap-x-3'>
       <RangeInput
         formatter={formatQuality}
         label='Quality'
@@ -184,7 +184,7 @@ export const Inputs: FC = () => {
 }
 
 interface FeatherProps {
-  state: State
+  readonly state: State
 
   formatBlur(v: number): string
   onFeatherChanged(feather: number): void
@@ -212,7 +212,7 @@ const FeatherInput: FC<FeatherProps> = ({
 }
 
 interface DualFlagProps {
-  state: State
+  readonly state: State
 
   onFlag2Changed(flag: string): void
   onDualFlagChanged(value: boolean): void

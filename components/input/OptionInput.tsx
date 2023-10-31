@@ -4,10 +4,10 @@ import { useCallback, useId } from 'react'
 import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
-  label: string
-  options: string[]
+  readonly label: string
+  readonly options: string[]
 
-  value: string
+  readonly value: string
   onChange(value: string): void
 }
 
@@ -27,7 +27,7 @@ export const OptionInput: FC<Props> = ({ label, options, value, onChange }) => {
       </label>
 
       <select
-        className='p-1 mt-2 text-sm bg-light dark:bg-dark rounded border border-gray-400 dark:border-gray-500'
+        className='mt-2 rounded border border-gray-400 bg-light p-1 text-sm dark:border-gray-500 dark:bg-dark'
         id={id}
         onChange={handleChange}
         value={value}

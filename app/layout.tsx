@@ -27,7 +27,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
     </head>
 
     <body className='bg-light dark:bg-dark dark:text-light'>
-      <div className='w-full h-screen flex flex-col items-center px-4'>
+      <div className='flex h-screen w-full flex-col items-center px-4'>
         <Provider>{children}</Provider>
       </div>
     </body>

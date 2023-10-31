@@ -4,13 +4,13 @@ import { useCallback, useId } from 'react'
 import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
-  label: string
+  readonly label: string
 
-  min: number
-  max: number
-  step: number
+  readonly min: number
+  readonly max: number
+  readonly step: number
 
-  value: number
+  readonly value: number
   onChange(value: number): void
   formatter?(value: number): string
 }
@@ -52,7 +52,7 @@ export const RangeInput: FC<Props> = ({
     <>
       <label htmlFor={id}>
         {label}:{' '}
-        <span className='font-mono whitespace-pre'>{formatValue(value)}</span>
+        <span className='whitespace-pre font-mono'>{formatValue(value)}</span>
       </label>
 
       <input

@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react'
 
 interface Props {
-  href: string
+  readonly href: string
 }
 
 export const ExtLink: FC<PropsWithChildren<Props>> = ({ href, children }) => (

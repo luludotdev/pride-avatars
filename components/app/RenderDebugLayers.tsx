@@ -4,7 +4,7 @@ import { useDisplayLayers } from '~/lib/hooks/useLayers'
 import type { MaybeLayers } from '~/lib/layers'
 
 interface Props {
-  layers: MaybeLayers
+  readonly layers: MaybeLayers
 }
 
 const RenderDebugLayers: FC<Props> = ({ layers }) => {

@@ -12,8 +12,8 @@ import { drawFrame } from '~/lib/render'
 import { sleep } from '~/lib/sleep'
 
 interface Props {
-  canvasRef: RefObject<HTMLCanvasElement>
-  layers: MaybeLayers
+  readonly canvasRef: RefObject<HTMLCanvasElement>
+  readonly layers: MaybeLayers
 }
 
 export const SaveImage: FC<Props> = ({ canvasRef, layers: maybeLayers }) => {

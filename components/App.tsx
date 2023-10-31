@@ -54,8 +54,8 @@ export const App: FC = () => {
       <Advert />
       <RenderDebugLayers layers={layers} />
 
-      <div className='flex flex-col flex-1 items-center w-full max-w-[500px] gap-y-4'>
-        <h1 className='text-4xl mt-6 mb-2 font-bold'>Pride Avatars! 🏳️‍🌈</h1>
+      <div className='flex w-full max-w-[500px] flex-1 flex-col items-center gap-y-4'>
+        <h1 className='mb-2 mt-6 text-4xl font-bold'>Pride Avatars! 🏳️‍🌈</h1>
 
         <ExperimentalWarning />
         <LoadImage />
@@ -70,7 +70,7 @@ export const App: FC = () => {
         <SaveImage canvasRef={canvasRef} layers={layers} />
       </div>
 
-      <footer className='text-center py-3'>
+      <footer className='py-3 text-center'>
         <p>
           Made with 💝 by{' '}
           <ExtLink href='https://twitter.com/JackBaron__'>Lulu</ExtLink>

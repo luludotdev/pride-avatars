@@ -1,8 +1,8 @@
 import type { FC, PropsWithChildren } from 'react'
 
 export const Warning: FC<PropsWithChildren<unknown>> = ({ children }) => (
-  <div className='w-full py-3 px-4 text-center dark:text-black flex flex-col gap-y-1 bg-yellow-200 rounded border border-yellow-400'>
-    <p className='font-semibold text-lg'>⚠️ Warning!</p>
+  <div className='flex w-full flex-col gap-y-1 rounded border border-yellow-400 bg-yellow-200 px-4 py-3 text-center dark:text-black'>
+    <p className='text-lg font-semibold'>⚠️ Warning!</p>
     {children}
   </div>
 )

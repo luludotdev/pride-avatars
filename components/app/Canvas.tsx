@@ -14,8 +14,8 @@ import { qualityToResolution } from '~/lib/quality'
 import { drawFrame } from '~/lib/render'
 
 interface Props {
-  canvasRef: RefObject<HTMLCanvasElement>
-  layers: MaybeLayers
+  readonly canvasRef: RefObject<HTMLCanvasElement>
+  readonly layers: MaybeLayers
 }
 
 export const Canvas: FC<Props> = ({ canvasRef: ref, layers }) => {
@@ -52,7 +52,7 @@ export const Canvas: FC<Props> = ({ canvasRef: ref, layers }) => {
     <>
       <canvas
         className={clsx(
-          'w-full h-auto rounded',
+          'h-auto w-full rounded',
           state.preview && 'rounded-full',
         )}
         height={resolution}
@@ -75,11 +75,11 @@ export const Canvas: FC<Props> = ({ canvasRef: ref, layers }) => {
 }
 
 interface RenderProps {
-  state: State
-  dispatch: Dispatch<Action>
+  readonly state: State
+  readonly dispatch: Dispatch<Action>
 
-  canvasRef: RefObject<HTMLCanvasElement>
-  layers: MaybeLayers
+  readonly canvasRef: RefObject<HTMLCanvasElement>
+  readonly layers: MaybeLayers
 }
 
 const Render: FC<RenderProps> = ({

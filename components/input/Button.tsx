@@ -5,7 +5,7 @@ import { useCallback } from 'react'
 import type { FC, PropsWithChildren } from 'react'
 
 interface Props {
-  disabled?: boolean
+  readonly disabled?: boolean
   onClick(): void
 }
 

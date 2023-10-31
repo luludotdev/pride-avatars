@@ -52,7 +52,7 @@ export const LoadImage: FC = () => {
 }
 
 interface ClearImageProps {
-  state: State
+  readonly state: State
   onClearClicked(): void
 }
 
