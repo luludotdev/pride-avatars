@@ -1,6 +1,5 @@
 /* eslint-disable n/prefer-global/url */
 import { saveAs } from 'file-saver'
-import GIFEncoder from 'gif-encoder-2'
 import ms from 'ms'
 import { useCallback } from 'react'
 import type { FC, RefObject } from 'react'
@@ -57,6 +56,7 @@ export const SaveImage: FC<Props> = ({ canvasRef, layers: maybeLayers }) => {
         const layers = ensureLayers(maybeLayers)
         if (!ctx || !layers) throw new Error('oh no')
 
+        const { default: GIFEncoder } = await import('gif-encoder-2')
         const encoder = new GIFEncoder(
           canvas.width,
           canvas.height,

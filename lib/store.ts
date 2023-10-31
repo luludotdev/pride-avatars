@@ -1,6 +1,5 @@
 /* eslint-disable n/prefer-global/url */
 import { parse as parsePath } from 'path'
-import { decompressFrames, parseGIF } from 'gifuct-js'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { preloadFlags } from '~/lib/flags'
@@ -184,6 +183,7 @@ export const useStore = create<State>()(
             return
           }
 
+          const { parseGIF, decompressFrames } = await import('gifuct-js')
           const gif = parseGIF(await file.arrayBuffer())
           const decoded = decompressFrames(gif, true)
 
