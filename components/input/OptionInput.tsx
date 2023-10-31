@@ -5,7 +5,7 @@ import type { ChangeEventHandler, FC } from 'react'
 
 interface Props {
   readonly label: string
-  readonly options: string[]
+  readonly options: readonly string[]
 
   readonly value: string
   onChange(value: string): void
