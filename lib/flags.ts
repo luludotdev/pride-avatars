@@ -111,10 +111,14 @@ const getFlagCombined = (name: FlagName, orange = false) => {
 }
 
 export { getFlagCombined as getFlag }
+export const preloadFlags = (orange = false) => {
+  for (const [name, url, orangeURL] of flags) {
+    // Only preload on client-side
+    if (typeof window === 'undefined') continue
 
-for (const [name, url, _orange] of flags) {
-  // Only preload on client-side
-  if (typeof window === 'undefined') continue
-
-  getFlag(name, url)
+    getFlag(name, url)
+    if (orange) getFlagOrange(name, orangeURL)
+  }
 }
+
+preloadFlags()

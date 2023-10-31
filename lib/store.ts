@@ -3,6 +3,7 @@ import { parse as parsePath } from 'path'
 import { decompressFrames, parseGIF } from 'gifuct-js'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { preloadFlags } from '~/lib/flags'
 import type { FlagName } from '~/lib/flags'
 
 // eslint-disable-next-line no-restricted-globals, n/prefer-global/process
@@ -236,6 +237,8 @@ export const useStore = create<State>()(
         },
         toggleOrangeEasterEgg: () => {
           const showOrangeEasterEgg = !get().showOrangeEasterEgg
+          if (showOrangeEasterEgg) preloadFlags(true)
+
           set(
             { dirty: true, showOrangeEasterEgg },
             false,
