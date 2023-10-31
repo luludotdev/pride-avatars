@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react'
 
 export const useAnimationFrame = (
+  // eslint-disable-next-line promise/prefer-await-to-callbacks
   cb: (arg: { time: number; delta: number }) => Promise<void> | void,
-  deps: readonly unknown[],
 ) => {
   /* eslint-disable react-hooks/rules-of-hooks */
   if (typeof window === 'undefined') return
@@ -29,7 +29,6 @@ export const useAnimationFrame = (
     return () => {
       if (frame.current) cancelAnimationFrame(frame.current)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animate, ...deps])
+  }, [animate])
   /* eslint-enable react-hooks/rules-of-hooks */
 }

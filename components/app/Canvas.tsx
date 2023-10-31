@@ -70,10 +70,11 @@ interface RenderProps {
 
 const Render: FC<RenderProps> = ({ canvasRef: ref, layers: maybeLayers }) => {
   const debug = useDebug()
-  const state = useStore()
 
-  useAnimationFrame(
-    async ({ time }) => {
+  const render = useCallback(
+    async ({ time }: { time: number }) => {
+      const state = useStore.getState()
+
       if (state.saving) return
       if (!ref.current) return
       if (!debug && !state.dirty && state.frames === null) return
@@ -86,8 +87,10 @@ const Render: FC<RenderProps> = ({ canvasRef: ref, layers: maybeLayers }) => {
       await drawFrame(ctx, layers, state, time)
       if (state.blur === 0) state.markClean()
     },
-    [debug, ref, maybeLayers, state],
+    [debug, maybeLayers, ref],
   )
+
+  useAnimationFrame(render)
 
   return null
 }
