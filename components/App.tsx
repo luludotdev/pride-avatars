@@ -18,10 +18,12 @@ import { useStore } from '~/lib/store'
 
 export const App: FC = () => {
   const frames = useStore(state => state.frames)
-  const showEasterEgg = useStore(state => state.showEasterEgg)
+  const showRecursionEasterEgg = useStore(state => state.showRecursionEasterEgg)
+  const showOrangeEasterEgg = useStore(state => state.showOrangeEasterEgg)
 
   const loadImage = useStore(state => state.loadImage)
-  const toggleEasterEgg = useStore(state => state.toggleEasterEgg)
+  const toggleRecursion = useStore(state => state.toggleRecursionEasterEgg)
+  const toggleOrangeEasterEgg = useStore(state => state.toggleOrangeEasterEgg)
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const layers = useLayers()
@@ -35,7 +37,7 @@ export const App: FC = () => {
     void loadImage(b64)
   }, [frames, loadImage])
 
-  useKonami(toggleEasterEgg, {
+  useKonami(toggleRecursion, {
     code: [
       'ArrowUp',
       'ArrowUp',
@@ -50,6 +52,10 @@ export const App: FC = () => {
     ],
   })
 
+  useKonami(toggleOrangeEasterEgg, {
+    code: ['h', 'e', 'y', 'a', 'p', 'p', 'l', 'e'],
+  })
+
   return (
     <>
       <Advert />
@@ -62,7 +68,7 @@ export const App: FC = () => {
         <LoadImage />
         <Inputs />
 
-        {!(showEasterEgg && !frames) ? null : (
+        {!(showRecursionEasterEgg && !frames) ? null : (
           <Button onClick={onEasterEggClicked}>⭕</Button>
         )}
 

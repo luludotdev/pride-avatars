@@ -67,8 +67,10 @@ interface State {
   loadImage(this: void, image: File | string): Promise<void>
   clearImage(this: void): void
 
-  showEasterEgg: boolean
-  toggleEasterEgg(this: void): void
+  showRecursionEasterEgg: boolean
+  showOrangeEasterEgg: boolean
+  toggleRecursionEasterEgg(this: void): void
+  toggleOrangeEasterEgg(this: void): void
 
   saving: boolean
   setSaving(this: void, saving: boolean): void
@@ -226,10 +228,19 @@ export const useStore = create<State>()(
           )
         },
 
-        showEasterEgg: false,
-        toggleEasterEgg: () => {
-          const showEasterEgg = !get().showEasterEgg
-          set({ showEasterEgg }, false, 'toggleEasterEgg')
+        showRecursionEasterEgg: false,
+        showOrangeEasterEgg: false,
+        toggleRecursionEasterEgg: () => {
+          const showRecursionEasterEgg = !get().showRecursionEasterEgg
+          set({ showRecursionEasterEgg }, false, 'toggleRecursionEasterEgg')
+        },
+        toggleOrangeEasterEgg: () => {
+          const showOrangeEasterEgg = !get().showOrangeEasterEgg
+          set(
+            { dirty: true, showOrangeEasterEgg },
+            false,
+            'toggleOrangeEasterEgg',
+          )
         },
 
         saving: false,
