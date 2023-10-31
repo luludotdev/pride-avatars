@@ -27,9 +27,15 @@ export const App: FC = () => {
   const toggleOrangeEasterEgg = useStore(state => state.toggleOrangeEasterEgg)
 
   useEffect(() => {
+    const now = new Date()
+    const isAprilFools = now.getMonth() === 3 && now.getDate() === 1
+
     const rand = Math.random()
+    const chance = isAprilFools ? 0.666_666 : 0.02
     // 2% chance to automatically enable "annoying orange" mode
-    if (rand <= 0.02) enableOrangeEasterEgg()
+    // or 66.6% chance on april fools day (2/3rds time)
+
+    if (rand <= chance) enableOrangeEasterEgg()
   }, [enableOrangeEasterEgg])
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
