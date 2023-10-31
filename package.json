@@ -9,8 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "prettier --check . && eslint components lib pages --ext mjs,js,ts,tsx",
-    "format": "prettier --write . && eslint components lib pages --ext mjs,js,ts,tsx --fix",
+    "lint": "prettier --check . && eslint app components lib --ext mjs,js,ts,tsx",
+    "format": "prettier --write . && eslint app components lib --ext mjs,js,ts,tsx --fix",
     "fmt": "npm run format",
     "test": "npm run lint"
   },
@@ -38,6 +38,7 @@
     "eslint": "^8.52.0",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
     "tailwindcss": "^3.3.5",
     "type-fest": "^4.6.0",
     "typescript": "^5.2.2"
