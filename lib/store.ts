@@ -72,6 +72,7 @@ export interface State {
   showOrangeEasterEgg: boolean
   toggleRecursionEasterEgg(this: void): void
   toggleOrangeEasterEgg(this: void): void
+  enableOrangeEasterEgg(this: void): void
 
   saving: boolean
   setSaving(this: void, saving: boolean): void
@@ -241,6 +242,15 @@ export const useStore = create<State>()(
 
           set(
             { dirty: true, showOrangeEasterEgg },
+            false,
+            'toggleOrangeEasterEgg',
+          )
+        },
+        enableOrangeEasterEgg: () => {
+          preloadFlags(true)
+
+          set(
+            { dirty: true, showOrangeEasterEgg: true },
             false,
             'toggleOrangeEasterEgg',
           )

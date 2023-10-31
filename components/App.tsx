@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import type { FC } from 'react'
 import useKonami from 'react-use-konami'
 import { ExtLink } from '~/components/ExtLink'
@@ -19,11 +19,17 @@ import { useStore } from '~/lib/store'
 export const App: FC = () => {
   const frames = useStore(state => state.frames)
   const showRecursionEasterEgg = useStore(state => state.showRecursionEasterEgg)
-  const showOrangeEasterEgg = useStore(state => state.showOrangeEasterEgg)
 
   const loadImage = useStore(state => state.loadImage)
   const toggleRecursion = useStore(state => state.toggleRecursionEasterEgg)
+  const enableOrangeEasterEgg = useStore(state => state.enableOrangeEasterEgg)
   const toggleOrangeEasterEgg = useStore(state => state.toggleOrangeEasterEgg)
+
+  useEffect(() => {
+    const rand = Math.random()
+    // 2% chance to automatically enable "annoying orange" mode
+    if (rand <= 0.02) enableOrangeEasterEgg()
+  }, [enableOrangeEasterEgg])
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const layers = useLayers()
