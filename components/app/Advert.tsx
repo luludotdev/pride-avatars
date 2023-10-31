@@ -4,16 +4,15 @@ import { useCallback } from 'react'
 import type { FC } from 'react'
 import { ExtLink } from '~/components/ExtLink'
 import { Button } from '~/components/input/Button'
-import { useStore } from '~/lib/hooks/useStore'
+import { useStore } from '~/lib/store'
 
 export const Advert: FC = () => {
-  const { state, dispatch } = useStore()
+  const advertOpen = useStore(state => state.advertOpen)
 
-  const handleClose = useCallback(() => {
-    dispatch({ type: 'setAdShowing', value: false })
-  }, [dispatch])
+  const setAdShowing = useStore(state => state.setAdShowing)
+  const handleClose = useCallback(() => setAdShowing(false), [setAdShowing])
 
-  return !state.advertOpen ? null : (
+  return !advertOpen ? null : (
     <div className='absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black bg-opacity-30 dark:bg-opacity-40'>
       <div className='flex max-w-[480px] flex-col gap-y-2 rounded-md border border-gray-400 bg-light px-6 py-5 text-sm shadow-md dark:border-gray-500 dark:bg-dark'>
         <h1 className='text-center text-2xl font-bold'>

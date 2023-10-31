@@ -5,11 +5,11 @@ import ms from 'ms'
 import { useCallback } from 'react'
 import type { FC, RefObject } from 'react'
 import { Button } from '~/components/input/Button'
-import { useStore } from '~/lib/hooks/useStore'
 import { ensureLayers } from '~/lib/layers'
 import type { MaybeLayers } from '~/lib/layers'
 import { drawFrame } from '~/lib/render'
 import { sleep } from '~/lib/sleep'
+import { useStore } from '~/lib/store'
 
 interface Props {
   readonly canvasRef: RefObject<HTMLCanvasElement>
@@ -17,14 +17,17 @@ interface Props {
 }
 
 export const SaveImage: FC<Props> = ({ canvasRef, layers: maybeLayers }) => {
-  const { state, dispatch } = useStore()
+  const state = useStore()
+  const setSaving = useStore(state => state.setSaving)
+  const setAdShowing = useStore(state => state.setAdShowing)
 
+  const originalName = useStore(state => state.filename)
   const filename = useCallback(
     (ext: string) => {
-      const base = state.filename ?? 'avatar'
+      const base = originalName ?? 'avatar'
       return `${base}.pride.${ext}`
     },
-    [state.filename],
+    [originalName],
   )
 
   const onSaveClicked = useCallback(async () => {
@@ -39,17 +42,14 @@ export const SaveImage: FC<Props> = ({ canvasRef, layers: maybeLayers }) => {
     }
 
     const shouldShow = shouldShowAd()
-    if (shouldShow) {
-      dispatch({ type: 'markAdShown' })
-      dispatch({ type: 'setAdShowing', value: true })
-    }
+    if (shouldShow) setAdShowing(true)
 
     if (state.saving) return
     if (!canvasRef.current) return
     const canvas = canvasRef.current
 
     if (state.frames) {
-      dispatch({ type: 'setSaving', value: true })
+      setSaving(true)
       await sleep(50)
 
       try {
@@ -84,13 +84,13 @@ export const SaveImage: FC<Props> = ({ canvasRef, layers: maybeLayers }) => {
         saveAs(url, filename('gif'))
         URL.revokeObjectURL(url)
       } finally {
-        dispatch({ type: 'setSaving', value: false })
+        setSaving(false)
       }
     } else {
       const url = canvas.toDataURL('image/png;base64')
       saveAs(url, filename('png'))
     }
-  }, [canvasRef, maybeLayers, state, dispatch, filename])
+  }, [canvasRef, maybeLayers, state, setSaving, setAdShowing, filename])
 
   return (
     <Button disabled={state.saving} onClick={onSaveClicked}>

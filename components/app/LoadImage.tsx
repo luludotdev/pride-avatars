@@ -1,42 +1,38 @@
 import { Suspense, useCallback, useRef } from 'react'
 import type { ChangeEventHandler, FC } from 'react'
-import type { State } from '~/components/app/Store'
 import { Button } from '~/components/input/Button'
 import { useDebug } from '~/lib/hooks/useDebug'
-import { useStore } from '~/lib/hooks/useStore'
-import { loadImage } from '~/lib/load'
+import { useStore } from '~/lib/store'
 
 export const LoadImage: FC = () => {
-  const { state, dispatch } = useStore()
-  const ref = useRef<HTMLInputElement>(null)
+  const saving = useStore(state => state.saving)
 
+  const loadImage = useStore(state => state.loadImage)
+  const clearImage = useStore(state => state.clearImage)
+
+  const ref = useRef<HTMLInputElement>(null)
   const onLoadClicked = useCallback(() => {
     ref.current?.click()
   }, [])
-
-  const onClearClicked = useCallback(
-    () => dispatch({ type: 'clearImage' }),
-    [dispatch],
-  )
 
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     async ev => {
       const file = ev.target.files?.[0]
       if (file === undefined) return
 
-      await loadImage(dispatch, file)
+      await loadImage(file)
     },
-    [dispatch],
+    [loadImage],
   )
 
   return (
     <>
-      <Button disabled={state.saving} onClick={onLoadClicked}>
+      <Button disabled={saving} onClick={onLoadClicked}>
         📸 Load Image
       </Button>
 
       <Suspense fallback={null}>
-        <ClearImage onClearClicked={onClearClicked} state={state} />
+        <ClearImage onClearClicked={clearImage} saving={saving} />
       </Suspense>
 
       <input
@@ -52,16 +48,16 @@ export const LoadImage: FC = () => {
 }
 
 interface ClearImageProps {
-  readonly state: State
+  readonly saving: boolean
   onClearClicked(): void
 }
 
-const ClearImage: FC<ClearImageProps> = ({ state, onClearClicked }) => {
+const ClearImage: FC<ClearImageProps> = ({ saving, onClearClicked }) => {
   const debug = useDebug()
   if (!debug) return null
 
   return (
-    <Button disabled={state.saving} onClick={onClearClicked}>
+    <Button disabled={saving} onClick={onClearClicked}>
       🗑️ Clear Image
     </Button>
   )

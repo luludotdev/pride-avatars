@@ -14,27 +14,28 @@ import { RenderDebugLayers } from '~/components/app/RenderDebugLayers'
 import { SaveImage } from '~/components/app/SaveImage'
 import { Button } from '~/components/input/Button'
 import { useLayers } from '~/lib/hooks/useLayers'
-import { useStore } from '~/lib/hooks/useStore'
+import { useStore } from '~/lib/store'
 
 export const App: FC = () => {
-  const { state, dispatch } = useStore()
+  const frames = useStore(state => state.frames)
+  const showEasterEgg = useStore(state => state.showEasterEgg)
+
+  const loadImage = useStore(state => state.loadImage)
+  const toggleEasterEgg = useStore(state => state.toggleEasterEgg)
+
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const layers = useLayers()
 
   const onEasterEggClicked = useCallback(() => {
     if (!canvasRef.current) return
-    if (state.frames) return
+    if (frames) return
     const canvas = canvasRef.current
 
     const b64 = canvas.toDataURL()
-    dispatch({ type: 'setImage', value: b64 })
-  }, [state, dispatch])
+    void loadImage(b64)
+  }, [frames, loadImage])
 
-  const handleKonami = useCallback(() => {
-    dispatch({ type: 'toggleEasterEgg' })
-  }, [dispatch])
-
-  useKonami(handleKonami, {
+  useKonami(toggleEasterEgg, {
     code: [
       'ArrowUp',
       'ArrowUp',
@@ -61,7 +62,7 @@ export const App: FC = () => {
         <LoadImage />
         <Inputs />
 
-        {!(state.showEasterEgg && !state.frames) ? null : (
+        {!(showEasterEgg && !frames) ? null : (
           <Button onClick={onEasterEggClicked}>⭕</Button>
         )}
 

@@ -1,17 +1,18 @@
 import { useMemo } from 'react'
 import type { FC } from 'react'
 import { Warning } from '~/components/app/Warning'
-import { useStore } from '~/lib/hooks/useStore'
 import { qualities } from '~/lib/quality'
+import { useStore } from '~/lib/store'
 
 const MAX_QUALITY = 2
 export const QualityWarning: FC = () => {
-  const { state } = useStore()
+  const quality = useStore(state => state.quality)
+  const frames = useStore(state => state.frames)
 
   const shouldShow = useMemo<boolean>(() => {
-    if (state.frames === null) return false
-    return state.quality > MAX_QUALITY
-  }, [state.frames, state.quality])
+    if (frames === null) return false
+    return quality > MAX_QUALITY
+  }, [frames, quality])
 
   return !shouldShow ? null : (
     <Warning>

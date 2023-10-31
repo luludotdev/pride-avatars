@@ -19,13 +19,12 @@
     "file-saver": "^2.0.5",
     "gif-encoder-2": "^1.0.5",
     "gifuct-js": "^2.1.2",
-    "immer": "^10.0.3",
     "ms": "^2.1.3",
     "next": "14.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-use-konami": "^1.1.0",
-    "use-immer": "^0.9.0"
+    "zustand": "^4.4.4"
   },
   "devDependencies": {
     "@luludev/eslint-config": "^0.5.1",

@@ -6,6 +6,9 @@ const Root: FC = () => <App />
 export const metadata = {
   title: 'Pride Avatars!',
   description: 'Enhance your social media avatars with a pride flag border!',
+}
+
+export const viewport = {
   themeColor: '#afa5fd',
 }
 

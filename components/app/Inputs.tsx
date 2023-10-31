@@ -1,25 +1,33 @@
 import { Suspense, useCallback } from 'react'
 import type { FC } from 'react'
-import type { State } from '~/components/app/Store'
 import { CheckboxInput } from '~/components/input/CheckboxInput'
 import { OptionInput } from '~/components/input/OptionInput'
 import { RangeInput } from '~/components/input/RangeInput'
-import { flagNames, isFlagName } from '~/lib/flags'
+import { flagNames } from '~/lib/flags'
 import { useExperimental } from '~/lib/hooks/useExperimental'
-import { useStore } from '~/lib/hooks/useStore'
 import {
   qualities,
   qualityToResolution,
   scaleQualityValue,
 } from '~/lib/quality'
+import { useStore } from '~/lib/store'
 
 export const Inputs: FC = () => {
-  const { state, dispatch } = useStore()
+  const quality = useStore(state => state.quality)
+  const padding = useStore(state => state.padding)
+  const angle = useStore(state => state.angle)
+  const blur = useStore(state => state.blur)
+  const flag = useStore(state => state.flag)
+  const preview = useStore(state => state.preview)
+  const clip = useStore(state => state.clip)
 
-  const onQualityChanged = useCallback(
-    (quality: number) => dispatch({ type: 'setQuality', value: quality }),
-    [dispatch],
-  )
+  const setQuality = useStore(state => state.setQuality)
+  const setPadding = useStore(state => state.setPadding)
+  const setAngle = useStore(state => state.setAngle)
+  const setBlur = useStore(state => state.setBlur)
+  const setFlag = useStore(state => state.setFlag)
+  const setPreview = useStore(state => state.setPreview)
+  const setClip = useStore(state => state.setClip)
 
   const formatQuality = useCallback<(v: number) => string>(value => {
     const padding = 6
@@ -29,22 +37,12 @@ export const Inputs: FC = () => {
     return `${resolution}px`.padEnd(padding, ' ')
   }, [])
 
-  const onPaddingChanged = useCallback(
-    (padding: number) => dispatch({ type: 'setPadding', value: padding }),
-    [dispatch],
-  )
-
   const formatPadding = useCallback<(v: number) => string>(
     value => {
-      const scaled = scaleQualityValue(state.quality, value, true)
+      const scaled = scaleQualityValue(quality, value, true)
       return `${scaled.toFixed(0).padStart(2, '0')}px`
     },
-    [state.quality],
-  )
-
-  const onAngleChanged = useCallback(
-    (angle: number) => dispatch({ type: 'setAngle', value: angle }),
-    [dispatch],
+    [quality],
   )
 
   const formatAngle = useCallback<(v: number) => string>(
@@ -52,58 +50,12 @@ export const Inputs: FC = () => {
     [],
   )
 
-  const onBlurChanged = useCallback(
-    (blur: number) => dispatch({ type: 'setBlur', value: blur }),
-    [dispatch],
-  )
-
   const formatBlur = useCallback<(v: number) => string>(
     value => {
-      const scaled = scaleQualityValue(state.quality, value)
+      const scaled = scaleQualityValue(quality, value)
       return `${scaled.toFixed(2)}px`.padEnd(7, ' ')
     },
-    [state.quality],
-  )
-
-  const onFeatherChanged = useCallback(
-    (feather: number) => dispatch({ type: 'setFeather', value: feather }),
-    [dispatch],
-  )
-
-  const onFlagChanged = useCallback(
-    (flag: string) => {
-      if (!isFlagName(flag)) return
-      dispatch({ type: 'setFlag', value: flag })
-    },
-    [dispatch],
-  )
-
-  const onFlag2Changed = useCallback(
-    (flag: string) => {
-      if (!isFlagName(flag)) return
-      dispatch({ type: 'setFlag2', value: flag })
-    },
-    [dispatch],
-  )
-
-  const onDualFlagChanged = useCallback(
-    (value: boolean) => dispatch({ type: 'setDualFlag', value }),
-    [dispatch],
-  )
-
-  const onBlurFlagBoundaryChanged = useCallback(
-    (value: boolean) => dispatch({ type: 'setBlurFlagBoundary', value }),
-    [dispatch],
-  )
-
-  const onPreviewChanged = useCallback(
-    (value: boolean) => dispatch({ type: 'setPreview', value }),
-    [dispatch],
-  )
-
-  const onClipChanged = useCallback(
-    (value: boolean) => dispatch({ type: 'setClip', value }),
-    [dispatch],
+    [quality],
   )
 
   return (
@@ -113,9 +65,9 @@ export const Inputs: FC = () => {
         label='Quality'
         max={qualities.length - 1}
         min={0}
-        onChange={onQualityChanged}
+        onChange={setQuality}
         step={1}
-        value={state.quality}
+        value={quality}
       />
 
       <RangeInput
@@ -123,9 +75,9 @@ export const Inputs: FC = () => {
         label='Padding'
         max={96}
         min={0}
-        onChange={onPaddingChanged}
+        onChange={setPadding}
         step={1}
-        value={state.padding}
+        value={padding}
       />
 
       <RangeInput
@@ -133,9 +85,9 @@ export const Inputs: FC = () => {
         label='Tilt'
         max={10}
         min={-10}
-        onChange={onAngleChanged}
+        onChange={setAngle}
         step={0.01}
-        value={state.angle}
+        value={angle}
       />
 
       <RangeInput
@@ -143,58 +95,40 @@ export const Inputs: FC = () => {
         label='Blur'
         max={10}
         min={0}
-        onChange={onBlurChanged}
+        onChange={setBlur}
         step={0.01}
-        value={state.blur}
+        value={blur}
       />
 
       <Suspense fallback={null}>
-        <FeatherInput
-          formatBlur={formatBlur}
-          onFeatherChanged={onFeatherChanged}
-          state={state}
-        />
+        <FeatherInput formatBlur={formatBlur} />
       </Suspense>
 
       <OptionInput
         label='Flag'
-        onChange={onFlagChanged}
+        onChange={setFlag}
         options={flagNames}
-        value={state.flag}
+        value={flag}
       />
 
       <Suspense fallback={null}>
-        <DualFlagInput
-          onBlurFlagBoundaryChanged={onBlurFlagBoundaryChanged}
-          onDualFlagChanged={onDualFlagChanged}
-          onFlag2Changed={onFlag2Changed}
-          state={state}
-        />
+        <DualFlagInput />
       </Suspense>
 
-      <CheckboxInput
-        label='Preview'
-        onChange={onPreviewChanged}
-        value={state.preview}
-      />
-
-      <CheckboxInput label='Clip' onChange={onClipChanged} value={state.clip} />
+      <CheckboxInput label='Preview' onChange={setPreview} value={preview} />
+      <CheckboxInput label='Clip' onChange={setClip} value={clip} />
     </div>
   )
 }
 
 interface FeatherProps {
-  readonly state: State
-
   formatBlur(v: number): string
-  onFeatherChanged(feather: number): void
 }
 
-const FeatherInput: FC<FeatherProps> = ({
-  state,
-  formatBlur,
-  onFeatherChanged,
-}) => {
+const FeatherInput: FC<FeatherProps> = ({ formatBlur }) => {
+  const feather = useStore(state => state.feather)
+  const setFeather = useStore(state => state.setFeather)
+
   const experimental = useExperimental()
   if (!experimental) return null
 
@@ -204,52 +138,47 @@ const FeatherInput: FC<FeatherProps> = ({
       label='Feather'
       max={10}
       min={0}
-      onChange={onFeatherChanged}
+      onChange={setFeather}
       step={0.01}
-      value={state.feather}
+      value={feather}
     />
   )
 }
 
-interface DualFlagProps {
-  readonly state: State
+const DualFlagInput: FC = () => {
+  const flag2 = useStore(state => state.flag2)
+  const dualFlag = useStore(state => state.dualFlag)
+  const blurFlagBoundary = useStore(state => state.blurFlagBoundary)
 
-  onFlag2Changed(flag: string): void
-  onDualFlagChanged(value: boolean): void
-  onBlurFlagBoundaryChanged(value: boolean): void
-}
+  const setFlag2 = useStore(state => state.setFlag2)
+  const setDualFlag = useStore(state => state.setDualFlag)
+  const setBlurFlagBoundary = useStore(state => state.setBlurFlagBoundary)
 
-const DualFlagInput: FC<DualFlagProps> = ({
-  state,
-  onFlag2Changed,
-  onDualFlagChanged,
-  onBlurFlagBoundaryChanged,
-}) => {
   const experimental = useExperimental()
   if (!experimental) return null
 
   return (
     <>
-      {state.dualFlag ? (
+      {dualFlag ? (
         <OptionInput
           label='Second Flag'
-          onChange={onFlag2Changed}
+          onChange={setFlag2}
           options={flagNames}
-          value={state.flag2}
+          value={flag2}
         />
       ) : null}
 
       <CheckboxInput
         label='Dual Flags'
-        onChange={onDualFlagChanged}
-        value={state.dualFlag}
+        onChange={setDualFlag}
+        value={dualFlag}
       />
 
-      {state.dualFlag ? (
+      {dualFlag ? (
         <CheckboxInput
           label='Blur Boundary'
-          onChange={onBlurFlagBoundaryChanged}
-          value={state.blurFlagBoundary}
+          onChange={setBlurFlagBoundary}
+          value={blurFlagBoundary}
         />
       ) : null}
     </>

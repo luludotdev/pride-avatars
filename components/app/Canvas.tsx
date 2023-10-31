@@ -2,16 +2,14 @@
 
 import clsx from 'clsx'
 import { Suspense, useCallback, useMemo } from 'react'
-import type { Dispatch, DragEventHandler, FC, RefObject } from 'react'
-import type { Action, State } from '~/components/app/Store'
+import type { DragEventHandler, FC, RefObject } from 'react'
 import { useAnimationFrame } from '~/lib/hooks/useAnimationFrame'
 import { useDebug } from '~/lib/hooks/useDebug'
-import { useStore } from '~/lib/hooks/useStore'
 import { ensureLayers } from '~/lib/layers'
 import type { MaybeLayers } from '~/lib/layers'
-import { loadImage } from '~/lib/load'
 import { qualityToResolution } from '~/lib/quality'
 import { drawFrame } from '~/lib/render'
+import { useStore } from '~/lib/store'
 
 interface Props {
   readonly canvasRef: RefObject<HTMLCanvasElement>
@@ -19,8 +17,10 @@ interface Props {
 }
 
 export const Canvas: FC<Props> = ({ canvasRef: ref, layers }) => {
-  const { state, dispatch } = useStore()
+  const quality = useStore(state => state.quality)
+  const preview = useStore(state => state.preview)
 
+  const loadImage = useStore(state => state.loadImage)
   const handleDragOver = useCallback<DragEventHandler<HTMLCanvasElement>>(
     ev => ev.preventDefault(),
     [],
@@ -38,23 +38,17 @@ export const Canvas: FC<Props> = ({ canvasRef: ref, layers }) => {
       if (!file) return
       if (!file.type.startsWith('image/')) return
 
-      await loadImage(dispatch, file)
+      await loadImage(file)
     },
-    [dispatch],
+    [loadImage],
   )
 
-  const resolution = useMemo(
-    () => qualityToResolution(state.quality),
-    [state.quality],
-  )
+  const resolution = useMemo(() => qualityToResolution(quality), [quality])
 
   return (
     <>
       <canvas
-        className={clsx(
-          'h-auto w-full rounded',
-          state.preview && 'rounded-full',
-        )}
+        className={clsx('h-auto w-full rounded', preview && 'rounded-full')}
         height={resolution}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
@@ -63,32 +57,20 @@ export const Canvas: FC<Props> = ({ canvasRef: ref, layers }) => {
       />
 
       <Suspense fallback={null}>
-        <Render
-          canvasRef={ref}
-          dispatch={dispatch}
-          layers={layers}
-          state={state}
-        />
+        <Render canvasRef={ref} layers={layers} />
       </Suspense>
     </>
   )
 }
 
 interface RenderProps {
-  readonly state: State
-  readonly dispatch: Dispatch<Action>
-
   readonly canvasRef: RefObject<HTMLCanvasElement>
   readonly layers: MaybeLayers
 }
 
-const Render: FC<RenderProps> = ({
-  state,
-  dispatch,
-  canvasRef: ref,
-  layers: maybeLayers,
-}) => {
+const Render: FC<RenderProps> = ({ canvasRef: ref, layers: maybeLayers }) => {
   const debug = useDebug()
+  const state = useStore()
 
   useAnimationFrame(
     async ({ time }) => {
@@ -102,9 +84,9 @@ const Render: FC<RenderProps> = ({
       if (!ctx || !layers) return
 
       await drawFrame(ctx, layers, state, time)
-      if (state.blur === 0) dispatch({ type: 'markClean' })
+      if (state.blur === 0) state.markClean()
     },
-    [debug, ref, maybeLayers, state, dispatch],
+    [debug, ref, maybeLayers, state],
   )
 
   return null
