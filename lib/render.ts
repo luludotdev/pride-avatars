@@ -103,7 +103,7 @@ export const drawFrame = async (
   const scale = Math.abs(state.angle) / 50 + 1.01
   ctxFlag.scale(scale, scale)
 
-  const flagImage = getFlag(state.flag)
+  const flagImage = getFlag(state.flag, state.showOrangeEasterEgg)
   if (!flagImage.complete) await flagImage.decode()
 
   const blur = scaleQualityValue(state.quality, state.blur)
