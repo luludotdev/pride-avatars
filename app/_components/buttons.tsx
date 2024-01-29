@@ -10,7 +10,7 @@ import { useCanvas, useLayers } from '~/lib/data/rendering'
 import { useStore } from '~/lib/data/store'
 import { ensureLayers } from '~/lib/layers'
 import { drawFrame } from '~/lib/render'
-import { sleep } from '~/lib/sleep'
+import { sleep } from '~/lib/utils'
 
 export const LoadImage = () => {
   const saving = useStore(state => state.saving)
