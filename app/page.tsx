@@ -1,4 +1,5 @@
-import { LoadImage, SaveImage } from './_components/buttons'
+import { Suspense } from 'react'
+import { ClearImage, LoadImage, SaveImage } from './_components/buttons'
 import { Canvas } from './_components/canvas'
 import { Container, Content } from './_components/container'
 import { Footer, NameCard, RepoCard } from './_components/footer'
@@ -12,7 +13,11 @@ const Root = () => (
       </h1>
 
       <ExperimentalWarning />
+
       <LoadImage />
+      <Suspense fallback={null}>
+        <ClearImage />
+      </Suspense>
 
       <Canvas />
       <QualityWarning />

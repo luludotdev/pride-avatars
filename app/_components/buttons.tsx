@@ -1,22 +1,21 @@
 'use client'
 
 import { saveAs } from 'file-saver'
-import { Camera, Save } from 'lucide-react'
+import { Camera, Save, Trash2 } from 'lucide-react'
 import ms from 'ms'
 import { useCallback, useRef } from 'react'
 import type { ChangeEventHandler } from 'react'
 import { Button } from '~/components/ui/button'
 import { useCanvas, useLayers } from '~/lib/data/rendering'
 import { useStore } from '~/lib/data/store'
+import { useDebug } from '~/lib/hooks/useDebug'
 import { ensureLayers } from '~/lib/layers'
 import { drawFrame } from '~/lib/render'
 import { sleep } from '~/lib/sleep'
 
 export const LoadImage = () => {
   const saving = useStore(state => state.saving)
-
   const loadImage = useStore(state => state.loadImage)
-  const clearImage = useStore(state => state.clearImage)
 
   const ref = useRef<HTMLInputElement>(null)
   const onLoadClicked = useCallback(() => {
@@ -44,8 +43,6 @@ export const LoadImage = () => {
         <Camera className='mr-2 h-5 w-5' /> Load Image
       </Button>
 
-      {/* TODO: Implement clear image button */}
-
       <input
         accept='image/*'
         className='hidden'
@@ -55,6 +52,25 @@ export const LoadImage = () => {
         type='file'
       />
     </>
+  )
+}
+
+export const ClearImage = () => {
+  const saving = useStore(state => state.saving)
+  const clearImage = useStore(state => state.clearImage)
+
+  const debug = useDebug()
+  if (!debug) return null
+
+  return (
+    <Button
+      className='w-full'
+      disabled={saving}
+      onClick={clearImage}
+      variant='outline'
+    >
+      <Trash2 className='mr-2 h-5 w-5' /> Clear Image
+    </Button>
   )
 }
 
