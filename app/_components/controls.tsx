@@ -1,7 +1,7 @@
 'use client'
 
-import type { ComponentPropsWithoutRef } from 'react'
 import { useCallback, useId, useMemo } from 'react'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Checkbox } from '~/components/ui/checkbox'
 import { Label } from '~/components/ui/label'
 import {
@@ -137,11 +137,13 @@ export const Controls = () => {
         </SelectContent>
       </Select>
 
-      <Label>Preview</Label>
-      <Checkbox checked={preview} onCheckedChange={setPreview} />
+      <CheckboxInput checked={preview} onCheckedChange={setPreview}>
+        Preview
+      </CheckboxInput>
 
-      <Label>Clip</Label>
-      <Checkbox checked={clip} onCheckedChange={setClip} />
+      <CheckboxInput checked={clip} onCheckedChange={setClip}>
+        Clip
+      </CheckboxInput>
     </div>
   )
 }
@@ -174,6 +176,22 @@ const RangeInput = ({
     <>
       <Label htmlFor={id}>{label}</Label>
       <Slider id={id} onValueChange={onValueChange} value={val} {...props} />
+    </>
+  )
+}
+
+const CheckboxInput = ({
+  children,
+  ...props
+}: ComponentPropsWithoutRef<typeof Checkbox> & {
+  readonly children: ReactNode
+}) => {
+  const id = useId()
+
+  return (
+    <>
+      <Label htmlFor={id}>{children}</Label>
+      <Checkbox id={id} {...props} />
     </>
   )
 }
