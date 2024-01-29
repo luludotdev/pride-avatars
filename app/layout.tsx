@@ -3,6 +3,7 @@ import './tailwind.css'
 import { Fira_Code as FiraCode, Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
 import { PreloadFlags } from '~/components/PreloadFlags'
+import { ThemeProvider } from '~/components/theme-provider'
 import { cn } from '~/lib/utils'
 
 const fontSans = Inter({
@@ -32,7 +33,14 @@ const RootLayout = ({ children }: { readonly children: ReactNode }) => (
         fontMono.variable,
       )}
     >
-      {children}
+      <ThemeProvider
+        attribute='class'
+        defaultTheme='system'
+        disableTransitionOnChange
+        enableSystem
+      >
+        {children}
+      </ThemeProvider>
     </body>
   </html>
 )
