@@ -58,6 +58,7 @@ export const NameCard = ({
 export const RepoCard = async ({ ...props }: TriggerProps) => {
   const resp = await fetch(
     'https://api.github.com/repos/luludotdev/pride-avatars',
+    { next: { revalidate: 60 * 60 } },
   )
 
   const json = await resp.json()
