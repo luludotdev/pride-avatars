@@ -28,9 +28,11 @@ export const Controls = () => {
   const blur = useStore(state => state.blur)
   const feather = useStore(state => state.feather)
   const flag = useStore(state => state.flag)
+  const flag2 = useStore(state => state.flag2)
   const preview = useStore(state => state.preview)
   const clip = useStore(state => state.clip)
   const dualFlag = useStore(state => state.dualFlag)
+  const blurFlagBoundary = useStore(state => state.blurFlagBoundary)
 
   const setQuality = useStore(state => state.setQuality)
   const setPadding = useStore(state => state.setPadding)
@@ -38,9 +40,11 @@ export const Controls = () => {
   const setBlur = useStore(state => state.setBlur)
   const setFeather = useStore(state => state.setFeather)
   const setFlag = useStore(state => state.setFlag)
+  const setFlag2 = useStore(state => state.setFlag2)
   const setPreview = useStore(state => state.setPreview)
   const setClip = useStore(state => state.setClip)
   const setDualFlag = useStore(state => state.setDualFlag)
+  const setBlurFlagBoundary = useStore(state => state.setBlurFlagBoundary)
 
   const formatQuality = useCallback<(v: number) => string>(value => {
     const padding = 6
@@ -133,6 +137,30 @@ export const Controls = () => {
         value={flag}
       />
 
+      <Experimental>
+        {dualFlag && (
+          <SelectInput
+            label='Second Flag'
+            onChange={setFlag2}
+            options={flagNames}
+            value={flag2}
+          />
+        )}
+
+        <CheckboxInput checked={dualFlag} onCheckedChange={setDualFlag}>
+          Dual Flags
+        </CheckboxInput>
+
+        {dualFlag && (
+          <CheckboxInput
+            checked={blurFlagBoundary}
+            onCheckedChange={setBlurFlagBoundary}
+          >
+            Blur Boundary
+          </CheckboxInput>
+        )}
+      </Experimental>
+
       <CheckboxInput checked={preview} onCheckedChange={setPreview}>
         Preview
       </CheckboxInput>
@@ -204,7 +232,7 @@ const SelectInput = ({
     <>
       <Label htmlFor={id}>{label}</Label>
       <Select onValueChange={onChange} value={value}>
-        <SelectTrigger className='my-1' id={id}>
+        <SelectTrigger id={id}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
