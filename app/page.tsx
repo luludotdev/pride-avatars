@@ -2,6 +2,7 @@ import { LoadImage, SaveImage } from './_components/buttons'
 import { Canvas } from './_components/canvas'
 import { Container, Content } from './_components/container'
 import { Footer, NameCard, RepoCard } from './_components/footer'
+import { ExperimentalWarning, QualityWarning } from './_components/warnings'
 
 const Root = () => (
   <Container>
@@ -10,10 +11,11 @@ const Root = () => (
         Pride Avatars! 🏳️‍🌈
       </h1>
 
+      <ExperimentalWarning />
       <LoadImage />
 
       <Canvas />
-
+      <QualityWarning />
       <SaveImage />
     </Content>
 
