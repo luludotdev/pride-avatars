@@ -4,6 +4,7 @@ import { ClearImage, LoadImage, SaveImage } from './_components/buttons'
 import { Canvas } from './_components/canvas'
 import { Container, Content } from './_components/container'
 import { Controls } from './_components/controls'
+import { RenderDebugLayers } from './_components/debug-layers'
 import { KonamiButton, OrangeCredits } from './_components/easter-eggs'
 import { Footer, NameCard, RepoCard } from './_components/footer'
 import { ThemeButton } from './_components/theme-button'
@@ -12,6 +13,9 @@ import { ExperimentalWarning, QualityWarning } from './_components/warnings'
 const Root = () => (
   <>
     <Advert />
+    <Suspense fallback={null}>
+      <RenderDebugLayers />
+    </Suspense>
 
     <Container>
       <Content>
