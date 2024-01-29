@@ -110,8 +110,8 @@ export const drawFrame = async (
   ctxFlag.filter = state.blurFlagBoundary
     ? ''
     : blur !== 0
-    ? `blur(${blur}px)`
-    : ''
+      ? `blur(${blur}px)`
+      : ''
 
   ctxFlag.drawImage(
     flagImage,

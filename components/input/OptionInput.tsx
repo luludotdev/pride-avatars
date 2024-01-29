@@ -27,7 +27,7 @@ export const OptionInput: FC<Props> = ({ label, options, value, onChange }) => {
       </label>
 
       <select
-        className='mt-2 rounded border border-gray-400 bg-light p-1 text-sm dark:border-gray-500 dark:bg-dark'
+        className='bg-light dark:bg-dark mt-2 rounded border border-gray-400 p-1 text-sm dark:border-gray-500'
         id={id}
         onChange={handleChange}
         value={value}

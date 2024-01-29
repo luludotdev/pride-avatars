@@ -59,7 +59,7 @@ export const Inputs: FC = () => {
   )
 
   return (
-    <div className='grid w-full grid-cols-input gap-x-3'>
+    <div className='grid-cols-input grid w-full gap-x-3'>
       <RangeInput
         formatter={formatQuality}
         label='Quality'

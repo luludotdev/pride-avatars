@@ -16,7 +16,7 @@ export const useAnimationFrame = (
     const time = (now - init.current) / 1_000
     const delta = (now - last.current) / 1_000
 
-    // eslint-disable-next-line n/callback-return, n/no-callback-literal, promise/prefer-await-to-callbacks
+    // eslint-disable-next-line n/callback-return, promise/prefer-await-to-callbacks
     await cb({ time, delta })
 
     // eslint-disable-next-line require-atomic-updates
