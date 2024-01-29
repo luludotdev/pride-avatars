@@ -98,7 +98,7 @@ export const App: FC = () => {
 
         <p>
           Source available on{' '}
-          <ExtLink href='https://github.com/lolPants/pride-avatars'>
+          <ExtLink href='https://github.com/luludotdev/pride-avatars'>
             GitHub
           </ExtLink>
         </p>
