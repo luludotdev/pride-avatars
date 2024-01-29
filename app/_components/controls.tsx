@@ -70,7 +70,7 @@ export const Controls = () => {
   )
 
   return (
-    <div className='grid-cols-input grid w-full gap-x-3'>
+    <div className='grid-cols-input grid w-full items-center gap-x-4 gap-y-3'>
       <RangeInput
         formatter={formatQuality}
         label='Quality'
@@ -123,7 +123,7 @@ export const Controls = () => {
         />
       </Experimental>
 
-      <Label>Flag</Label>
+      <Label className='col-span-2'>Flag</Label>
       <Select onValueChange={setFlag} value={flag}>
         <SelectTrigger>
           <SelectValue placeholder='Flag' />
@@ -170,11 +170,14 @@ const RangeInput = ({
     [onChange],
   )
 
-  // TODO: Format value
+  const formatted = useMemo(() => formatter(value), [formatter, value])
 
   return (
     <>
       <Label htmlFor={id}>{label}</Label>
+      <span className='whitespace-pre font-mono text-sm leading-none'>
+        {formatted}
+      </span>
       <Slider id={id} onValueChange={onValueChange} value={val} {...props} />
     </>
   )
@@ -190,7 +193,9 @@ const CheckboxInput = ({
 
   return (
     <>
-      <Label htmlFor={id}>{children}</Label>
+      <Label className='col-span-2' htmlFor={id}>
+        {children}
+      </Label>
       <Checkbox id={id} {...props} />
     </>
   )
