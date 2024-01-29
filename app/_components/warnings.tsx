@@ -2,14 +2,10 @@
 
 import { useMemo } from 'react'
 import { useStore } from '~/lib/data/store'
-import { useExperimental } from '~/lib/hooks/useExperimental'
 import { qualities } from '~/lib/quality'
 import { Warning } from './warning'
 
 export const ExperimentalWarning = () => {
-  const experimental = useExperimental()
-  if (!experimental) return null
-
   return (
     <Warning>
       <p className='text-sm'>

@@ -8,7 +8,6 @@ import type { ChangeEventHandler } from 'react'
 import { Button } from '~/components/ui/button'
 import { useCanvas, useLayers } from '~/lib/data/rendering'
 import { useStore } from '~/lib/data/store'
-import { useDebug } from '~/lib/hooks/useDebug'
 import { ensureLayers } from '~/lib/layers'
 import { drawFrame } from '~/lib/render'
 import { sleep } from '~/lib/sleep'
@@ -58,9 +57,6 @@ export const LoadImage = () => {
 export const ClearImage = () => {
   const saving = useStore(state => state.saving)
   const clearImage = useStore(state => state.clearImage)
-
-  const debug = useDebug()
-  if (!debug) return null
 
   return (
     <Button

@@ -14,16 +14,14 @@ import {
 import { Slider } from '~/components/ui/slider'
 import { useStore } from '~/lib/data/store'
 import { flagNames } from '~/lib/flags'
-import { useExperimental } from '~/lib/hooks/useExperimental'
 import {
   qualities,
   qualityToResolution,
   scaleQualityValue,
 } from '~/lib/quality'
+import { Experimental } from './feature-flags'
 
 export const Controls = () => {
-  const experimental = useExperimental()
-
   const quality = useStore(state => state.quality)
   const padding = useStore(state => state.padding)
   const angle = useStore(state => state.angle)
@@ -113,7 +111,7 @@ export const Controls = () => {
         value={blur}
       />
 
-      {experimental && (
+      <Experimental>
         <RangeInput
           formatter={formatBlur}
           label='Feather'
@@ -123,7 +121,7 @@ export const Controls = () => {
           step={0.01}
           value={feather}
         />
-      )}
+      </Experimental>
 
       <Label>Flag</Label>
       <Select onValueChange={setFlag} value={flag}>
