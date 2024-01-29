@@ -18,5 +18,11 @@
       { "additionalHooks": "(useAnimationFrame)" }
     ]
   },
+  "overrides": [{
+    "files": "./components/ui/**/*",
+    "rules": {
+      "react/prop-types": 0
+    }
+  }],
   "ignorePatterns": ["**/build/*"]
 }
