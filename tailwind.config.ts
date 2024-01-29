@@ -1,30 +1,43 @@
 import type { Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
+import animate from 'tailwindcss-animate'
 
 export default {
+  darkMode: ['class'],
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'Inter', ...fontFamily.sans],
-        mono: ['var(--font-fira-code)', 'Fira Code', ...fontFamily.mono],
+        sans: ['var(--font-sans)', 'Inter', ...fontFamily.sans],
+        mono: ['var(--font-mono)', 'Fira Code', ...fontFamily.mono],
       },
-      colors: {
-        light: '#fefdfe',
-        dark: '#1f1e1f',
-        accent: {
-          light: '#8879fc',
-          dark: '#afa5fd',
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
-      gridTemplateColumns: {
-        input: 'fit-content(2000px) auto',
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
-  plugins: [],
+  plugins: [animate],
 } satisfies Config
