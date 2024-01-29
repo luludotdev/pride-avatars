@@ -2,7 +2,7 @@ import './tailwind.css'
 
 import { Fira_Code as FiraCode, Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
-import { ThemeProvider } from '~/components/theme-provider'
+import { ThemeProvider } from '~/app/_components/theme-provider'
 import { CanvasProvider } from '~/lib/data/rendering'
 import { flags } from '~/lib/flags'
 import { cn } from '~/lib/utils'
@@ -32,7 +32,7 @@ const RootLayout = ({ children }: { readonly children: ReactNode }) => (
 
     <body
       className={cn(
-        'bg-background min-h-screen font-sans antialiased',
+        'min-h-screen bg-background font-sans antialiased',
         fontSans.variable,
         fontMono.variable,
       )}
