@@ -21,7 +21,7 @@ const fontMono = FiraCode({
 })
 
 const RootLayout = ({ children }: { readonly children: ReactNode }) => (
-  <html lang='en'>
+  <html lang='en' suppressHydrationWarning>
     <head>
       <PreloadFlags />
     </head>
