@@ -2,8 +2,8 @@ import './tailwind.css'
 
 import { Fira_Code as FiraCode, Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
-import { PreloadFlags } from '~/components/PreloadFlags'
 import { ThemeProvider } from '~/components/theme-provider'
+import { flags } from '~/lib/flags'
 import { cn } from '~/lib/utils'
 import { CanvasProvider } from './_components/canvas'
 
@@ -25,8 +25,9 @@ const RootLayout = ({ children }: { readonly children: ReactNode }) => (
   <html lang='en' suppressHydrationWarning>
     <head>
       <link as='image' href='https://lulu.dev/avatar.png' rel='preload' />
-
-      <PreloadFlags />
+      {flags.map(([name, url]) => (
+        <link as='image' href={url} key={name} rel='preload' />
+      ))}
     </head>
 
     <body
