@@ -19,7 +19,6 @@ import {
   qualityToResolution,
   scaleQualityValue,
 } from '~/lib/quality'
-import { cn } from '~/lib/utils'
 import { Experimental } from './feature-flags'
 
 export const Controls = () => {
@@ -71,7 +70,7 @@ export const Controls = () => {
   )
 
   return (
-    <div className='grid-cols-input grid w-full items-center gap-x-4 gap-y-3'>
+    <div className='grid w-full grid-cols-input items-center gap-x-4 gap-y-3'>
       <RangeInput
         formatter={formatQuality}
         label='Quality'
@@ -126,7 +125,7 @@ export const Controls = () => {
 
       <Label>Flag</Label>
       <Select onValueChange={setFlag} value={flag}>
-        <SelectTrigger className='col-span-2'>
+        <SelectTrigger>
           <SelectValue placeholder='Flag' />
         </SelectTrigger>
         <SelectContent>
@@ -171,15 +170,21 @@ const RangeInput = ({
     [onChange],
   )
 
-  const formatted = useMemo(() => formatter(value), [formatter, value])
+  const formatted = useMemo(
+    () => formatter(value).padEnd(7, ' '),
+    [formatter, value],
+  )
 
   return (
     <>
       <Label htmlFor={id}>{label}</Label>
+      <div className='flex gap-x-2'>
       <span className='whitespace-pre font-mono text-sm leading-none'>
         {formatted}
       </span>
+
       <Slider id={id} onValueChange={onValueChange} value={val} {...props} />
+      </div>
     </>
   )
 }
@@ -195,11 +200,7 @@ const CheckboxInput = ({
   return (
     <>
       <Label htmlFor={id}>{children}</Label>
-      <Checkbox
-        id={id}
-        {...props}
-        className={cn(props.className, 'col-span-2')}
-      />
+      <Checkbox id={id} {...props} />
     </>
   )
 }
