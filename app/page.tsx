@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { Advert } from './_components/advert'
 import { ClearImage, LoadImage, SaveImage } from './_components/buttons'
 import { Canvas } from './_components/canvas'
 import { Container, Content } from './_components/container'
@@ -8,6 +9,8 @@ import { ExperimentalWarning, QualityWarning } from './_components/warnings'
 
 const Root = () => (
   <>
+    <Advert />
+
     <Container>
       <Content>
         <h1 className='my-2 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl'>
