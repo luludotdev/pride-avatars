@@ -14,7 +14,7 @@ const Root = () => (
     <Container>
       <Content>
         <h1 className='my-2 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl'>
-          Pride Avatars! 🏳️‍🌈
+          Pride Avatars 🏳️‍🌈
         </h1>
 
         <ExperimentalWarning />
@@ -51,8 +51,8 @@ const Root = () => (
 )
 
 export const metadata = {
-  title: 'Pride Avatars!',
-  description: 'Enhance your social media avatars with a pride flag border!',
+  title: 'Pride Avatars',
+  description: 'Enhance your social media avatars with a pride flag border',
 }
 
 export const viewport = {
