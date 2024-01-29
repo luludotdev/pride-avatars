@@ -1,3 +1,4 @@
+import { Canvas } from './_components/canvas'
 import { Container, Content } from './_components/container'
 import { Footer, NameCard, RepoCard } from './_components/footer'
 
@@ -7,6 +8,8 @@ const Root = () => (
       <h1 className='my-2 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl'>
         Pride Avatars! 🏳️‍🌈
       </h1>
+
+      <Canvas />
     </Content>
 
     <Footer>

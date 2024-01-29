@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import { PreloadFlags } from '~/components/PreloadFlags'
 import { ThemeProvider } from '~/components/theme-provider'
 import { cn } from '~/lib/utils'
+import { CanvasProvider } from './_components/canvas'
 
 const fontSans = Inter({
   variable: '--font-sans',
@@ -41,7 +42,7 @@ const RootLayout = ({ children }: { readonly children: ReactNode }) => (
         disableTransitionOnChange
         enableSystem
       >
-        {children}
+        <CanvasProvider>{children}</CanvasProvider>
       </ThemeProvider>
     </body>
   </html>
