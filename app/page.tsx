@@ -35,7 +35,14 @@ const Root = () => (
       <Footer>
         <p className='leading-7'>
           Made with 💝 by{' '}
-          <NameCard href='https://twitter.com/lulu__dev'>Lulu</NameCard>
+          <NameCard
+            avatar='https://lulu.dev/avatar.png'
+            handle='@lulu.dev'
+            href='https://twitter.com/lulu__dev'
+            website='https://lulu.dev'
+          >
+            Lulu
+          </NameCard>
         </p>
 
         <p className='leading-7'>

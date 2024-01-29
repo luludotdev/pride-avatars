@@ -1,6 +1,6 @@
 import { Star } from 'lucide-react'
 import type { ReactNode } from 'react'
-import { Avatar, AvatarImage } from '~/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 import {
   HoverCard,
   HoverCardContent,
@@ -27,18 +27,28 @@ const CardTrigger = ({ children, href }: TriggerProps) => (
   </HoverCardTrigger>
 )
 
-export const NameCard = ({ ...props }: TriggerProps) => (
+export const NameCard = ({
+  avatar,
+  handle,
+  website,
+  ...props
+}: TriggerProps & {
+  readonly avatar: string
+  readonly handle: string
+  readonly website?: string
+}) => (
   <HoverCard>
     <CardTrigger {...props} />
     <HoverCardContent className='w-fit'>
       <div className='flex space-x-4'>
         <Avatar>
-          <AvatarImage src='https://lulu.dev/avatar.png' />
+          <AvatarFallback />
+          <AvatarImage src={avatar} />
         </Avatar>
 
         <div className='text-left'>
-          <h4 className='text-sm font-bold leading-5'>@lulu.dev</h4>
-          <p className='text-sm leading-5'>https://lulu.dev</p>
+          <h4 className='text-sm font-bold leading-5'>{handle}</h4>
+          <p className='text-sm leading-5'>{website ?? props.href}</p>
         </div>
       </div>
     </HoverCardContent>
