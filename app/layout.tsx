@@ -23,6 +23,8 @@ const fontMono = FiraCode({
 const RootLayout = ({ children }: { readonly children: ReactNode }) => (
   <html lang='en' suppressHydrationWarning>
     <head>
+      <link as='image' href='https://lulu.dev/avatar.png' rel='preload' />
+
       <PreloadFlags />
     </head>
 
