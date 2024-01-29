@@ -3,6 +3,7 @@ import { Advert } from './_components/advert'
 import { ClearImage, LoadImage, SaveImage } from './_components/buttons'
 import { Canvas } from './_components/canvas'
 import { Container, Content } from './_components/container'
+import { Controls } from './_components/controls'
 import { Footer, NameCard, RepoCard } from './_components/footer'
 import { ThemeButton } from './_components/theme-button'
 import { ExperimentalWarning, QualityWarning } from './_components/warnings'
@@ -24,7 +25,9 @@ const Root = () => (
           <ClearImage />
         </Suspense>
 
+        <Controls />
         <Canvas />
+
         <QualityWarning />
         <SaveImage />
       </Content>
