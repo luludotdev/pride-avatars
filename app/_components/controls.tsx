@@ -19,6 +19,7 @@ import {
   qualityToResolution,
   scaleQualityValue,
 } from '~/lib/quality'
+import { cn } from '~/lib/utils'
 import { Experimental } from './feature-flags'
 
 export const Controls = () => {
@@ -123,9 +124,9 @@ export const Controls = () => {
         />
       </Experimental>
 
-      <Label className='col-span-2'>Flag</Label>
+      <Label>Flag</Label>
       <Select onValueChange={setFlag} value={flag}>
-        <SelectTrigger>
+        <SelectTrigger className='col-span-2'>
           <SelectValue placeholder='Flag' />
         </SelectTrigger>
         <SelectContent>
@@ -193,10 +194,12 @@ const CheckboxInput = ({
 
   return (
     <>
-      <Label className='col-span-2' htmlFor={id}>
-        {children}
-      </Label>
-      <Checkbox id={id} {...props} />
+      <Label htmlFor={id}>{children}</Label>
+      <Checkbox
+        id={id}
+        {...props}
+        className={cn(props.className, 'col-span-2')}
+      />
     </>
   )
 }
