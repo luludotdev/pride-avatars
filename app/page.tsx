@@ -4,6 +4,7 @@ import { ClearImage, LoadImage, SaveImage } from './_components/buttons'
 import { Canvas } from './_components/canvas'
 import { Container, Content } from './_components/container'
 import { Controls } from './_components/controls'
+import { KonamiButton, OrangeCredits } from './_components/easter-eggs'
 import { Footer, NameCard, RepoCard } from './_components/footer'
 import { ThemeButton } from './_components/theme-button'
 import { ExperimentalWarning, QualityWarning } from './_components/warnings'
@@ -26,6 +27,7 @@ const Root = () => (
         </Suspense>
 
         <Controls />
+        <KonamiButton />
         <Canvas />
 
         <QualityWarning />
@@ -51,6 +53,19 @@ const Root = () => (
             GitHub
           </RepoCard>
         </p>
+
+        <OrangeCredits>
+          <p className='leading-7'>
+            Cursed Annoying Orange flags made by{' '}
+            <NameCard
+              avatar='https://avatar-serv.vercel.app/api/discord/246478140132687872'
+              handle='@bobbievr'
+              href='https://twitter.com/vrbobbie'
+            >
+              Bobbie
+            </NameCard>
+          </p>
+        </OrangeCredits>
       </Footer>
     </Container>
 
