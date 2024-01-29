@@ -1,6 +1,6 @@
 'use client'
 
-import { useCanvas } from '~/lib/data/canvas'
+import { useCanvas } from '~/lib/data/rendering'
 import { cn } from '~/lib/utils'
 
 export const Canvas = () => {

@@ -3,7 +3,7 @@ import './tailwind.css'
 import { Fira_Code as FiraCode, Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
 import { ThemeProvider } from '~/components/theme-provider'
-import { CanvasProvider } from '~/lib/data/canvas'
+import { CanvasProvider } from '~/lib/data/rendering'
 import { flags } from '~/lib/flags'
 import { cn } from '~/lib/utils'
 
