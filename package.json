@@ -32,7 +32,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "@luludev/eslint-config": "^0.5.1",
+    "@luludev/eslint-config": "^0.5.3",
     "@types/file-saver": "^2.0.7",
     "@types/ms": "^0.7.34",
     "@types/node": "20.11.10",
