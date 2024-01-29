@@ -1,4 +1,3 @@
-/* eslint-disable n/prefer-global/url */
 import { parse as parsePath } from 'path'
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'

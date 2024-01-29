@@ -1,9 +1,9 @@
 'use client'
 
 import { useMemo } from 'react'
+import { useStore } from '~/lib/data/store'
 import { useExperimental } from '~/lib/hooks/useExperimental'
 import { qualities } from '~/lib/quality'
-import { useStore } from '~/lib/store'
 import { Warning } from './warning'
 
 export const ExperimentalWarning = () => {

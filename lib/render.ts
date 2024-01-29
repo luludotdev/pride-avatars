@@ -1,7 +1,7 @@
+import type { AnimationFrame, State } from '~/lib/data/store'
 import { getFlag } from '~/lib/flags'
 import type { Layers } from '~/lib/layers'
 import { scaleQualityValue } from '~/lib/quality'
-import type { AnimationFrame, State } from '~/lib/store'
 
 interface DrawOptions {
   x: number
