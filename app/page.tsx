@@ -1,3 +1,4 @@
+import { LoadImage, SaveImage } from './_components/buttons'
 import { Canvas } from './_components/canvas'
 import { Container, Content } from './_components/container'
 import { Footer, NameCard, RepoCard } from './_components/footer'
@@ -9,7 +10,11 @@ const Root = () => (
         Pride Avatars! 🏳️‍🌈
       </h1>
 
+      <LoadImage />
+
       <Canvas />
+
+      <SaveImage />
     </Content>
 
     <Footer>
