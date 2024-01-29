@@ -30,6 +30,7 @@ export const Controls = () => {
   const flag = useStore(state => state.flag)
   const preview = useStore(state => state.preview)
   const clip = useStore(state => state.clip)
+  const dualFlag = useStore(state => state.dualFlag)
 
   const setQuality = useStore(state => state.setQuality)
   const setPadding = useStore(state => state.setPadding)
@@ -39,6 +40,7 @@ export const Controls = () => {
   const setFlag = useStore(state => state.setFlag)
   const setPreview = useStore(state => state.setPreview)
   const setClip = useStore(state => state.setClip)
+  const setDualFlag = useStore(state => state.setDualFlag)
 
   const formatQuality = useCallback<(v: number) => string>(value => {
     const padding = 6
@@ -123,19 +125,13 @@ export const Controls = () => {
         />
       </Experimental>
 
-      <Label>Flag</Label>
-      <Select onValueChange={setFlag} value={flag}>
-        <SelectTrigger>
-          <SelectValue placeholder='Flag' />
-        </SelectTrigger>
-        <SelectContent>
-          {flagNames.map(flag => (
-            <SelectItem key={flag} value={flag}>
-              {flag}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <SelectInput
+        label='Flag'
+        onChange={setFlag}
+        options={flagNames}
+        placeholder='Flag'
+        value={flag}
+      />
 
       <CheckboxInput checked={preview} onCheckedChange={setPreview}>
         Preview
@@ -179,12 +175,46 @@ const RangeInput = ({
     <>
       <Label htmlFor={id}>{label}</Label>
       <div className='flex gap-x-2'>
-      <span className='whitespace-pre font-mono text-sm leading-none'>
-        {formatted}
-      </span>
+        <span className='whitespace-pre font-mono text-sm leading-none'>
+          {formatted}
+        </span>
 
-      <Slider id={id} onValueChange={onValueChange} value={val} {...props} />
+        <Slider id={id} onValueChange={onValueChange} value={val} {...props} />
       </div>
+    </>
+  )
+}
+
+const SelectInput = ({
+  label,
+  placeholder,
+  options,
+  value,
+  onChange,
+}: {
+  readonly label: string
+  readonly placeholder?: string
+  readonly options: readonly string[]
+  readonly value: string
+  onChange(value: string): void
+}) => {
+  const id = useId()
+
+  return (
+    <>
+      <Label htmlFor={id}>{label}</Label>
+      <Select onValueChange={onChange} value={value}>
+        <SelectTrigger className='my-1' id={id}>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map(option => (
+            <SelectItem key={option} value={option}>
+              {option}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </>
   )
 }
