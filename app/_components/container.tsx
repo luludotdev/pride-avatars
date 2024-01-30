@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 export const Container = ({ children }: { readonly children: ReactNode }) => (
-  <div className='flex h-screen w-full flex-col items-center px-4'>
+  <div className='relative flex h-fit min-h-screen w-full flex-col items-center px-4'>
     {children}
   </div>
 )

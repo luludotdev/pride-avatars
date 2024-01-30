@@ -73,11 +73,11 @@ const Root = () => (
           </p>
         </OrangeCredits>
       </Footer>
-    </Container>
 
-    <div className='absolute bottom-0 left-0 m-4'>
-      <ThemeButton />
-    </div>
+      <div className='absolute bottom-0 left-0 m-4'>
+        <ThemeButton />
+      </div>
+    </Container>
   </>
 )
 
