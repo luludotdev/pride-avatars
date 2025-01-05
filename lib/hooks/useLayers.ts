@@ -27,7 +27,7 @@ export const useDisplayLayers = (layers: MaybeLayers) => {
     const bg = "red";
 
     const container = document.createElement("div");
-    document.body.appendChild(container);
+    document.body.append(container);
 
     container.style.zIndex = "100";
     container.style.position = "absolute";
@@ -42,7 +42,7 @@ export const useDisplayLayers = (layers: MaybeLayers) => {
       if (!ctx) continue;
 
       const canvas = ctx.canvas;
-      container.appendChild(canvas);
+      container.append(canvas);
 
       canvas.style.background = bg;
       canvas.style.width = size;

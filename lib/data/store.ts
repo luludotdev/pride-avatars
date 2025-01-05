@@ -4,7 +4,6 @@ import { devtools } from "zustand/middleware";
 import { preloadFlags } from "~/lib/flags";
 import type { FlagName } from "~/lib/flags";
 
-// eslint-disable-next-line no-restricted-globals, n/prefer-global/process
 const IS_DEV = process.env.NODE_ENV !== "production";
 
 const LAST_SHOW_ADD_KEY = "@@pride-avatars/last-shown-ad";
@@ -21,64 +20,64 @@ const loadLastShownAd: () => State["lastShownAd"] = () => {
 };
 
 export type AnimationFrame = [canvas: HTMLCanvasElement, clear: boolean];
-export interface State {
+export type State = {
   dirty: boolean;
-  markClean(this: void): void;
+  markClean: (this: void) => void;
 
   quality: number;
-  setQuality(this: void, quality: number): void;
+  setQuality: (this: void, quality: number) => void;
 
   padding: number;
-  setPadding(this: void, padding: number): void;
+  setPadding: (this: void, padding: number) => void;
 
   angle: number;
-  setAngle(this: void, angle: number): void;
+  setAngle: (this: void, angle: number) => void;
 
   blur: number;
-  setBlur(this: void, blur: number): void;
+  setBlur: (this: void, blur: number) => void;
 
   feather: number;
-  setFeather(this: void, feather: number): void;
+  setFeather: (this: void, feather: number) => void;
 
   preview: boolean;
-  setPreview(this: void, preview: boolean): void;
+  setPreview: (this: void, preview: boolean) => void;
 
   clip: boolean;
-  setClip(this: void, clip: boolean): void;
+  setClip: (this: void, clip: boolean) => void;
 
   dualFlag: boolean;
-  setDualFlag(this: void, value: boolean): void;
+  setDualFlag: (this: void, value: boolean) => void;
 
   blurFlagBoundary: boolean;
-  setBlurFlagBoundary(this: void, blur: boolean): void;
+  setBlurFlagBoundary: (this: void, blur: boolean) => void;
 
   flag: FlagName;
-  setFlag(this: void, flag: FlagName): void;
+  setFlag: (this: void, flag: FlagName) => void;
 
   flag2: FlagName;
-  setFlag2(this: void, flag: FlagName): void;
+  setFlag2: (this: void, flag: FlagName) => void;
 
   filename: string | null;
   image: HTMLImageElement | null;
   frames: AnimationFrame[] | null;
   delay: number;
 
-  loadImage(this: void, image: File | string): Promise<void>;
-  clearImage(this: void): void;
+  loadImage: (this: void, image: File | string) => Promise<void>;
+  clearImage: (this: void) => void;
 
   showRecursionEasterEgg: boolean;
   showOrangeEasterEgg: boolean;
-  toggleRecursionEasterEgg(this: void): void;
-  toggleOrangeEasterEgg(this: void): void;
-  enableOrangeEasterEgg(this: void): void;
+  toggleRecursionEasterEgg: (this: void) => void;
+  toggleOrangeEasterEgg: (this: void) => void;
+  enableOrangeEasterEgg: (this: void) => void;
 
   saving: boolean;
-  setSaving(this: void, saving: boolean): void;
+  setSaving: (this: void, saving: boolean) => void;
 
   advertOpen: boolean;
   lastShownAd: Date | undefined;
-  setAdShowing(this: void, showing: boolean): void;
-}
+  setAdShowing: (this: void, showing: boolean) => void;
+};
 
 export const useStore = create<State>()(
   devtools(

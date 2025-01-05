@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useId, useMemo } from "react";
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { Checkbox } from "~/components/ui/checkbox";
 import { Label } from "~/components/ui/label";
 import {
@@ -13,7 +13,7 @@ import {
 } from "~/components/ui/select";
 import { Slider } from "~/components/ui/slider";
 import { useStore } from "~/lib/data/store";
-import { flagNames } from "~/lib/flags";
+import { flagNames, isFlagName } from "~/lib/flags";
 import {
   qualities,
   qualityToResolution,
@@ -75,6 +75,20 @@ export const Controls = () => {
     [quality],
   );
 
+  const onFlag = useCallback(
+    (value: string) => {
+      if (isFlagName(value)) setFlag(value);
+    },
+    [setFlag],
+  );
+
+  const onFlag2 = useCallback(
+    (value: string) => {
+      if (isFlagName(value)) setFlag2(value);
+    },
+    [setFlag2],
+  );
+
   return (
     <div className="grid w-full grid-cols-input items-center gap-x-4 gap-y-3">
       <RangeInput
@@ -131,7 +145,7 @@ export const Controls = () => {
 
       <SelectInput
         label="Flag"
-        onChange={setFlag}
+        onChange={onFlag}
         options={flagNames}
         placeholder="Flag"
         value={flag}
@@ -141,7 +155,7 @@ export const Controls = () => {
         {dualFlag && (
           <SelectInput
             label="Second Flag"
-            onChange={setFlag2}
+            onChange={onFlag2}
             options={flagNames}
             value={flag2}
           />
@@ -179,13 +193,13 @@ const RangeInput = ({
   formatter,
   ...props
 }: Omit<
-  ComponentPropsWithoutRef<typeof Slider>,
+  ComponentProps<typeof Slider>,
   "label" | "onChange" | "onValueChange" | "value"
 > & {
   readonly label: string;
   readonly value: number;
-  onChange(value: number): void;
-  formatter(value: number): string;
+  readonly onChange: (value: number) => void;
+  readonly formatter: (value: number) => string;
 }) => {
   const id = useId();
   const val = useMemo(() => [value], [value]);
@@ -224,7 +238,7 @@ const SelectInput = ({
   readonly placeholder?: string;
   readonly options: readonly string[];
   readonly value: string;
-  onChange(value: string): void;
+  readonly onChange: (value: string) => void;
 }) => {
   const id = useId();
 
@@ -250,7 +264,7 @@ const SelectInput = ({
 const CheckboxInput = ({
   children,
   ...props
-}: ComponentPropsWithoutRef<typeof Checkbox> & {
+}: ComponentProps<typeof Checkbox> & {
   readonly children: ReactNode;
 }) => {
   const id = useId();

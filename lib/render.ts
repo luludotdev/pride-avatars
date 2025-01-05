@@ -3,7 +3,7 @@ import { getFlag } from "~/lib/flags";
 import type { Layers } from "~/lib/layers";
 import { scaleQualityValue } from "~/lib/quality";
 
-interface DrawOptions {
+type DrawOptions = {
   x: number;
   y: number;
 
@@ -12,7 +12,7 @@ interface DrawOptions {
 
   offsetX: number;
   offsetY: number;
-}
+};
 
 const drawImage = async (
   ctx: CanvasRenderingContext2D,
