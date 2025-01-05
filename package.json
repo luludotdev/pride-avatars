@@ -9,10 +9,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "prettier --check . && eslint app components lib --ext mjs,js,ts,tsx",
-    "format": "prettier --write . && eslint app components lib --ext mjs,js,ts,tsx --fix",
-    "fmt": "npm run format",
-    "test": "npm run lint"
+    "lint": "prettier --check . && eslint app components lib",
+    "format": "prettier --write . && eslint app components lib --fix",
+    "fmt": "pnpm run format",
+    "test": "pnpm run lint"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.5",
