@@ -1,24 +1,35 @@
 import "./tailwind.css";
 
-import { Fira_Code as FiraCode, Inter } from "next/font/google";
+import { DM_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import type { ReactNode } from "react";
 import { ThemeProvider } from "~/app/_components/theme-provider";
 import { CanvasProvider } from "~/lib/data/rendering";
 import { flags } from "~/lib/flags";
 import { cn } from "~/lib/utils";
 
-const fontSans = Inter({
+const inter = localFont({
+  src: [
+    {
+      path: "./_fonts/InterVariable.woff2",
+      style: "normal",
+      weight: "100 900",
+    },
+    {
+      path: "./_fonts/InterVariable-Italic.woff2",
+      style: "italic",
+      weight: "100 900",
+    },
+  ],
   variable: "--font-sans",
-  subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600", "700"],
 });
 
-const fontMono = FiraCode({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
+const dm_mono = DM_Mono({
   weight: ["500"],
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 const RootLayout = ({ children }: { readonly children: ReactNode }) => (
@@ -33,8 +44,8 @@ const RootLayout = ({ children }: { readonly children: ReactNode }) => (
     <body
       className={cn(
         "min-h-screen bg-background font-sans antialiased",
-        fontSans.variable,
-        fontMono.variable,
+        inter.variable,
+        dm_mono.variable,
       )}
     >
       <ThemeProvider
