@@ -1,6 +1,9 @@
 # VSCode
 .vscode/
 
+# pnpm
+pnpm-lock.yaml
+
 # Generated
 .next/
 out/

@@ -1,14 +1,14 @@
-import type * as CSS from 'csstype'
-import type { StaticImageData } from 'next/image'
+import type * as CSS from "csstype";
+import type { StaticImageData } from "next/image";
 
-declare module 'csstype' {
+declare module "csstype" {
   interface Properties {
     // Allow any CSS Custom Properties
-    [index: `--${string}`]: string
+    [index: `--${string}`]: string;
   }
 }
 
-declare module '~/assets/flags/*.svg' {
-  const content: StaticImageData
-  export default content
+declare module "~/assets/flags/*.svg" {
+  const content: StaticImageData;
+  export default content;
 }

@@ -1,10 +1,10 @@
-declare module 'konami' {
+declare module "konami" {
   class Konami {
-    public constructor(arg: string | (() => void))
+    public constructor(arg: string | (() => void));
 
-    public load(): void
-    public unload(): void
+    public load(): void;
+    public unload(): void;
   }
 
-  export default Konami
+  export default Konami;
 }

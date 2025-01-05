@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { useCallback } from 'react'
+import { useCallback } from "react";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -8,15 +8,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '~/components/ui/alert-dialog'
-import { Button } from '~/components/ui/button'
-import { useStore } from '~/lib/data/store'
+} from "~/components/ui/alert-dialog";
+import { Button } from "~/components/ui/button";
+import { useStore } from "~/lib/data/store";
 
 export const Advert = () => {
-  const open = useStore(state => state.advertOpen)
+  const open = useStore((state) => state.advertOpen);
 
-  const setAdShowing = useStore(state => state.setAdShowing)
-  const handleClose = useCallback(() => setAdShowing(false), [setAdShowing])
+  const setAdShowing = useStore((state) => state.setAdShowing);
+  const handleClose = useCallback(() => setAdShowing(false), [setAdShowing]);
 
   return (
     <AlertDialog open={open}>
@@ -26,12 +26,12 @@ export const Advert = () => {
 
           <AlertDialogDescription>
             I&apos;m glad you&apos;ve enjoyed my little passion project. If this
-            app has helped you, please consider{' '}
+            app has helped you, please consider{" "}
             <a
-              className='underline'
-              href='http://paypal.me/jackbarondev'
-              rel='noopener noreferrer'
-              target='_blank'
+              className="underline"
+              href="http://paypal.me/jackbarondev"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               supporting my work
             </a>
@@ -44,11 +44,11 @@ export const Advert = () => {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <Button onClick={handleClose} variant='outline'>
+          <Button onClick={handleClose} variant="outline">
             Dismiss
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
-}
+  );
+};

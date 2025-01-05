@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { useLayers } from '~/lib/data/rendering'
-import { useDisplayLayers } from '~/lib/hooks/useLayers'
+import { useLayers } from "~/lib/data/rendering";
+import { useDisplayLayers } from "~/lib/hooks/useLayers";
 
 export const RenderDebugLayers = () => {
-  const layers = useLayers()
-  useDisplayLayers(layers)
+  const layers = useLayers();
+  useDisplayLayers(layers);
 
-  return null
-}
+  return null;
+};
