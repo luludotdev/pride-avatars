@@ -39,7 +39,7 @@ export const LoadImage = () => {
         onClick={onLoadClicked}
         variant="outline"
       >
-        <Camera className="mr-2 h-5 w-5" /> Load Image
+        <Camera className="!size-5" /> Load Image
       </Button>
 
       <input
@@ -65,7 +65,7 @@ export const ClearImage = () => {
       onClick={clearImage}
       variant="outline"
     >
-      <Trash2 className="mr-2 h-5 w-5" /> Clear Image
+      <Trash2 className="!size-5" /> Clear Image
     </Button>
   );
 };
@@ -157,7 +157,7 @@ export const SaveImage = () => {
       onClick={onSaveClicked}
       variant="outline"
     >
-      <Save className="mr-2 h-5 w-5" /> Download
+      <Save className="!size-5" /> Download
     </Button>
   );
 };

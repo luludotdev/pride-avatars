@@ -48,7 +48,7 @@ export const KonamiButton = () => {
 
   return (
     <Button className="w-full" onClick={onClick} variant="outline">
-      <Circle className="h-5 w-5" />
+      <Circle className="!size-5" />
     </Button>
   );
 };
