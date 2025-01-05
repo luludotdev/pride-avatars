@@ -7,7 +7,7 @@ export const useAnimationFrame = (
   /* eslint-disable react-hooks/rules-of-hooks */
   if (typeof window === "undefined") return;
 
-  const frame = useRef<number>();
+  const frame = useRef<number | undefined>(undefined);
   const last = useRef(performance.now());
   const init = useRef(performance.now());
 
