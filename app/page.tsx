@@ -20,7 +20,7 @@ const Root = () => (
     <Container>
       <Content>
         <h1
-          className="my-2 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
+          className="my-2 scroll-m-20 text-4xl font-[750] tracking-tight lg:text-5xl"
           style={{ fontVariationSettings: '"opsz" 14' }}
         >
           Pride Avatars 🏳️‍🌈
