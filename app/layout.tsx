@@ -1,26 +1,15 @@
 import "./tailwind.css";
 
-import { DM_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import { DM_Mono, Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { ThemeProvider } from "~/app/_components/theme-provider";
 import { CanvasProvider } from "~/lib/data/rendering";
 import { flags } from "~/lib/flags";
 import { cn } from "~/lib/utils";
 
-const inter = localFont({
-  src: [
-    {
-      path: "./_fonts/InterVariable.woff2",
-      style: "normal",
-      weight: "100 900",
-    },
-    {
-      path: "./_fonts/InterVariable-Italic.woff2",
-      style: "italic",
-      weight: "100 900",
-    },
-  ],
+const inter = Inter({
+  subsets: ["latin"],
+  axes: ["opsz"],
   variable: "--font-sans",
   display: "swap",
 });
