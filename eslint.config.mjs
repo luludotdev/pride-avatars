@@ -34,8 +34,12 @@ const config = [
     },
     languageOptions: {
       parserOptions: {
-        project: "./tsconfig.json",
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
+    },
+    rules: {
+      "sonarjs/no-one-iteration-loop": 0,
     },
   },
 ];
