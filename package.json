@@ -55,5 +55,29 @@
     "tailwindcss": "^3.4.17",
     "type-fest": "^4.31.0",
     "typescript": "^5.7.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "@stylistic/eslint-plugin": "^5",
+      "@stylistic/eslint-plugin-jsx": "npm:@stylistic/eslint-plugin@^5",
+      "@stylistic/eslint-plugin-ts": "npm:@stylistic/eslint-plugin@^5",
+      "@angular-eslint/eslint-plugin": "-",
+      "@angular-eslint/eslint-plugin-template": "-",
+      "@angular-eslint/template-parser": "-",
+      "astro-eslint-parser": "-",
+      "eslint-plugin-astro": "-",
+      "eslint-plugin-cypress": "-",
+      "eslint-plugin-rxjs": "-",
+      "eslint-plugin-rxjs-angular": "-",
+      "eslint-plugin-svelte3": "-",
+      "eslint-plugin-vue": "-",
+      "vue-eslint-parser": "-"
+    },
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }
