@@ -90,7 +90,7 @@ export const Controls = () => {
   );
 
   return (
-    <div className="grid w-full grid-cols-input items-center gap-x-4 gap-y-3">
+    <div className="grid w-full grid-cols-[fit-content(2000px)_auto] items-center gap-x-4 gap-y-3">
       <RangeInput
         formatter={formatQuality}
         label="Quality"
@@ -217,7 +217,7 @@ const RangeInput = ({
     <>
       <Label htmlFor={id}>{label}</Label>
       <div className="flex gap-x-2">
-        <span className="whitespace-pre font-mono text-sm leading-none">
+        <span className="font-mono text-sm leading-none whitespace-pre">
           {formatted}
         </span>
 

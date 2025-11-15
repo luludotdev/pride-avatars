@@ -34,12 +34,12 @@ export const LoadImage = () => {
   return (
     <>
       <Button
-        className="w-full"
+        className="w-full py-5"
         disabled={saving}
         onClick={onLoadClicked}
         variant="outline"
       >
-        <Camera className="!size-5" /> Load Image
+        <Camera className="size-5!" /> Load Image
       </Button>
 
       <input
@@ -60,12 +60,12 @@ export const ClearImage = () => {
 
   return (
     <Button
-      className="w-full"
+      className="w-full py-5"
       disabled={saving}
       onClick={clearImage}
       variant="outline"
     >
-      <Trash2 className="!size-5" /> Clear Image
+      <Trash2 className="size-5!" /> Clear Image
     </Button>
   );
 };
@@ -91,7 +91,7 @@ export const SaveImage = () => {
     const shouldShowAd = () => {
       if (state.lastShownAd === undefined) return true;
 
-      const offset = ms("3 months");
+      const offset = ms("90 days");
       const now = Date.now();
       const lastShown = state.lastShownAd.getTime();
 
@@ -136,7 +136,11 @@ export const SaveImage = () => {
 
         encoder.finish();
         const buffer = encoder.out.getData();
-        const blob = new Blob([buffer], { type: "image/gif" });
+        if (!(buffer.buffer instanceof ArrayBuffer)) {
+          throw new TypeError("not a buffer");
+        }
+
+        const blob = new Blob([buffer.buffer], { type: "image/gif" });
 
         const url = URL.createObjectURL(blob);
         saveAs(url, filename("gif"));
@@ -152,12 +156,12 @@ export const SaveImage = () => {
 
   return (
     <Button
-      className="w-full"
+      className="w-full py-5"
       disabled={state.saving}
       onClick={onSaveClicked}
       variant="outline"
     >
-      <Save className="!size-5" /> Download
+      <Save className="size-5!" /> Download
     </Button>
   );
 };

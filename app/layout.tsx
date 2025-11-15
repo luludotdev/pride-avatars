@@ -10,14 +10,14 @@ import { cn } from "~/lib/utils";
 const inter = Inter({
   subsets: ["latin"],
   axes: ["opsz"],
-  variable: "--font-sans",
+  variable: "--font-inter",
   display: "swap",
 });
 
 const dm_mono = DM_Mono({
   weight: ["500"],
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-dm-mono",
   display: "swap",
 });
 
@@ -32,7 +32,7 @@ const RootLayout = ({ children }: { readonly children: ReactNode }) => (
 
     <body
       className={cn(
-        "min-h-screen bg-background font-sans antialiased",
+        "bg-background min-h-screen font-sans antialiased",
         inter.variable,
         dm_mono.variable,
       )}

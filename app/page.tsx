@@ -1,3 +1,4 @@
+import type { Metadata, Viewport } from "next";
 import { Advert } from "./_components/advert";
 import { ClearImage, LoadImage, SaveImage } from "./_components/buttons";
 import { Canvas } from "./_components/canvas";
@@ -47,7 +48,7 @@ const Root = () => (
         <p className="leading-7">
           Made with 💝 by{" "}
           <NameCard
-            avatar="https://lulu.dev/avatar.png"
+            avatar="https://lulu.dev/bnuuy_bg.png"
             handle="@lulu.dev"
             href="https://twitter.com/lulu__dev"
             website="https://lulu.dev"
@@ -77,19 +78,19 @@ const Root = () => (
         </OrangeCredits>
       </Footer>
 
-      <div className="absolute bottom-0 left-0 m-4">
+      <div className="fixed bottom-0 left-0 m-4">
         <ThemeButton />
       </div>
     </Container>
   </>
 );
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Pride Avatars",
   description: "Enhance your social media avatars with a pride flag border",
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: "#afa5fd",
 };
 
