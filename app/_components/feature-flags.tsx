@@ -2,8 +2,8 @@
 
 import { Suspense } from "react";
 import type { ReactNode } from "react";
-import { useDebug } from "~/lib/hooks/useDebug";
-import { useExperimental } from "~/lib/hooks/useExperimental";
+import { useDebug } from "#/lib/hooks/useDebug";
+import { useExperimental } from "#/lib/hooks/useExperimental";
 
 const Debug = ({ children }: { readonly children: ReactNode }) => {
   const debug = useDebug();

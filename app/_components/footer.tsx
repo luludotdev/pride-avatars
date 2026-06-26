@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import type { ReactNode } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/components/ui/hover-card";
+import { Avatar, AvatarFallback, AvatarImage } from "#/components/ui/avatar";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "#/components/ui/hover-card";
 
 export const Footer = ({ children }: { readonly children: ReactNode }) => (
   <footer className="py-4 text-center">{children}</footer>

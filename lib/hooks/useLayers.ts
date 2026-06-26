@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
-import { useDebug } from "~/lib/hooks/useDebug";
-import { layers, makeLayers } from "~/lib/layers";
-import type { MaybeLayers } from "~/lib/layers";
+import { useDebug } from "#/lib/hooks/useDebug";
+import { layers, makeLayers } from "#/lib/layers";
+import type { MaybeLayers } from "#/lib/layers";
 
 export const useLayers = () => {
   const isServer = useMemo(() => typeof window === "undefined", []);

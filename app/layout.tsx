@@ -1,10 +1,10 @@
 import "./tailwind.css";
 import { DM_Mono, Inter } from "next/font/google";
 import type { ReactNode } from "react";
-import { ThemeProvider } from "~/app/_components/theme-provider";
-import { CanvasProvider } from "~/lib/data/rendering";
-import { flags } from "~/lib/flags";
-import { cn } from "~/lib/utils";
+import { ThemeProvider } from "#/app/_components/theme-provider";
+import { CanvasProvider } from "#/lib/data/rendering";
+import { flags } from "#/lib/flags";
+import { cn } from "#/lib/utils";
 
 const inter = Inter({
   subsets: ["latin"],

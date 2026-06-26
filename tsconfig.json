@@ -19,7 +19,7 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
-      "~/*": ["./*"]
+      "#/*": ["./*"]
     }
   },
   "include": [

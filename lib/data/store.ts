@@ -1,8 +1,8 @@
-import { parse as parsePath } from "path";
+import { parse as parsePath } from "node:path";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { preloadFlags } from "~/lib/flags";
-import type { FlagName } from "~/lib/flags";
+import { preloadFlags } from "#/lib/flags";
+import type { FlagName } from "#/lib/flags";
 
 const IS_DEV = process.env.NODE_ENV !== "production";
 

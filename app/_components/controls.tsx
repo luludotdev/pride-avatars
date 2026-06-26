@@ -2,19 +2,19 @@
 
 import { useCallback, useId, useMemo } from "react";
 import type { ComponentProps, ReactNode } from "react";
-import { Checkbox } from "~/components/ui/checkbox";
-import { Label } from "~/components/ui/label";
+import { Checkbox } from "#/components/ui/checkbox";
+import { Label } from "#/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "~/components/ui/select";
-import { Slider } from "~/components/ui/slider";
-import { useStore } from "~/lib/data/store";
-import { flagNames, isFlagName } from "~/lib/flags";
-import { qualities, qualityToResolution, scaleQualityValue } from "~/lib/quality";
+} from "#/components/ui/select";
+import { Slider } from "#/components/ui/slider";
+import { useStore } from "#/lib/data/store";
+import { flagNames, isFlagName } from "#/lib/flags";
+import { qualities, qualityToResolution, scaleQualityValue } from "#/lib/quality";
 import { Experimental } from "./feature-flags";
 
 export const Controls = () => {

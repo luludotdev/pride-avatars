@@ -5,6 +5,9 @@
   "license": "AGPL-3.0-or-later",
   "repository": "git@github.com:luludotdev/pride-avatars.git",
   "type": "module",
+  "imports": {
+    "#/*": "./*"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

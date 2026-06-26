@@ -8,9 +8,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "~/components/ui/alert-dialog";
-import { Button } from "~/components/ui/button";
-import { useStore } from "~/lib/data/store";
+} from "#/components/ui/alert-dialog";
+import { Button } from "#/components/ui/button";
+import { useStore } from "#/lib/data/store";
 
 export const Advert = () => {
   const open = useStore((state) => state.advertOpen);

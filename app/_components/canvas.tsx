@@ -2,14 +2,14 @@
 
 import { Suspense, useCallback, useMemo } from "react";
 import type { DragEventHandler } from "react";
-import { useCanvas, useLayers } from "~/lib/data/rendering";
-import { useStore } from "~/lib/data/store";
-import { useAnimationFrame } from "~/lib/hooks/useAnimationFrame";
-import { useDebug } from "~/lib/hooks/useDebug";
-import { ensureLayers } from "~/lib/layers";
-import { qualityToResolution } from "~/lib/quality";
-import { drawFrame } from "~/lib/render";
-import { cn } from "~/lib/utils";
+import { useCanvas, useLayers } from "#/lib/data/rendering";
+import { useStore } from "#/lib/data/store";
+import { useAnimationFrame } from "#/lib/hooks/useAnimationFrame";
+import { useDebug } from "#/lib/hooks/useDebug";
+import { ensureLayers } from "#/lib/layers";
+import { qualityToResolution } from "#/lib/quality";
+import { drawFrame } from "#/lib/render";
+import { cn } from "#/lib/utils";
 
 export const Canvas = () => {
   const ref = useCanvas();

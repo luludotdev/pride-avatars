@@ -4,9 +4,9 @@ import { Circle } from "lucide-react";
 import type { ReactNode } from "react";
 import { useCallback, useEffect } from "react";
 import useKonami from "react-use-konami";
-import { Button } from "~/components/ui/button";
-import { useCanvas } from "~/lib/data/rendering";
-import { useStore } from "~/lib/data/store";
+import { Button } from "#/components/ui/button";
+import { useCanvas } from "#/lib/data/rendering";
+import { useStore } from "#/lib/data/store";
 
 export const KonamiButton = () => {
   const canvasRef = useCanvas();

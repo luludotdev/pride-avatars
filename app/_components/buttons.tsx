@@ -5,12 +5,12 @@ import { Camera, Save, Trash2 } from "lucide-react";
 import ms from "ms";
 import { useCallback, useRef } from "react";
 import type { ChangeEventHandler } from "react";
-import { Button } from "~/components/ui/button";
-import { useCanvas, useLayers } from "~/lib/data/rendering";
-import { useStore } from "~/lib/data/store";
-import { ensureLayers } from "~/lib/layers";
-import { drawFrame } from "~/lib/render";
-import { sleep } from "~/lib/utils";
+import { Button } from "#/components/ui/button";
+import { useCanvas, useLayers } from "#/lib/data/rendering";
+import { useStore } from "#/lib/data/store";
+import { ensureLayers } from "#/lib/layers";
+import { drawFrame } from "#/lib/render";
+import { sleep } from "#/lib/utils";
 
 export const LoadImage = () => {
   const saving = useStore((state) => state.saving);

@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { useStore } from "~/lib/data/store";
-import { qualities } from "~/lib/quality";
+import { useStore } from "#/lib/data/store";
+import { qualities } from "#/lib/quality";
 import { Warning } from "./warning";
 
 export const ExperimentalWarning = () => (

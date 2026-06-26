@@ -8,7 +8,7 @@ declare module "csstype" {
   }
 }
 
-declare module "~/assets/flags/*.svg" {
+declare module "#/assets/flags/*.svg" {
   const content: StaticImageData;
   export default content;
 }
