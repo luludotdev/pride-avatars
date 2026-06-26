@@ -45,10 +45,7 @@ export const Canvas = () => {
   return (
     <>
       <canvas
-        className={cn(
-          "aspect-square h-auto w-full rounded border",
-          preview && "rounded-full",
-        )}
+        className={cn("aspect-square h-auto w-full rounded border", preview && "rounded-full")}
         height={resolution}
         onDragOver={handleDragOver}
         onDrop={handleDrop}

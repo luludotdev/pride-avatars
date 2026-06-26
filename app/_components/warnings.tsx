@@ -8,12 +8,10 @@ import { Warning } from "./warning";
 export const ExperimentalWarning = () => (
   <Warning>
     <p className="text-sm">
-      Experimental features are enabled. Some options may not be fully
-      implemented or may contain rendering bugs.
+      Experimental features are enabled. Some options may not be fully implemented or may contain
+      rendering bugs.
     </p>
-    <p className="text-sm">
-      Please do not submit bug reports for experimental features.
-    </p>
+    <p className="text-sm">Please do not submit bug reports for experimental features.</p>
   </Warning>
 );
 
@@ -32,8 +30,8 @@ export const QualityWarning = () => {
   return (
     <Warning>
       <p className="text-sm">
-        Encoding GIFs at a high quality will take a while, and the result
-        filesize might be too large to upload to social media platforms.
+        Encoding GIFs at a high quality will take a while, and the result filesize might be too
+        large to upload to social media platforms.
       </p>
       <p className="text-sm">
         Consider dropping the quality to {qualities[MAX_QUALITY]}px or lower.

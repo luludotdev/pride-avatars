@@ -10,9 +10,7 @@ const makeLayer = () => {
 
 export type MaybeLayers = Record<Layer, ReturnType<typeof makeLayer>>;
 export const makeLayers = () =>
-  Object.fromEntries(
-    layers.map((layer) => [layer, makeLayer()] as const),
-  ) as MaybeLayers;
+  Object.fromEntries(layers.map((layer) => [layer, makeLayer()] as const)) as MaybeLayers;
 
 export type Layers = SetNonNullable<MaybeLayers>;
 export const ensureLayers = (maybe: MaybeLayers): Layers | undefined => {

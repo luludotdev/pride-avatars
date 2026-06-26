@@ -27,11 +27,7 @@ const Experimental = ({ children }: { readonly children: ReactNode }) => {
   return <>{children}</>;
 };
 
-const ExperimentalSuspense = ({
-  children,
-}: {
-  readonly children: ReactNode;
-}) => (
+const ExperimentalSuspense = ({ children }: { readonly children: ReactNode }) => (
   <Suspense fallback={null}>
     <Experimental>{children}</Experimental>
   </Suspense>

@@ -1,5 +1,4 @@
 import "./tailwind.css";
-
 import { DM_Mono, Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { ThemeProvider } from "~/app/_components/theme-provider";
@@ -32,17 +31,12 @@ const RootLayout = ({ children }: { readonly children: ReactNode }) => (
 
     <body
       className={cn(
-        "bg-background min-h-screen font-sans antialiased",
+        "min-h-screen bg-background font-sans antialiased",
         inter.variable,
         dm_mono.variable,
       )}
     >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        disableTransitionOnChange
-        enableSystem
-      >
+      <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
         <CanvasProvider>{children}</CanvasProvider>
       </ThemeProvider>
     </body>

@@ -25,8 +25,8 @@ export const Advert = () => {
           <AlertDialogTitle>Thanks for using Pride Avatars</AlertDialogTitle>
 
           <AlertDialogDescription>
-            I&apos;m glad you&apos;ve enjoyed my little passion project. If this
-            app has helped you, please consider{" "}
+            I&apos;m glad you&apos;ve enjoyed my little passion project. If this app has helped you,
+            please consider{" "}
             <a
               className="underline"
               href="http://paypal.me/jackbarondev"
@@ -37,9 +37,8 @@ export const Advert = () => {
             </a>
             . Developers gotta eat too! 😉
             <br />
-            <br />I work on these projects in my free time and your support
-            helps me spend more time working on fun little side-projects, just
-            like this.
+            <br />I work on these projects in my free time and your support helps me spend more time
+            working on fun little side-projects, just like this.
           </AlertDialogDescription>
         </AlertDialogHeader>
 

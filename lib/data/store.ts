@@ -100,12 +100,10 @@ export const useStore = create<State>()(
         },
 
         quality: 3,
-        setQuality: (quality) =>
-          set({ dirty: true, quality }, false, "setQuality"),
+        setQuality: (quality) => set({ dirty: true, quality }, false, "setQuality"),
 
         padding: 42,
-        setPadding: (padding) =>
-          set({ dirty: true, padding }, false, "setPadding"),
+        setPadding: (padding) => set({ dirty: true, padding }, false, "setPadding"),
 
         angle: 0,
         setAngle: (raw) => {
@@ -119,8 +117,7 @@ export const useStore = create<State>()(
         setBlur: (blur) => set({ dirty: true, blur }, false, "setBlur"),
 
         feather: 0,
-        setFeather: (feather) =>
-          set({ dirty: true, feather }, false, "setFeather"),
+        setFeather: (feather) => set({ dirty: true, feather }, false, "setFeather"),
 
         preview: false,
         setPreview: (preview) => set({ preview }, false, "setPreview"),
@@ -129,8 +126,7 @@ export const useStore = create<State>()(
         setClip: (clip) => set({ dirty: true, clip }, false, "setClip"),
 
         dualFlag: false,
-        setDualFlag: (dualFlag) =>
-          set({ dirty: true, dualFlag }, false, "setDualFlag"),
+        setDualFlag: (dualFlag) => set({ dirty: true, dualFlag }, false, "setDualFlag"),
 
         blurFlagBoundary: false,
         setBlurFlagBoundary: (blurFlagBoundary) =>
@@ -160,11 +156,7 @@ export const useStore = create<State>()(
                 "loadImage",
               );
             } else {
-              set(
-                { dirty: true, image: img, frames: null, delay: -1 },
-                false,
-                "loadImage",
-              );
+              set({ dirty: true, image: img, frames: null, delay: -1 }, false, "loadImage");
             }
           };
 
@@ -213,19 +205,11 @@ export const useStore = create<State>()(
           );
 
           clearPreviousImage();
-          set(
-            { dirty: true, filename, image: null, frames, delay },
-            false,
-            "loadImage",
-          );
+          set({ dirty: true, filename, image: null, frames, delay }, false, "loadImage");
         },
         clearImage: () => {
           clearPreviousImage();
-          set(
-            { dirty: true, image: null, frames: null, delay: -1 },
-            false,
-            "clearImage",
-          );
+          set({ dirty: true, image: null, frames: null, delay: -1 }, false, "clearImage");
         },
 
         showRecursionEasterEgg: false,
@@ -238,20 +222,12 @@ export const useStore = create<State>()(
           const showOrangeEasterEgg = !get().showOrangeEasterEgg;
           if (showOrangeEasterEgg) preloadFlags(true);
 
-          set(
-            { dirty: true, showOrangeEasterEgg },
-            false,
-            "toggleOrangeEasterEgg",
-          );
+          set({ dirty: true, showOrangeEasterEgg }, false, "toggleOrangeEasterEgg");
         },
         enableOrangeEasterEgg: () => {
           preloadFlags(true);
 
-          set(
-            { dirty: true, showOrangeEasterEgg: true },
-            false,
-            "toggleOrangeEasterEgg",
-          );
+          set({ dirty: true, showOrangeEasterEgg: true }, false, "toggleOrangeEasterEgg");
         },
 
         saving: false,

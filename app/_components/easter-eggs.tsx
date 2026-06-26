@@ -12,9 +12,7 @@ export const KonamiButton = () => {
   const canvasRef = useCanvas();
 
   const frames = useStore((state) => state.frames);
-  const showRecursionEasterEgg = useStore(
-    (state) => state.showRecursionEasterEgg,
-  );
+  const showRecursionEasterEgg = useStore((state) => state.showRecursionEasterEgg);
 
   const loadImage = useStore((state) => state.loadImage);
   const toggleRecursion = useStore((state) => state.toggleRecursionEasterEgg);
@@ -53,18 +51,10 @@ export const KonamiButton = () => {
   );
 };
 
-export const OrangeCredits = ({
-  children,
-}: {
-  readonly children: ReactNode;
-}) => {
+export const OrangeCredits = ({ children }: { readonly children: ReactNode }) => {
   const showOrangeEasterEgg = useStore((state) => state.showOrangeEasterEgg);
-  const enableOrangeEasterEgg = useStore(
-    (state) => state.enableOrangeEasterEgg,
-  );
-  const toggleOrangeEasterEgg = useStore(
-    (state) => state.toggleOrangeEasterEgg,
-  );
+  const enableOrangeEasterEgg = useStore((state) => state.enableOrangeEasterEgg);
+  const toggleOrangeEasterEgg = useStore((state) => state.toggleOrangeEasterEgg);
 
   useKonami(toggleOrangeEasterEgg, {
     code: ["h", "e", "y", "a", "p", "p", "l", "e"],

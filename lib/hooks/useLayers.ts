@@ -9,9 +9,7 @@ export const useLayers = () => {
   return useMemo<MaybeLayers>(() => {
     if (!isServer) return makeLayers();
 
-    return Object.fromEntries(
-      layers.map((layer) => [layer, undefined] as const),
-    ) as MaybeLayers;
+    return Object.fromEntries(layers.map((layer) => [layer, undefined] as const)) as MaybeLayers;
   }, [isServer]);
 };
 

@@ -33,12 +33,7 @@ export const LoadImage = () => {
 
   return (
     <>
-      <Button
-        className="w-full py-5"
-        disabled={saving}
-        onClick={onLoadClicked}
-        variant="outline"
-      >
+      <Button className="w-full py-5" disabled={saving} onClick={onLoadClicked} variant="outline">
         <Camera className="size-5!" /> Load Image
       </Button>
 
@@ -59,12 +54,7 @@ export const ClearImage = () => {
   const clearImage = useStore((state) => state.clearImage);
 
   return (
-    <Button
-      className="w-full py-5"
-      disabled={saving}
-      onClick={clearImage}
-      variant="outline"
-    >
+    <Button className="w-full py-5" disabled={saving} onClick={clearImage} variant="outline">
       <Trash2 className="size-5!" /> Clear Image
     </Button>
   );
@@ -115,12 +105,7 @@ export const SaveImage = () => {
         if (!ctx || !layers) throw new Error("oh no");
 
         const { default: GIFEncoder } = await import("gif-encoder-2");
-        const encoder = new GIFEncoder(
-          canvas.width,
-          canvas.height,
-          "neuquant",
-          true,
-        );
+        const encoder = new GIFEncoder(canvas.width, canvas.height, "neuquant", true);
 
         encoder.setDelay(state.delay);
         encoder.start();

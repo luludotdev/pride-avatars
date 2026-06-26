@@ -3,11 +3,11 @@ export const qualityToResolution = (quality: number) => qualities[quality];
 
 const SCALE_FACTOR = 8;
 
-export const scaleQualityValue: (
-  quality: number,
-  value: number,
-  round?: boolean,
-) => number = (quality, value, round = false) => {
+export const scaleQualityValue: (quality: number, value: number, round?: boolean) => number = (
+  quality,
+  value,
+  round = false,
+) => {
   const resolution = qualityToResolution(quality);
   const scaled = (value / 64) * (resolution / SCALE_FACTOR);
 

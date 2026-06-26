@@ -59,9 +59,7 @@ const Root = () => (
 
         <p className="leading-7">
           Source available on{" "}
-          <RepoCard href="https://github.com/luludotdev/pride-avatars">
-            GitHub
-          </RepoCard>
+          <RepoCard href="https://github.com/luludotdev/pride-avatars">GitHub</RepoCard>
         </p>
 
         <OrangeCredits>

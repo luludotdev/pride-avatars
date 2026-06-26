@@ -14,11 +14,7 @@ import {
 import { Slider } from "~/components/ui/slider";
 import { useStore } from "~/lib/data/store";
 import { flagNames, isFlagName } from "~/lib/flags";
-import {
-  qualities,
-  qualityToResolution,
-  scaleQualityValue,
-} from "~/lib/quality";
+import { qualities, qualityToResolution, scaleQualityValue } from "~/lib/quality";
 import { Experimental } from "./feature-flags";
 
 export const Controls = () => {
@@ -62,10 +58,7 @@ export const Controls = () => {
     [quality],
   );
 
-  const formatAngle = useCallback<(v: number) => string>(
-    (value) => `${value.toFixed(2)}°`,
-    [],
-  );
+  const formatAngle = useCallback<(v: number) => string>((value) => `${value.toFixed(2)}°`, []);
 
   const formatBlur = useCallback<(v: number) => string>(
     (value) => {
@@ -153,12 +146,7 @@ export const Controls = () => {
 
       <Experimental>
         {dualFlag && (
-          <SelectInput
-            label="Second Flag"
-            onChange={onFlag2}
-            options={flagNames}
-            value={flag2}
-          />
+          <SelectInput label="Second Flag" onChange={onFlag2} options={flagNames} value={flag2} />
         )}
 
         <CheckboxInput checked={dualFlag} onCheckedChange={setDualFlag}>
@@ -166,10 +154,7 @@ export const Controls = () => {
         </CheckboxInput>
 
         {dualFlag && (
-          <CheckboxInput
-            checked={blurFlagBoundary}
-            onCheckedChange={setBlurFlagBoundary}
-          >
+          <CheckboxInput checked={blurFlagBoundary} onCheckedChange={setBlurFlagBoundary}>
             Blur Boundary
           </CheckboxInput>
         )}
@@ -192,10 +177,7 @@ const RangeInput = ({
   onChange,
   formatter,
   ...props
-}: Omit<
-  ComponentProps<typeof Slider>,
-  "label" | "onChange" | "onValueChange" | "value"
-> & {
+}: Omit<ComponentProps<typeof Slider>, "label" | "onChange" | "onValueChange" | "value"> & {
   readonly label: string;
   readonly value: number;
   readonly onChange: (value: number) => void;
@@ -203,23 +185,15 @@ const RangeInput = ({
 }) => {
   const id = useId();
   const val = useMemo(() => [value], [value]);
-  const onValueChange = useCallback(
-    ([value]: number[]) => onChange(value),
-    [onChange],
-  );
+  const onValueChange = useCallback(([value]: number[]) => onChange(value), [onChange]);
 
-  const formatted = useMemo(
-    () => formatter(value).padEnd(7, " "),
-    [formatter, value],
-  );
+  const formatted = useMemo(() => formatter(value).padEnd(7, " "), [formatter, value]);
 
   return (
     <>
       <Label htmlFor={id}>{label}</Label>
       <div className="flex gap-x-2">
-        <span className="font-mono text-sm leading-none whitespace-pre">
-          {formatted}
-        </span>
+        <span className="font-mono text-sm leading-none whitespace-pre">{formatted}</span>
 
         <Slider id={id} onValueChange={onValueChange} value={val} {...props} />
       </div>

@@ -107,11 +107,7 @@ export const drawFrame = async (
   if (!flagImage.complete) await flagImage.decode();
 
   const blur = scaleQualityValue(state.quality, state.blur);
-  ctxFlag.filter = state.blurFlagBoundary
-    ? ""
-    : blur !== 0
-      ? `blur(${blur}px)`
-      : "";
+  ctxFlag.filter = state.blurFlagBoundary ? "" : blur !== 0 ? `blur(${blur}px)` : "";
 
   ctxFlag.drawImage(
     flagImage,
@@ -126,12 +122,7 @@ export const drawFrame = async (
     if (flagImage2.complete) await flagImage2.decode();
 
     const region = new Path2D();
-    region.rect(
-      0,
-      (ctxFlag.canvas.height / 2) * -1,
-      ctxFlag.canvas.width,
-      ctxFlag.canvas.height,
-    );
+    region.rect(0, (ctxFlag.canvas.height / 2) * -1, ctxFlag.canvas.width, ctxFlag.canvas.height);
 
     ctxFlag.clip(region, "evenodd");
     ctxFlag.drawImage(
@@ -146,19 +137,9 @@ export const drawFrame = async (
   ctxFlag2.canvas.width = canvasWidth;
   ctxFlag2.canvas.width = canvasHeight;
 
-  ctxFlag2.filter = state.blurFlagBoundary
-    ? blur !== 0
-      ? `blur(${blur}px)`
-      : ""
-    : "";
+  ctxFlag2.filter = state.blurFlagBoundary ? (blur !== 0 ? `blur(${blur}px)` : "") : "";
 
-  ctxFlag2.drawImage(
-    ctxFlag.canvas,
-    0,
-    0,
-    ctxFlag2.canvas.width,
-    ctxFlag2.canvas.height,
-  );
+  ctxFlag2.drawImage(ctxFlag.canvas, 0, 0, ctxFlag2.canvas.width, ctxFlag2.canvas.height);
 
   const copy = state.blurFlagBoundary ? ctxFlag2.canvas : ctxFlag.canvas;
   ctx.drawImage(copy, 0, 0, canvasWidth, canvasHeight);
@@ -221,22 +202,10 @@ export const drawFrame = async (
       ctxMask.fill();
     }
 
-    ctxComp.drawImage(
-      ctxMask.canvas,
-      0,
-      0,
-      ctxComp.canvas.width,
-      ctxComp.canvas.height,
-    );
+    ctxComp.drawImage(ctxMask.canvas, 0, 0, ctxComp.canvas.width, ctxComp.canvas.height);
 
     ctxComp.globalCompositeOperation = "source-in";
-    ctxComp.drawImage(
-      ctxImage.canvas,
-      0,
-      0,
-      ctxComp.canvas.width,
-      ctxComp.canvas.height,
-    );
+    ctxComp.drawImage(ctxImage.canvas, 0, 0, ctxComp.canvas.width, ctxComp.canvas.height);
 
     ctx.drawImage(
       ctxComp.canvas,

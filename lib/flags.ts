@@ -7,11 +7,6 @@ import GayMen from "~/assets/flags/GayMen.svg";
 import Genderfluid from "~/assets/flags/Genderfluid.svg";
 import Lesbian from "~/assets/flags/Lesbian.svg";
 import Nonbinary from "~/assets/flags/Nonbinary.svg";
-import Pansexual from "~/assets/flags/Pansexual.svg";
-import Pastel from "~/assets/flags/Pastel.svg";
-import PastelPlus from "~/assets/flags/PastelPlus.svg";
-import Rainbow from "~/assets/flags/Rainbow.svg";
-import Transgender from "~/assets/flags/Transgender.svg";
 import AsexualOrange from "~/assets/flags/orange/AsexualOrange.png";
 import BisexualOrange from "~/assets/flags/orange/BisexualOrange.png";
 import DemiboyOrange from "~/assets/flags/orange/DemiboyOrange.png";
@@ -26,6 +21,11 @@ import PastelOrange from "~/assets/flags/orange/PastelOrange.png";
 import PastelPlusOrange from "~/assets/flags/orange/PastelPlusOrange.png";
 import RainbowOrange from "~/assets/flags/orange/RainbowOrange.png";
 import TransgenderOrange from "~/assets/flags/orange/TransgenderOrange.png";
+import Pansexual from "~/assets/flags/Pansexual.svg";
+import Pastel from "~/assets/flags/Pastel.svg";
+import PastelPlus from "~/assets/flags/PastelPlus.svg";
+import Rainbow from "~/assets/flags/Rainbow.svg";
+import Transgender from "~/assets/flags/Transgender.svg";
 
 export type FlagName = (typeof flagNames)[number];
 export const flagNames = [
@@ -70,10 +70,7 @@ export function isFlagName(string: unknown): string is FlagName {
 }
 
 const flagStore: Map<FlagName, HTMLImageElement> = new Map();
-const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
-  name,
-  url,
-) => {
+const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (name, url) => {
   const cached = flagStore.get(name);
   if (cached !== undefined) return cached;
 
@@ -88,10 +85,7 @@ const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (
 };
 
 const flagOrangeStore: Map<FlagName, HTMLImageElement> = new Map();
-const getFlagOrange: (name: FlagName, url?: string) => HTMLImageElement = (
-  name,
-  url,
-) => {
+const getFlagOrange: (name: FlagName, url?: string) => HTMLImageElement = (name, url) => {
   const cached = flagOrangeStore.get(name);
   if (cached !== undefined) return cached;
 

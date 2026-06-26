@@ -19,11 +19,7 @@ const Context = createContext<{
   },
 });
 
-export const CanvasProvider = ({
-  children,
-}: {
-  readonly children: ReactNode;
-}) => {
+export const CanvasProvider = ({ children }: { readonly children: ReactNode }) => {
   const ref = useRef<HTMLCanvasElement>(null);
   const layers = useMakeLayers();
 
