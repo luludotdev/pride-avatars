@@ -1,0 +1,8 @@
+verifyDepsBeforeRun: install
+
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - "@luludev/configs"
