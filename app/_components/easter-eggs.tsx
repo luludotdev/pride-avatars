@@ -2,7 +2,7 @@
 
 import { Circle } from "lucide-react";
 import type { ReactNode } from "react";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import useKonami from "react-use-konami";
 import { Button } from "#/components/ui/button";
 import { useCanvas } from "#/lib/data/rendering";
@@ -32,14 +32,14 @@ export const KonamiButton = () => {
     ],
   });
 
-  const onClick = useCallback(() => {
+  const onClick = () => {
     if (!canvasRef.current) return;
     if (frames) return;
     const canvas = canvasRef.current;
 
     const b64 = canvas.toDataURL();
     void loadImage(b64);
-  }, [canvasRef, frames, loadImage]);
+  };
 
   if (frames !== null) return null;
   if (!showRecursionEasterEgg) return null;
@@ -65,7 +65,7 @@ export const OrangeCredits = ({ children }: { readonly children: ReactNode }) =>
     const isAprilFools = now.getMonth() === 3 && now.getDate() === 1;
 
     const rand = Math.random();
-    const chance = isAprilFools ? 0.666_666 : 0.02;
+    const chance = isAprilFools ? 0.666666 : 0.02;
     // 2% chance to automatically enable "annoying orange" mode
     // or 66.6% chance on april fools day (2/3rds time)
 

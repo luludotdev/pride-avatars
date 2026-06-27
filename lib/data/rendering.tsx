@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, use, useMemo, useRef } from "react";
+import { createContext, use, useRef } from "react";
 import type { ReactNode, RefObject } from "react";
 import { useLayers as useMakeLayers } from "#/lib/hooks/useLayers";
 import type { MaybeLayers } from "#/lib/layers";
@@ -23,8 +23,7 @@ export const CanvasProvider = ({ children }: { readonly children: ReactNode }) =
   const ref = useRef<HTMLCanvasElement>(null);
   const layers = useMakeLayers();
 
-  const value = useMemo(() => ({ canvas: ref, layers }), [ref, layers]);
-  return <Context value={value}>{children}</Context>;
+  return <Context value={{ canvas: ref, layers }}>{children}</Context>;
 };
 
 export const useCanvas = () => {

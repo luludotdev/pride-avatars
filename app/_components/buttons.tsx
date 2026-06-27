@@ -4,7 +4,7 @@ import { saveAs } from "file-saver";
 import { Camera, Save, Trash2 } from "lucide-react";
 import ms from "ms";
 import { useCallback, useRef } from "react";
-import type { ChangeEventHandler } from "react";
+import type { ChangeEvent } from "react";
 import { Button } from "#/components/ui/button";
 import { useCanvas, useLayers } from "#/lib/data/rendering";
 import { useStore } from "#/lib/data/store";
@@ -13,27 +13,25 @@ import { drawFrame } from "#/lib/render";
 import { sleep } from "#/lib/utils";
 
 export const LoadImage = () => {
+  const ref = useRef<HTMLInputElement>(null);
   const saving = useStore((state) => state.saving);
   const loadImage = useStore((state) => state.loadImage);
 
-  const ref = useRef<HTMLInputElement>(null);
-  const onLoadClicked = useCallback(() => {
-    ref.current?.click();
-  }, []);
+  const handleChange = async (ev: ChangeEvent<HTMLInputElement>) => {
+    const file = ev.target.files?.[0];
+    if (file === undefined) return;
 
-  const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-    async (ev) => {
-      const file = ev.target.files?.[0];
-      if (file === undefined) return;
-
-      await loadImage(file);
-    },
-    [loadImage],
-  );
+    await loadImage(file);
+  };
 
   return (
     <>
-      <Button className="w-full py-5" disabled={saving} onClick={onLoadClicked} variant="outline">
+      <Button
+        className="w-full py-5"
+        disabled={saving}
+        onClick={() => ref.current?.click()}
+        variant="outline"
+      >
         <Camera className="size-5!" /> Load Image
       </Button>
 
@@ -98,10 +96,10 @@ export const SaveImage = () => {
     if (state.frames) {
       setSaving(true);
       await sleep(50);
+      const layers = ensureLayers(maybeLayers);
 
       try {
         const ctx = canvas.getContext("2d");
-        const layers = ensureLayers(maybeLayers);
         if (!ctx || !layers) throw new Error("oh no");
 
         const { default: GIFEncoder } = await import("gif-encoder-2");
@@ -110,14 +108,14 @@ export const SaveImage = () => {
         encoder.setDelay(state.delay);
         encoder.start();
 
-        /* eslint-disable no-await-in-loop */
+        /* oxlint-disable no-await-in-loop */
         for (let idx = 0; idx < state.frames.length; idx++) {
-          const time = (idx * state.delay) / 1_000;
+          const time = (idx * state.delay) / 1000;
           await drawFrame(ctx, layers, state, time);
 
           encoder.addFrame(ctx);
         }
-        /* eslint-enable no-await-in-loop */
+        /* oxlint-enable no-await-in-loop */
 
         encoder.finish();
         const buffer = encoder.out.getData();

@@ -11,7 +11,7 @@ const loadLastShownAd: () => State["lastShownAd"] = () => {
   if (typeof window === "undefined") return undefined;
 
   const stored = localStorage.getItem(LAST_SHOW_ADD_KEY);
-  if (!stored) return undefined;
+  if (stored === null) return undefined;
 
   const parsed = Number.parseInt(stored, 10);
   if (Number.isNaN(parsed)) return undefined;
@@ -100,10 +100,14 @@ export const useStore = create<State>()(
         },
 
         quality: 3,
-        setQuality: (quality) => set({ dirty: true, quality }, false, "setQuality"),
+        setQuality: (quality) => {
+          set({ dirty: true, quality }, false, "setQuality");
+        },
 
         padding: 42,
-        setPadding: (padding) => set({ dirty: true, padding }, false, "setPadding"),
+        setPadding: (padding) => {
+          set({ dirty: true, padding }, false, "setPadding");
+        },
 
         angle: 0,
         setAngle: (raw) => {
@@ -114,29 +118,44 @@ export const useStore = create<State>()(
         },
 
         blur: 0,
-        setBlur: (blur) => set({ dirty: true, blur }, false, "setBlur"),
+        setBlur: (blur) => {
+          set({ dirty: true, blur }, false, "setBlur");
+        },
 
         feather: 0,
-        setFeather: (feather) => set({ dirty: true, feather }, false, "setFeather"),
+        setFeather: (feather) => {
+          set({ dirty: true, feather }, false, "setFeather");
+        },
 
         preview: false,
-        setPreview: (preview) => set({ preview }, false, "setPreview"),
+        setPreview: (preview) => {
+          set({ preview }, false, "setPreview");
+        },
 
         clip: true,
-        setClip: (clip) => set({ dirty: true, clip }, false, "setClip"),
+        setClip: (clip) => {
+          set({ dirty: true, clip }, false, "setClip");
+        },
 
         dualFlag: false,
-        setDualFlag: (dualFlag) => set({ dirty: true, dualFlag }, false, "setDualFlag"),
+        setDualFlag: (dualFlag) => {
+          set({ dirty: true, dualFlag }, false, "setDualFlag");
+        },
 
         blurFlagBoundary: false,
-        setBlurFlagBoundary: (blurFlagBoundary) =>
-          set({ dirty: true, blurFlagBoundary }, false, "setBlurFlagBoundary"),
+        setBlurFlagBoundary: (blurFlagBoundary) => {
+          set({ dirty: true, blurFlagBoundary }, false, "setBlurFlagBoundary");
+        },
 
         flag: "Pastel",
-        setFlag: (flag) => set({ dirty: true, flag }, false, "setFlag"),
+        setFlag: (flag) => {
+          set({ dirty: true, flag }, false, "setFlag");
+        },
 
         flag2: "Pastel",
-        setFlag2: (flag2) => set({ dirty: true, flag2 }, false, "setFlag2"),
+        setFlag2: (flag2) => {
+          set({ dirty: true, flag2 }, false, "setFlag2");
+        },
 
         filename: null,
         image: null,
@@ -149,7 +168,7 @@ export const useStore = create<State>()(
             const img = new Image();
             img.src = data;
 
-            if (filename) {
+            if (filename !== undefined) {
               set(
                 { dirty: true, filename, image: img, frames: null, delay: -1 },
                 false,
@@ -231,7 +250,9 @@ export const useStore = create<State>()(
         },
 
         saving: false,
-        setSaving: (saving) => set({ saving }, false, "setSaving"),
+        setSaving: (saving) => {
+          set({ saving }, false, "setSaving");
+        },
 
         advertOpen: false,
         lastShownAd: loadLastShownAd(),

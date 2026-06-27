@@ -148,7 +148,7 @@ export const drawFrame = async (
     if (state.image !== null) return [state.image];
     if (state.frames === null || state.frames.length === 0) return [];
 
-    const frameTime = (time * 1_000) / state.delay;
+    const frameTime = (time * 1000) / state.delay;
     const idx = Math.floor(frameTime % state.frames.length);
 
     return state.frames.slice(0, idx + 1);
@@ -161,14 +161,13 @@ export const drawFrame = async (
 
     ctxImage.translate(ctxImage.canvas.width / 2, ctxImage.canvas.height / 2);
 
-    // eslint-disable-next-line id-length
     for (const f of frames) {
       const frame = f instanceof HTMLImageElement ? ([f, false] as const) : f;
       const [image, clearFrame] = frame;
 
       if (clearFrame) clear(ctxImage);
 
-      // eslint-disable-next-line no-await-in-loop
+      // oxlint-disable-next-line no-await-in-loop
       await drawImage(ctxImage, image, {
         x: (ctxImage.canvas.width / 2) * -1,
         y: (ctxImage.canvas.height / 2) * -1,
@@ -190,7 +189,6 @@ export const drawFrame = async (
       );
 
       ctxMask.closePath();
-      ctxMask.fill();
     } else {
       ctxMask.rect(
         feather,
@@ -198,9 +196,8 @@ export const drawFrame = async (
         ctxMask.canvas.width - feather * 2,
         ctxMask.canvas.height - feather * 2,
       );
-
-      ctxMask.fill();
     }
+    ctxMask.fill();
 
     ctxComp.drawImage(ctxMask.canvas, 0, 0, ctxComp.canvas.width, ctxComp.canvas.height);
 

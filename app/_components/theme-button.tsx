@@ -41,7 +41,9 @@ const ThemeItem = ({ theme }: { readonly theme: string }) => {
   return (
     <DropdownMenuItem
       className={cn(theme === current && "font-bold")}
-      onClick={() => setTheme(theme)}
+      onClick={() => {
+        setTheme(theme);
+      }}
     >
       {label}
     </DropdownMenuItem>

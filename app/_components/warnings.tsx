@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import { useStore } from "#/lib/data/store";
 import { qualities } from "#/lib/quality";
 import { Warning } from "./warning";
@@ -20,11 +19,7 @@ export const QualityWarning = () => {
   const quality = useStore((state) => state.quality);
   const frames = useStore((state) => state.frames);
 
-  const shouldShow = useMemo<boolean>(() => {
-    if (frames === null) return false;
-    return quality > MAX_QUALITY;
-  }, [frames, quality]);
-
+  const shouldShow = frames === null ? false : quality > MAX_QUALITY;
   if (!shouldShow) return null;
 
   return (

@@ -69,7 +69,7 @@ export function isFlagName(string: unknown): string is FlagName {
   return flagNames.includes(string);
 }
 
-const flagStore: Map<FlagName, HTMLImageElement> = new Map();
+const flagStore = new Map<FlagName, HTMLImageElement>();
 const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (name, url) => {
   const cached = flagStore.get(name);
   if (cached !== undefined) return cached;
@@ -84,7 +84,7 @@ const getFlag: (name: FlagName, url?: string) => HTMLImageElement = (name, url) 
   return img;
 };
 
-const flagOrangeStore: Map<FlagName, HTMLImageElement> = new Map();
+const flagOrangeStore = new Map<FlagName, HTMLImageElement>();
 const getFlagOrange: (name: FlagName, url?: string) => HTMLImageElement = (name, url) => {
   const cached = flagOrangeStore.get(name);
   if (cached !== undefined) return cached;

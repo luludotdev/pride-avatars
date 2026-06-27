@@ -12,4 +12,20 @@ export default defineConfig({
     es2024: "readonly",
     browser: "readonly",
   },
+  rules: {
+    "no-use-before-define": "off",
+    "typescript/no-misused-promises": "off",
+    "react/only-export-components": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "unicorn/prefer-global-this": "off",
+  },
+  overrides: [
+    {
+      files: ["**/*.d.ts"],
+      rules: {
+        "typescript/consistent-type-definitions": "off",
+        "import/unambiguous": "off",
+      },
+    },
+  ],
 });

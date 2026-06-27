@@ -1,3 +1,4 @@
+// oxlint-disable new-cap
 import "./tailwind.css";
 import { DM_Mono, Inter } from "next/font/google";
 import type { ReactNode } from "react";

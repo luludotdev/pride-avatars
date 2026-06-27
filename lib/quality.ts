@@ -1,4 +1,4 @@
-export const qualities = [64, 128, 256, 512, 1_024] as const;
+export const qualities = [64, 128, 256, 512, 1024] as const;
 export const qualityToResolution = (quality: number) => qualities[quality];
 
 const SCALE_FACTOR = 8;

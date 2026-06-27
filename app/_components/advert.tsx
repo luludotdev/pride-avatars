@@ -1,6 +1,5 @@
 "use client";
 
-import { useCallback } from "react";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -14,9 +13,7 @@ import { useStore } from "#/lib/data/store";
 
 export const Advert = () => {
   const open = useStore((state) => state.advertOpen);
-
   const setAdShowing = useStore((state) => state.setAdShowing);
-  const handleClose = useCallback(() => setAdShowing(false), [setAdShowing]);
 
   return (
     <AlertDialog open={open}>
@@ -43,7 +40,12 @@ export const Advert = () => {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <Button onClick={handleClose} variant="outline">
+          <Button
+            variant="outline"
+            onClick={() => {
+              setAdShowing(false);
+            }}
+          >
             Dismiss
           </Button>
         </AlertDialogFooter>

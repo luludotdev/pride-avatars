@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useId, useMemo } from "react";
+import { useId } from "react";
 import type { ComponentProps, ReactNode } from "react";
 import { Checkbox } from "#/components/ui/checkbox";
 import { Label } from "#/components/ui/label";
@@ -16,6 +16,16 @@ import { useStore } from "#/lib/data/store";
 import { flagNames, isFlagName } from "#/lib/flags";
 import { qualities, qualityToResolution, scaleQualityValue } from "#/lib/quality";
 import { Experimental } from "./feature-flags";
+
+const formatQuality = (value: number): string => {
+  const padding = 6;
+  if (value === 0) return "shit".padEnd(padding, " ");
+
+  const resolution = qualityToResolution(value).toString();
+  return `${resolution}px`.padEnd(padding, " ");
+};
+
+const formatAngle = (value: number): string => `${value.toFixed(2)}°`;
 
 export const Controls = () => {
   const quality = useStore((state) => state.quality);
@@ -42,45 +52,23 @@ export const Controls = () => {
   const setDualFlag = useStore((state) => state.setDualFlag);
   const setBlurFlagBoundary = useStore((state) => state.setBlurFlagBoundary);
 
-  const formatQuality = useCallback<(v: number) => string>((value) => {
-    const padding = 6;
-    if (value === 0) return "shit".padEnd(padding, " ");
+  const formatPadding = (value: number): string => {
+    const scaled = scaleQualityValue(quality, value, true);
+    return `${scaled.toFixed(0).padStart(2, "0")}px`;
+  };
 
-    const resolution = qualityToResolution(value).toString();
-    return `${resolution}px`.padEnd(padding, " ");
-  }, []);
+  const formatBlur = (value: number): string => {
+    const scaled = scaleQualityValue(quality, value);
+    return `${scaled.toFixed(2)}px`.padEnd(7, " ");
+  };
 
-  const formatPadding = useCallback<(v: number) => string>(
-    (value) => {
-      const scaled = scaleQualityValue(quality, value, true);
-      return `${scaled.toFixed(0).padStart(2, "0")}px`;
-    },
-    [quality],
-  );
+  const onFlag = (value: string): void => {
+    if (isFlagName(value)) setFlag(value);
+  };
 
-  const formatAngle = useCallback<(v: number) => string>((value) => `${value.toFixed(2)}°`, []);
-
-  const formatBlur = useCallback<(v: number) => string>(
-    (value) => {
-      const scaled = scaleQualityValue(quality, value);
-      return `${scaled.toFixed(2)}px`.padEnd(7, " ");
-    },
-    [quality],
-  );
-
-  const onFlag = useCallback(
-    (value: string) => {
-      if (isFlagName(value)) setFlag(value);
-    },
-    [setFlag],
-  );
-
-  const onFlag2 = useCallback(
-    (value: string) => {
-      if (isFlagName(value)) setFlag2(value);
-    },
-    [setFlag2],
-  );
+  const onFlag2 = (value: string): void => {
+    if (isFlagName(value)) setFlag2(value);
+  };
 
   return (
     <div className="grid w-full grid-cols-[fit-content(2000px)_auto] items-center gap-x-4 gap-y-3">
@@ -184,18 +172,19 @@ const RangeInput = ({
   readonly formatter: (value: number) => string;
 }) => {
   const id = useId();
-  const val = useMemo(() => [value], [value]);
-  const onValueChange = useCallback(([value]: number[]) => onChange(value), [onChange]);
-
-  const formatted = useMemo(() => formatter(value).padEnd(7, " "), [formatter, value]);
+  const onValueChange = (v: number | readonly number[]) => {
+    onChange(v as number);
+  };
 
   return (
     <>
       <Label htmlFor={id}>{label}</Label>
-      <div className="flex gap-x-2">
-        <span className="font-mono text-sm leading-none whitespace-pre">{formatted}</span>
+      <div className="flex items-center gap-x-2">
+        <span className="font-mono text-sm leading-none whitespace-pre">
+          {formatter(value).padEnd(7, " ")}
+        </span>
 
-        <Slider id={id} onValueChange={onValueChange} value={val} {...props} />
+        <Slider id={id} onValueChange={onValueChange} value={value} {...props} />
       </div>
     </>
   );
@@ -215,11 +204,14 @@ const SelectInput = ({
   readonly onChange: (value: string) => void;
 }) => {
   const id = useId();
+  const onValueChange = (value: string | null) => {
+    if (value !== null) onChange(value);
+  };
 
   return (
     <>
       <Label htmlFor={id}>{label}</Label>
-      <Select onValueChange={onChange} value={value}>
+      <Select onValueChange={onValueChange} value={value}>
         <SelectTrigger id={id}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

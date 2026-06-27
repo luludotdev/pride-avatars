@@ -1,16 +1,11 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useDebug } from "#/lib/hooks/useDebug";
 import { layers, makeLayers } from "#/lib/layers";
 import type { MaybeLayers } from "#/lib/layers";
 
-export const useLayers = () => {
-  const isServer = useMemo(() => typeof window === "undefined", []);
-
-  return useMemo<MaybeLayers>(() => {
-    if (!isServer) return makeLayers();
-
-    return Object.fromEntries(layers.map((layer) => [layer, undefined] as const)) as MaybeLayers;
-  }, [isServer]);
+export const useLayers = (): MaybeLayers => {
+  if (typeof window !== "undefined") return makeLayers();
+  return Object.fromEntries(layers.map((layer) => [layer, undefined] as const)) as MaybeLayers;
 };
 
 export const useDisplayLayers = (layers: MaybeLayers) => {
