@@ -32,7 +32,7 @@ export const LoadImage = () => {
         onClick={() => ref.current?.click()}
         variant="outline"
       >
-        <Camera className="size-5!" /> Load Image
+        <Camera className="size-5!" /> <span className="pt-0.5">Load Image</span>
       </Button>
 
       <input
@@ -144,7 +144,7 @@ export const SaveImage = () => {
       onClick={onSaveClicked}
       variant="outline"
     >
-      <Save className="size-5!" /> Download
+      <Save className="size-5!" /> <span className="pt-0.5">Download</span>
     </Button>
   );
 };
